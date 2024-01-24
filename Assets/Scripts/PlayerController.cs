@@ -28,12 +28,27 @@ public class PlayerController : MonoBehaviour
     * 裸体撞击伤害
     * 角色属性的上限（血量/速度）
      */
+    public float speed = 0.0f;
+    public float volum_scale = 1.0f;
+    [Header("撞击相关")]
+    public float hit_prop = 0.0f;
+    public int hit_count = 0;
+    public float dash_cd = 0.0f;
+    public float dash_speed_k = 25.0f;
+    public bool is_doubledash = false;
+    public float hit_dmg = 0.0f;
+    [Header("护盾相关")]
+    public bool is_shield = false;
+    public float shield_cd = 0.0f;
+    // public float 这是啥
+    // 这是啥
+    
+    /*控制属性*/
     
     private Player1 kbdinput = null;    // player input
     private Player2 gpdinput = null;
     private Vector2 moveVec = Vector2.zero; // direction
     private Rigidbody player = null;    // keyboard
-    public float speed = 0.0f;      // move speed
 
     private void Awake()
     {
@@ -48,14 +63,20 @@ public class PlayerController : MonoBehaviour
         if (this.name.Contains("1"))    // kbd ctrl
         {
             kbdinput.Enable();
+            // wasd
             kbdinput.Player.Move.performed += Move;
             kbdinput.Player.Move.canceled += OnMovementCanceled;
+            // shift
+            kbdinput.Player.Dash.performed += Dash;
         }
         else
         {
             gpdinput.Enable();
+            // left joystick
             gpdinput.Player.Move.performed += Move;
             gpdinput.Player.Move.canceled += OnMovementCanceled;
+            // B
+            gpdinput.Player.Dash.performed += Dash;
         }
     }
 
@@ -66,12 +87,14 @@ public class PlayerController : MonoBehaviour
             kbdinput.Disable();
             kbdinput.Player.Move.performed -= Move;
             kbdinput.Player.Move.canceled -= OnMovementCanceled;
+            kbdinput.Player.Dash.performed -= Dash;
         }
         else
         {
             gpdinput.Disable();
             gpdinput.Player.Move.performed -= Move;
             gpdinput.Player.Move.canceled -= OnMovementCanceled;
+            gpdinput.Player.Dash.performed -= Dash;
         }
     }
 
@@ -80,12 +103,30 @@ public class PlayerController : MonoBehaviour
         player.AddForce(moveVec * speed);
     }
 
+    /// <summary>
+    /// 冲刺
+    /// </summary>
+    /// <param name="context"></param>
+    private void Dash(InputAction.CallbackContext context)
+    {
+        // print(moveVec);
+        player.AddForce(moveVec * speed * dash_speed_k);
+    }
+    
+    /// <summary>
+    /// 移动
+    /// </summary>
+    /// <param name="context"></param>
     private void Move(InputAction.CallbackContext context)
     {
         moveVec = context.ReadValue<Vector2>();
         player.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(moveVec.x >= 0 ? "Arts/-c" : "Arts/c");
     }
 
+    /// <summary>
+    /// 停止移动
+    /// </summary>
+    /// <param name="context"></param>
     private void OnMovementCanceled(InputAction.CallbackContext context)
     {
         moveVec = Vector2.zero;
