@@ -12,6 +12,23 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
+    
+    /*基本属性
+    * 击飞值，击飞值越高，被击飞概率越大
+    * 被击飞的次数
+    * 速度，速度越快，冲刺造成的伤害越高，伤害等于击飞值的变量
+    * 冲刺CD，10s
+    * 体积
+    * 是否带有一次性护盾
+    * 是否带有持续护盾
+    * 持续护盾时间
+    * 是否二段冲刺
+    * 二段冲刺buff时间
+    * 受到撞击吐多少东西
+    * 裸体撞击伤害
+    * 角色属性的上限（血量/速度）
+     */
+    
     private Player1 kbdinput = null;    // player input
     private Player2 gpdinput = null;
     private Vector2 moveVec = Vector2.zero; // direction
@@ -21,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         kbdinput = new Player1();
+        gpdinput = new Player2();
         player = GetComponent<Rigidbody>();
     }
 
@@ -59,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        player.AddForce(new Vector3(moveVec.x,0,moveVec.y) * speed);
+        player.AddForce(moveVec * speed);
     }
 
     private void Move(InputAction.CallbackContext context)
