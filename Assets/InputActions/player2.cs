@@ -44,6 +44,15 @@ public partial class @Player2: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbe3327d-20a0-4e47-ae92-c6f7dd5f315d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -77,6 +86,17 @@ public partial class @Player2: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0479fa50-cde1-479a-8a77-779f0157cf5e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OpenMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -666,6 +686,7 @@ public partial class @Player2: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_OpenMouse = m_Player.FindAction("OpenMouse", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -741,12 +762,14 @@ public partial class @Player2: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_OpenMouse;
     public struct PlayerActions
     {
         private @Player2 m_Wrapper;
         public PlayerActions(@Player2 wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @OpenMouse => m_Wrapper.m_Player_OpenMouse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -762,6 +785,9 @@ public partial class @Player2: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @OpenMouse.started += instance.OnOpenMouse;
+            @OpenMouse.performed += instance.OnOpenMouse;
+            @OpenMouse.canceled += instance.OnOpenMouse;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -772,6 +798,9 @@ public partial class @Player2: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @OpenMouse.started -= instance.OnOpenMouse;
+            @OpenMouse.performed -= instance.OnOpenMouse;
+            @OpenMouse.canceled -= instance.OnOpenMouse;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -956,6 +985,7 @@ public partial class @Player2: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnOpenMouse(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

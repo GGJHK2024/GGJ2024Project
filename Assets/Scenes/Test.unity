@@ -335,13 +335,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  max_speed: 20
   volum_scale: 1
   hit_prop: 0
+  max_hit_prop: 20
   hit_count: 0
-  dash_cd: 0
-  dash_speed_k: 25
+  dash_cd: 10
+  dash_speed_k: 40
+  is_dash: 0
   is_doubledash: 0
+  doubledash_time: 10
   hit_dmg: 0
+  is_tem_shield: 0
   is_shield: 0
   shield_cd: 0
 --- !u!54 &1885622620
@@ -698,13 +703,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  max_speed: 20
   volum_scale: 1
   hit_prop: 0
+  max_hit_prop: 20
   hit_count: 0
-  dash_cd: 0
-  dash_speed_k: 25
+  dash_cd: 3
+  dash_speed_k: 40
+  is_dash: 0
   is_doubledash: 0
+  doubledash_time: 10
   hit_dmg: 0
+  is_tem_shield: 0
   is_shield: 0
   shield_cd: 0
 --- !u!114 &1951067258
@@ -792,6 +802,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: fa5e5609-6c6a-47be-95da-354d3e90a650
     m_ActionName: Player/Dash[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c163580-f7f4-48f9-b082-dfa5fff06c6c
+    m_ActionName: Player/OpenMouse[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
