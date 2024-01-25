@@ -142,7 +142,6 @@ public class AudioMgr : BaseMgr<AudioMgr>
     /// </summary>
     public void PlaySound(string fileName)
     {
-        // todo: check whether players playing
         foreach (var s in soundMusic)
         {
             if (!s.isPlaying)
