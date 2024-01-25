@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 {
     /*基本属性*/
     public float speed = 0.0f;      // 速度，速度越快，冲刺造成的伤害越高，伤害等于击飞值的变量
-    public float max_speed = 20.0f; // 角色属性的速度上限
+    public float max_speed = 0.0f; // 角色属性的速度上限
     public float volum_scale = 1.0f;    // 体积
     public float pick_area = 5.0f;  // 拾取范围
     List<Transform> item_transforms = new List<Transform>();    // 可拾取范围内的所有物品的列表
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public float hit_dmg = 0.0f;    // 裸体撞击伤害
     // public ?? hit_out;   // 受到撞击吐多少东西,类还没写
 
-    private int dash_count = 0; // 冲刺次数
+    public int dash_count = 0; // 冲刺次数
     
     [Header("护盾相关")]
     public bool is_tem_shield = false;  // 是否带有一次性护盾
@@ -121,8 +121,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GrabSth(InputAction.CallbackContext context)
     {
-        // todo: change sprite
-        
+        // todo: change sprite摁住的时候嘴巴闭上
+
         // todo: 拾取道具，道具可以打上item标签方便筛选
         List<Collider> weaponCanBeGrab = new List<Collider>();
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pick_area);
@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     private void PutDown(InputAction.CallbackContext context)
     {
+        // todo: change sprite 松开的时候，嘴巴松开
         if (this.transform.GetChild(0).GetChild(0) != null) // 有拾取的武器
         {
             this.transform.GetChild(0).GetChild(0).SetParent(null); // 释放武器
@@ -161,18 +162,13 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     private void Dash(InputAction.CallbackContext context)
     {
-        if (!is_dash || (is_doubledash && dash_count < 2))
+        if (!is_dash || (is_doubledash && dash_count <= 1))
         {
-            // print("dash");
             player.AddForce(moveVec * speed * dash_speed_k);
             is_dash = true;
             dash_count++;
-        }
-        else
-        {
             Invoke(nameof(OnDashCdEnding), dash_cd);    // cd后重新变为可冲刺的状态
         }
-        
     }
     
     /// <summary>
