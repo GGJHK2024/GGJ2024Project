@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,10 +10,15 @@ public class UIMgr : BaseMgr<UIMgr>
 {
     private Stack<GameObject> _openingWindows = new Stack<GameObject>();
 
+    public float totalTime = 33f; // 总游戏时间
+    [SerializeField]public Text topTimerText; // 顶部倒计时UI
+    [SerializeField]public Text midTimerText;//中部倒计时UI
+
+
     private void Start()
     {
         EventCenter.GetInstance().AddEventListener("LastLog", CloseWindow);
-        
+
         Data db = SaveMgr.GetInstance().LoadDB();
         // find all inactive slider
         Slider[] sliders = GameObject.FindObjectsOfType<Slider>(true).Where(sr => !sr.gameObject.activeInHierarchy).ToArray();
@@ -28,6 +34,7 @@ public class UIMgr : BaseMgr<UIMgr>
                 s.value = db.soundMusic;
             }
         }
+
     }
 
     /// <summary>
@@ -135,5 +142,27 @@ public class UIMgr : BaseMgr<UIMgr>
     {
         CloseAllWindows();
         SceneManager.LoadScene(scene_id);
+    }
+
+    //
+    // 倒计时功能
+    //
+    public float GetTotalTime()
+    {
+        return totalTime;
+    }
+    public Text GetTopTimerText()
+    {
+        return topTimerText;
+    }
+    public Text GetMidTimerText()
+    {
+        return midTimerText;
+    }
+    IEnumerator  Show30s()
+    {   
+        midTimerText.text = "30s Left!";
+        yield return new WaitForSeconds(3f);
+        midTimerText.text = "";
     }
 }
