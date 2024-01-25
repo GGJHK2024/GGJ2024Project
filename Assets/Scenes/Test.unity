@@ -701,13 +701,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  max_speed: 20
   volum_scale: 1
+  pick_area: 5
   hit_prop: 0
+  max_hit_prop: 20
   hit_count: 0
-  dash_cd: 0
-  dash_speed_k: 25
+  dash_cd: 10
+  dash_speed_k: 40
+  is_dash: 0
   is_doubledash: 0
+  doubledash_time: 10
   hit_dmg: 0
+  is_tem_shield: 0
   is_shield: 0
   shield_cd: 0
 --- !u!54 &1885622620
@@ -737,8 +743,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.629988, y: 6.307495, z: 7.308867}
-  m_Center: {x: -0.053794682, y: 0.19294441, z: -0.027233511}
+  m_Size: {x: 2.7709398, y: 3.312299, z: 2.870531}
+  m_Center: {x: 0.014278412, y: 0.0023409128, z: 0.06806713}
 --- !u!212 &1885622622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -759,7 +765,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9cab3cc47e52ebe4e85a907e8c893665, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -799,8 +805,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885622617}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 5, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -847,7 +853,6 @@ GameObject:
   - component: {fileID: 1933970864}
   - component: {fileID: 1933970863}
   - component: {fileID: 1933970862}
-  - component: {fileID: 1933970861}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -855,20 +860,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1933970861
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933970860}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1933970862
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -982,8 +973,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.629988, y: 6.307495, z: 7.3104105}
-  m_Center: {x: -0.053794682, y: 0.1929444, z: -0.06229967}
+  m_Size: {x: 2.7981656, y: 3.3395271, z: 2.8567102}
+  m_Center: {x: 0.027892232, y: -0.011273384, z: 0.0040045977}
 --- !u!212 &1951067255
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1004,7 +995,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9cab3cc47e52ebe4e85a907e8c893665, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1044,8 +1035,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951067252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.40000004, z: 0.4}
+  m_LocalPosition: {x: -5, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -1064,13 +1055,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  max_speed: 20
   volum_scale: 1
+  pick_area: 5
   hit_prop: 0
+  max_hit_prop: 20
   hit_count: 0
-  dash_cd: 0
-  dash_speed_k: 25
-  is_doubledash: 0
+  dash_cd: 3
+  dash_speed_k: 40
+  is_dash: 0
+  is_doubledash: 1
+  doubledash_time: 10
   hit_dmg: 0
+  is_tem_shield: 0
   is_shield: 0
   shield_cd: 0
 --- !u!114 &1951067258
@@ -1158,6 +1155,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: fa5e5609-6c6a-47be-95da-354d3e90a650
     m_ActionName: Player/Dash[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c163580-f7f4-48f9-b082-dfa5fff06c6c
+    m_ActionName: Player/OpenMouse[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

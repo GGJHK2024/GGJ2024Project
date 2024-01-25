@@ -41,15 +41,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\InputActions\player1.cs" />
     <Compile Include="Assets\Scripts\SaveMgr.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\AudioMgr.cs" />
     <Compile Include="Assets\Scripts\Base\BaseMgr.cs" />
+    <Compile Include="Assets\InputActions\player2.cs" />
     <Compile Include="Assets\Scripts\EventCenter.cs" />
     <Compile Include="Assets\Scripts\LogMgr.cs" />
-    <Compile Include="Assets\InputActions\player1.cs" />
-    <Compile Include="Assets\InputActions\player2.cs" />
     <None Include="Assets\Resources\Arts\Billboard.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.34f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
