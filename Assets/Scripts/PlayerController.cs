@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
             kbdinput.Player.Dash.performed += Dash;
             // space
             kbdinput.Player.OpenMouse.performed += GrabSth;
+            kbdinput.Player.OpenMouse.canceled += PutDown;
         }
         else
         {
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
             gpdinput.Player.Dash.performed += Dash;
             // right trigger
             gpdinput.Player.OpenMouse.performed += GrabSth;
+            gpdinput.Player.OpenMouse.canceled += PutDown;
         }
     }
 
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
             kbdinput.Player.Move.canceled -= OnMovementCanceled;
             kbdinput.Player.Dash.performed -= Dash;
             kbdinput.Player.OpenMouse.performed -= GrabSth;
+            kbdinput.Player.OpenMouse.canceled -= PutDown;
         }
         else
         {
@@ -103,12 +106,14 @@ public class PlayerController : MonoBehaviour
             gpdinput.Player.Move.canceled -= OnMovementCanceled;
             gpdinput.Player.Dash.performed -= Dash;
             gpdinput.Player.OpenMouse.performed -= GrabSth;
+            gpdinput.Player.OpenMouse.canceled -= PutDown;
         }
     }
 
     private void FixedUpdate()
     {
         player.AddForce(moveVec * speed);
+        
     }
 
     /// <summary>
@@ -116,17 +121,36 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GrabSth(InputAction.CallbackContext context)
     {
-        print("open mouth");
+        // todo: change sprite
         
         // todo: 拾取道具，道具可以打上item标签方便筛选
-        
+        List<Collider> weaponCanBeGrab = new List<Collider>();
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pick_area);
         Collider[] orderedByProximity = hitColliders.OrderBy(c => (this.transform.position - c.transform.position).sqrMagnitude).ToArray();
         
         // 从近到远排序可拾取范围内的道具
         foreach (var hitCollider in orderedByProximity)
         {
+            if (!hitCollider.CompareTag("weapon"))
+                continue;
+            
+            weaponCanBeGrab.Add(hitCollider);
             print(hitCollider.name);
+        }
+        weaponCanBeGrab[0].transform.SetParent(this.transform.GetChild(0));
+        weaponCanBeGrab[0].transform.localPosition = new Vector3(0, 0, -0.05f);
+        // weaponCanBeGrab[0].transform.position = new Vector3(0, 0, -0.05f);
+    }
+
+    /// <summary>
+    /// 释放武器（如果持有的话）
+    /// </summary>
+    /// <param name="context"></param>
+    private void PutDown(InputAction.CallbackContext context)
+    {
+        if (this.transform.GetChild(0).GetChild(0) != null) // 有拾取的武器
+        {
+            this.transform.GetChild(0).GetChild(0).SetParent(null); // 释放武器
         }
     }
 
@@ -158,7 +182,7 @@ public class PlayerController : MonoBehaviour
     private void Move(InputAction.CallbackContext context)
     {
         moveVec = context.ReadValue<Vector2>();
-        player.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(moveVec.x >= 0 ? "Arts/-c" : "Arts/c");
+        player.transform.rotation = Quaternion.Euler(0, moveVec.x >= 0 ? 180 : 0, 0);
     }
 
     /// <summary>
