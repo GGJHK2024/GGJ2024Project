@@ -11,7 +11,7 @@ public class WeaponsInfo_Editor : Editor
     {
         DrawDefaultInspector();//绘制常规内容
 
-        if (GUILayout.Button("从配表ID刷新"))//添加按钮和功能——当组件上的按钮被按下时
+        if (GUILayout.Button("从配表ID刷新武器数据"))//添加按钮和功能——当组件上的按钮被按下时
         {
             WeaponsInfo weaponsInfo = (WeaponsInfo)target;
             Init(weaponsInfo);

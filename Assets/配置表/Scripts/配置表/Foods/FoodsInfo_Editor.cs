@@ -11,7 +11,7 @@ public class FoodsInfo_Editor : Editor
     {
         DrawDefaultInspector();//绘制常规内容
 
-        if (GUILayout.Button("从配表ID刷新啊啊啊啊"))//添加按钮和功能——当组件上的按钮被按下时
+        if (GUILayout.Button("从配表ID刷新食物数据"))//添加按钮和功能——当组件上的按钮被按下时
         {
             FoodsInfo foodsInfo = (FoodsInfo)target;
             Init(foodsInfo);
