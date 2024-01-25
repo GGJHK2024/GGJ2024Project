@@ -31,6 +31,7 @@ public class CameraTrans : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		this.transform.position = (playerTransform.position+playerTransform2.position)/2 + offset;  //玩家中间位置加上差值赋值给相机的位置
+		Camera.main.orthographicSize = (-this.transform.position.z) + 5;
 		CameraView();
 	}
 	void CameraView(){
