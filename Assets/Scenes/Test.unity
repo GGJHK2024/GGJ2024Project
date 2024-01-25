@@ -711,7 +711,7 @@ MonoBehaviour:
   dash_cd: 3
   dash_speed_k: 40
   is_dash: 0
-  is_doubledash: 0
+  is_doubledash: 1
   doubledash_time: 10
   hit_dmg: 0
   is_tem_shield: 0

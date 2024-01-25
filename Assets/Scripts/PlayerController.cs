@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public float hit_dmg = 0.0f;    // 裸体撞击伤害
     // public ?? hit_out;   // 受到撞击吐多少东西,类还没写
 
-    private int dash_count = 0;
+    private int dash_count = 0; // 冲刺次数
     
     [Header("护盾相关")]
     public bool is_tem_shield = false;  // 是否带有一次性护盾
@@ -116,22 +116,18 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     private void Dash(InputAction.CallbackContext context)
     {
-        // todo: fix double dash problem
-        if (!is_dash && !is_doubledash)   // 不在冲刺，这时可以允许玩家冲刺(单)
+        if (!is_dash || (is_doubledash && dash_count < 2))
         {
+            // print("dash");
             player.AddForce(moveVec * speed * dash_speed_k);
             is_dash = true;
+            dash_count++;
         }
-        
-        if (is_dash && is_doubledash && dash_count == 0)   // 允许二段冲刺且还未执行
+        else
         {
-            print("二次撞击");
-            player.AddForce(moveVec * speed * dash_speed_k);
-            dash_count++;   // 标记已经第二次冲刺（1）
+            Invoke(nameof(OnDashCdEnding), dash_cd);    // cd后重新变为可冲刺的状态
         }
         
-        Invoke(nameof(OnDashCdEnding), dash_cd);    // cd后重新变为可冲刺的状态
-
     }
     
     /// <summary>
