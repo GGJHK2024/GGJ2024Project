@@ -12,7 +12,7 @@ public class AudioMgr : BaseMgr<AudioMgr>
     /// <summary>
     /// 音效组件套组(至多同时播放十个音效)
     /// </summary>
-    public AudioSource soundMusic = null;
+    public AudioSource[] soundMusic = new AudioSource[10];
 
     //音乐大小
     private float _bkValue = 0;
@@ -30,7 +30,12 @@ public class AudioMgr : BaseMgr<AudioMgr>
             bkplayer.tag = "BKPlayer";
             DontDestroyOnLoad(bkplayer.gameObject);
             bkMusic = bkplayer.AddComponent<AudioSource>();
-            soundMusic = bkplayer.AddComponent<AudioSource>();
+            // all these audio source plays audio effects
+            for (int i = 1; i < 11; i++)
+            {
+                bkplayer.AddComponent<AudioSource>();
+                soundMusic[i-1] = bkplayer.GetComponents<AudioSource>()[i];
+            }
             bkMusic.loop = true;
             ChangeBKMusic("Music/bgm");
             PlayBkMusic();
@@ -39,7 +44,11 @@ public class AudioMgr : BaseMgr<AudioMgr>
         {
             GameObject bkplayer = GameObject.FindWithTag("BKPlayer");
             bkMusic = bkplayer.GetComponents<AudioSource>()[0];
-            soundMusic = bkplayer.GetComponents<AudioSource>()[1];
+            for (int i = 1; i < 10; i++)
+            {
+                soundMusic[i] = bkplayer.GetComponents<AudioSource>()[i];
+            }
+            
         }
     }
 
@@ -54,7 +63,10 @@ public class AudioMgr : BaseMgr<AudioMgr>
         _bkValue = db.bkMusic;
         _soundValue = db.soundMusic;
         bkMusic.volume = _bkValue;
-        soundMusic.volume = _soundValue;
+        for (int i = 0; i < 10; i++)
+        {
+            soundMusic[i].volume = _soundValue;
+        }
     }
 
 
@@ -119,7 +131,10 @@ public class AudioMgr : BaseMgr<AudioMgr>
         _soundValue = s.value;
         if (soundMusic == null)
             return;
-        soundMusic.volume = _soundValue;
+        for (int i = 0; i < 10; i++)
+        {
+            soundMusic[i].volume = _soundValue;
+        }
     }
 
     /// <summary>
@@ -127,19 +142,29 @@ public class AudioMgr : BaseMgr<AudioMgr>
     /// </summary>
     public void PlaySound(string fileName)
     {
-        soundMusic.Stop();
-        _sound = Resources.Load(fileName) as AudioClip;
-        soundMusic.clip = _sound;
-        soundMusic.Play();
+        // todo: check whether players playing
+        foreach (var s in soundMusic)
+        {
+            if (!s.isPlaying)
+            {
+                _sound = Resources.Load(fileName) as AudioClip;
+                s.clip = _sound;
+                s.Play();
+                break;
+            }
+        }
     }
 
     /// <summary>
     /// 停止音效
     /// </summary>
-    public void StopSound()
+    public void StopAllSound()
     {
         if (soundMusic == null)
             return;
-        soundMusic.Stop();
+        for (int i = 0; i < 10; i++)
+        {
+            soundMusic[i].Stop();
+        }
     }
 }
