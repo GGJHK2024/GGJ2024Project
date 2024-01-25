@@ -5,7 +5,4 @@
 /[Bb]uilds/
 /[Pp]rojectSettings/ProjectVersion.txt
 /Assets/AssetStoreTools*
-Logs/AssetImportWorker0.log
-Logs/AssetImportWorker1.log
-Logs/shadercompiler-AssetImportWorker0.log
-Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Logs
