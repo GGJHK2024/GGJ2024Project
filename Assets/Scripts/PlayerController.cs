@@ -1,9 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+
+
+// todo: change sprite
+// todo: pick up items
+
+
 
 /// <summary>
 /// 移动控制 WASD / left joystick
@@ -16,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 0.0f;      // 速度，速度越快，冲刺造成的伤害越高，伤害等于击飞值的变量
     public float max_speed = 20.0f; // 角色属性的速度上限
     public float volum_scale = 1.0f;    // 体积
+    public float pick_area = 5.0f;  // 拾取范围
+    List<Transform> item_transforms = new List<Transform>();    // 可拾取范围内的所有物品的列表
     
     [Header("撞击相关")]
     public float hit_prop = 0.0f;   // 击飞值，击飞值越高，被击飞概率越大
@@ -40,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private Player1 kbdinput = null;    // player input
     private Player2 gpdinput = null;
     private Vector2 moveVec = Vector2.zero; // direction
-    private Rigidbody player = null;    // keyboard
+    private Rigidbody player = null;
 
     private void Awake()
     {
@@ -107,6 +117,17 @@ public class PlayerController : MonoBehaviour
     private void GrabSth(InputAction.CallbackContext context)
     {
         print("open mouth");
+        
+        // todo: 拾取道具，道具可以打上item标签方便筛选
+        
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pick_area);
+        Collider[] orderedByProximity = hitColliders.OrderBy(c => (this.transform.position - c.transform.position).sqrMagnitude).ToArray();
+        
+        // 从近到远排序可拾取范围内的道具
+        foreach (var hitCollider in orderedByProximity)
+        {
+            print(hitCollider.name);
+        }
     }
 
     /// <summary>
