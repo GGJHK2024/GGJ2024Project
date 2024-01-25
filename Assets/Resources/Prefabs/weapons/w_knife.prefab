@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4458265125218630297}
   - component: {fileID: 4458265125218630298}
   - component: {fileID: 4458265125218630299}
+  - component: {fileID: 2340220878157750666}
   m_Layer: 0
   m_Name: w_knife
   m_TagString: weapon
@@ -119,3 +120,19 @@ MonoBehaviour:
     basic_damage: 10
     external_damage: 0
   InitFromID: 1
+--- !u!54 &2340220878157750666
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458265125218630300}
+  serializedVersion: 2
+  m_Mass: 0.2
+  m_Drag: 1.5
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 48
+  m_CollisionDetection: 0

@@ -138,8 +138,8 @@ public class PlayerController : MonoBehaviour
             print(hitCollider.name);
         }
         weaponCanBeGrab[0].transform.SetParent(this.transform.GetChild(0));
+        weaponCanBeGrab[0].transform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         weaponCanBeGrab[0].transform.localPosition = new Vector3(0, 0, -0.05f);
-        // weaponCanBeGrab[0].transform.position = new Vector3(0, 0, -0.05f);
     }
 
     /// <summary>
@@ -151,6 +151,19 @@ public class PlayerController : MonoBehaviour
         // todo: change sprite 松开的时候，嘴巴松开
         if (this.transform.GetChild(0).GetChild(0) != null) // 有拾取的武器
         {
+            GameObject weapon = this.transform.GetChild(0).GetChild(0).gameObject;
+            weapon.GetComponent<Rigidbody>().isKinematic = false;
+            
+            // 武器弹射
+            if (is_dash)
+            {
+                weapon.GetComponent<Rigidbody>().AddForce(moveVec * dash_speed_k * 10);   // 冲刺时弹射更快
+            }
+            else
+            {
+                weapon.GetComponent<Rigidbody>().AddForce(moveVec * dash_speed_k * 5);
+            }
+            
             this.transform.GetChild(0).GetChild(0).SetParent(null); // 释放武器
         }
     }
