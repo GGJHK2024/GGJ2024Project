@@ -258,9 +258,36 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// 碰撞检测
+    /// </summary>
+    private void OnTriggerEnter(Collider hitCollider)
+    {
+        if (hitCollider.CompareTag("Player"))   // 碰撞玩家
+        {
+            var otherPlayer = hitCollider.gameObject.GetComponent<PlayerController>();
+            if (is_hit && otherPlayer.is_hit) //都可以进行攻击
+            {
+                player.AddForce(-moveVec * current_speed); //达到攻击速度的鸡会小幅击飞
+                // otherPlayer.AddForce(-otherPlayer.moveVec * otherPlayer.current_speed);//达到攻击速度的鸡会小幅击飞
+            }
+            else if (is_hit && !otherPlayer.is_hit) //对方不能攻击
+            {
+                otherPlayer.hit_prop += 1.2f;
+            }
+            else if (!is_hit && otherPlayer.is_hit) //我方不能攻击
+            {
+                hit_prop += 1.2f;
+                player.AddForce(otherPlayer.moveVec * speed * hit_prop * 100); //未达到的鸡会大幅击飞并叠加击飞值
+            }
+        } 
+
+
+    }
+
+    /// <summary>
     ///碰撞检测
     /// </summary>
-    private void OnCollisionEnter(Collision other)
+    /*private void OnCollisionEnter(Collision other)
     {
         var otherPlayer = other.collider.GetComponent<PlayerController>();
         if (otherPlayer)
@@ -291,7 +318,7 @@ public class PlayerController : MonoBehaviour
         //     hit_prop += 1.2f;
         //     player.AddForce(-moveVec * speed * hit_prop);//未达到的鸡会大幅击飞并叠加击飞值
         // }
-    }
+    }*/
 
     // /// <summary>
     // /// 主动碰撞
