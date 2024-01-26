@@ -1390,7 +1390,7 @@ MonoBehaviour:
   hit_prop: 0
   max_hit_prop: 20
   hit_count: 0
-  dash_cd: 10
+  dash_cd: 5
   dash_speed_k: 40
   is_dash: 0
   is_doubledash: 0

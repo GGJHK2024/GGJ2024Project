@@ -115,16 +115,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         player.AddForce(moveVec * speed);
-        current_speed = player.velocity.magnitude;//获取实际速度
-        if (current_speed >= attack_speed)//判定是否可以造成伤害
-        {
-            //需要一个动画改变
-            is_hit = true;
-        }
-        else
-        {
-            is_hit = false;
-        }
+        Attackspeed();
+
     }
 
     private void LateUpdate()
@@ -282,7 +274,16 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Attackspeed()
     {
-
+        current_speed = player.velocity.magnitude;//获取实际速度
+        if (current_speed >= attack_speed)//判定是否可以造成伤害
+        {
+            //需要一个动画改变
+            is_hit = true;
+        }
+        else
+        {
+            is_hit = false;
+        }
     }
 
     /// <summary>
@@ -293,19 +294,16 @@ public class PlayerController : MonoBehaviour
         if (hitCollider.CompareTag("Player"))   // 碰撞玩家
         {
             var otherPlayer = hitCollider.gameObject.GetComponent<PlayerController>();
-            if (is_hit && otherPlayer.is_hit) //都可以进行攻击
+            player.AddForce(-moveVec * current_speed * 100);//碰撞的基础弹飞，增加打击感同时避免重复判定
+            if (is_hit && otherPlayer.is_hit) //双方可以进行攻击
             {
-                player.AddForce(-moveVec * current_speed); //达到攻击速度的鸡会小幅击飞
-                // otherPlayer.AddForce(-otherPlayer.moveVec * otherPlayer.current_speed);//达到攻击速度的鸡会小幅击飞
+                hit_prop += 0.5f;
+                player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
             }
-            else if (is_hit && !otherPlayer.is_hit) //对方不能攻击
+            else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
             {
-                otherPlayer.hit_prop += 1.2f;
-            }
-            else if (!is_hit && otherPlayer.is_hit) //我方不能攻击
-            {
-                hit_prop += 1.2f;
-                player.AddForce(otherPlayer.moveVec * speed * hit_prop * 100); //未达到的鸡会大幅击飞并叠加击飞值
+                hit_prop += 2f;
+                player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
             }
         }
 
@@ -315,57 +313,10 @@ public class PlayerController : MonoBehaviour
             
         }
 
-    }
-
-    /// <summary>
-    ///碰撞检测
-    /// </summary>
-    /*private void OnCollisionEnter(Collision other)
-    {
-        var otherPlayer = other.collider.GetComponent<PlayerController>();
-        if (otherPlayer)
+        if (hitCollider.CompareTag("weapon")) //碰撞武器
         {
-            if (is_hit && otherPlayer.is_hit)//都可以进行攻击
-            {
-                player.AddForce(-moveVec * current_speed);//达到攻击速度的鸡会小幅击飞
-                // otherPlayer.AddForce(-otherPlayer.moveVec * otherPlayer.current_speed);//达到攻击速度的鸡会小幅击飞
-            }
-            else if(is_hit && !otherPlayer.is_hit)//对方不能攻击
-            {
-                otherPlayer.hit_prop += 1.2f;
-            }
-            else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
-            {
-                hit_prop += 1.2f;
-                player.AddForce(otherPlayer.moveVec * speed * hit_prop * 100);//未达到的鸡会大幅击飞并叠加击飞值
-            }
+
         }
 
-        // if(is_hit)
-        // {
-        //     player.AddForce(-moveVec * current_speed);//达到攻击速度的鸡会小幅击飞
-
-        // }
-        // else
-        // {
-        //     hit_prop += 1.2f;
-        //     player.AddForce(-moveVec * speed * hit_prop);//未达到的鸡会大幅击飞并叠加击飞值
-        // }
-    }*/
-
-    // /// <summary>
-    // /// 主动碰撞
-    // /// </summary>
-    // private void ActiveCollisions(Collision Collision)
-    // {
-    //     player.AddForce(-moveVec * speed * hit_prop *10);
-    // }
-
-    // /// <summary>
-    // /// 被动碰撞
-    // /// </summary>
-    // private void PasstiveCollisions(Collision Collision)
-    // {
-    //     player.AddForce(-moveVec * speed * hit_prop *10);
-    // }
+    }
 }
