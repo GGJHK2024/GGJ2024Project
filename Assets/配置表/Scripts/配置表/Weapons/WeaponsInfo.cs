@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Threading.Tasks;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using XlsWork;
 using XlsWork.WeaponsXls;
@@ -29,6 +30,8 @@ public class WeaponsInfo : MonoBehaviour
 {
     // 基础信息
     public WeaponSettings Settings;
+
+    public UnityAction onPickedUpEvents;
     
     public bool isFlying = false;               // 武器是否处于掷出的状态
     public bool canBePickWhileFlying = false;   // 能够在飞行过程中被拾起（如弯刀

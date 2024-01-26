@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class Bomb : WeaponsInfo
 {
     private UnityAction onBombPicked;
-
     private bool firstPickUp = true;        // 是否第一次被捡起
 
     private bool beginDash = false;
@@ -21,8 +20,9 @@ public class Bomb : WeaponsInfo
     {
         isOnce = true;  // 非一次性武器
         canBePickWhileFlying = true;    // 可以再次捡起，但不重置引信
+        
         onBombPicked += OnPickUp;
-        EventCenter.GetInstance().AddEventListener("OnPickUp",onBombPicked);
+        EventCenter.GetInstance().AddEventListener("OnbombPickUp",onBombPicked);
     }
 
     private void FixedUpdate()
@@ -46,6 +46,7 @@ public class Bomb : WeaponsInfo
 
     private void OnDisable()
     {
+        EventCenter.GetInstance().RemoveEventListener("OnbombPickUp",onBombPicked);
         firstPickUp = true;
     }
 
@@ -57,13 +58,14 @@ public class Bomb : WeaponsInfo
       beginPick = false;
       afterPick_timer = 0.0f;
       beginDash = true;
-    }
+  }
 
-    /// <summary>
+  /// <summary>
     /// 捡起炸弹的回调函数
     /// </summary>
     private void OnPickUp()
     {
+        AudioMgr.GetInstance().PlaySound("Audios/捡到炸弹");
         if (firstPickUp)
         {
             // 炸弹被第一次捡起
@@ -107,10 +109,10 @@ public class Bomb : WeaponsInfo
             var direction = heading / distance;
             hitCollider.GetComponent<PlayerController>().hit_prop += Settings.external_damage;
             hitCollider.GetComponent<Rigidbody>().AddForce( direction * 500);
-            // print("炸了");
         }
         
         // todo: 重置后加入对象池
+        AudioMgr.GetInstance().PlaySound("Audios/炸弹爆炸");
         ResetState();
     }
 
