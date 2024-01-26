@@ -7,7 +7,6 @@ public class Chicken : WeaponsInfo
 {
     public override void Buff()
     {
-        print("嘎嘎");
         AudioMgr.GetInstance().PlaySound("Audios/chicken");
     }
 }

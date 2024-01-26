@@ -7,6 +7,7 @@ using XlsWork;
 using XlsWork.WeaponsXls;
 
 // todo: 非一次性使用物体耐久归零时涉及对象池的填装
+// todo: 武器击飞
 
 [Serializable]
 public class WeaponSettings
@@ -32,6 +33,8 @@ public class WeaponsInfo : MonoBehaviour
     public bool isOnce = false;                 // 是一次性物品（如炸弹
     
     public Rigidbody rigidbody;
+    
+    public float timer = 0.0f;
 
     private void Awake()
     {
@@ -40,6 +43,7 @@ public class WeaponsInfo : MonoBehaviour
 
     private void FixedUpdate()
     {
+        FlyTimer();
         FallDown();
     }
     
@@ -57,7 +61,7 @@ public class WeaponsInfo : MonoBehaviour
     /// <summary>
     /// 基础伤害：砸到别人身上时对对方造成伤害。
     /// </summary>
-    public virtual void Damage(Collider player)
+    public virtual void Damage(GameObject player)
     {
         player.GetComponent<PlayerController>().hit_prop += Settings.basic_damage;
     }
@@ -65,12 +69,39 @@ public class WeaponsInfo : MonoBehaviour
     // Buff效果：特殊之处，如弯刀如果被对方叼住则不受到伤害
     public virtual void Buff(){}
 
+    /// <summary>
+    /// 计算飞行时间
+    /// </summary>
+    public virtual void FlyTimer()
+    {
+        if (isFlying)
+        {
+            timer += Time.fixedDeltaTime;
+        }
+    }
+
+    /// <summary>
+    /// 落地判定
+    /// </summary>
     public virtual void FallDown()
     {
-        if (!(Mathf.Abs(rigidbody.velocity.x) > 0.0f) || !(Mathf.Abs(rigidbody.velocity.x) < 0.3f) ||
-            !(Mathf.Abs(rigidbody.velocity.y) > 0.0f) || !(Mathf.Abs(rigidbody.velocity.y) < 0.3f)) return;
+        if ((Mathf.Abs(rigidbody.velocity.x) > 0.0f && Mathf.Abs(rigidbody.velocity.x) < 0.3f) ||
+            (Mathf.Abs(rigidbody.velocity.y) > 0.0f && Mathf.Abs(rigidbody.velocity.y) < 0.3f))
+        {
+            isFlying = false;
+            timer = 0.0f;
+        }
         
-        isFlying = false;
+    }
+
+    /// <summary>
+    /// 撞击到玩家时轻微击飞
+    /// </summary>
+    public virtual void HitPlayerWhileFlying(PlayerController player)
+    {
+        print("hit" + player.gameObject.name);
+        
+        player.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 10);
     }
 
     [Header("配表内ID")]
