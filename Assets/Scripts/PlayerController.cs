@@ -21,13 +21,16 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     /*基本属性*/
-    public float speed = 0.0f;      // 速度，速度越快，冲刺造成的伤害越高，伤害等于击飞值的变量
+    public float speed = 0.0f;      // 基础速度，速度越快，冲刺造成的伤害越高，伤害等于击飞值的变量
+    public float current_speed = 0.0f;//实际速度
+    public float attack_speed = 15f;//允许攻击的速度
     public float max_speed = 0.0f; // 角色属性的速度上限
     public float volum_scale = 1.0f;    // 体积
     public float pick_area = 5.0f;  // 拾取范围
     List<Transform> item_transforms = new List<Transform>();    // 可拾取范围内的所有物品的列表
     
     [Header("撞击相关")]
+    public bool is_hit = false;//是否为有效攻击
     public float hit_prop = 0.0f;   // 击飞值，击飞值越高，被击飞概率越大
     public float max_hit_prop = 20.0f;  // 最大击飞值（？
     public int hit_count = 0;       // 被击飞的次数
@@ -113,7 +116,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         player.AddForce(moveVec * speed);
-        
+        current_speed = player.velocity.magnitude;//获取实际速度
+        if (current_speed >= attack_speed)//判定是否可以造成伤害
+        {
+            //需要一个动画改变
+            is_hit = true;
+        }
+        else
+        {
+            is_hit = false;
+        }
     }
 
     /// <summary>
@@ -237,4 +249,63 @@ public class PlayerController : MonoBehaviour
         is_dash = false;
     }
     
+    /// <summary>
+    /// 攻击速度
+    /// </summary>
+    private void Attackspeed()
+    {
+
+    }
+
+    /// <summary>
+    ///碰撞检测
+    /// </summary>
+    private void OnCollisionEnter(Collision other)
+    {
+        var otherPlayer = other.collider.GetComponent<PlayerController>();
+        if (otherPlayer)
+        {
+            if (is_hit && otherPlayer.is_hit)//都可以进行攻击
+            {
+                player.AddForce(-moveVec * current_speed);//达到攻击速度的鸡会小幅击飞
+                // otherPlayer.AddForce(-otherPlayer.moveVec * otherPlayer.current_speed);//达到攻击速度的鸡会小幅击飞
+            }
+            else if(is_hit && !otherPlayer.is_hit)//对方不能攻击
+            {
+                otherPlayer.hit_prop += 1.2f;
+            }
+            else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
+            {
+                hit_prop += 1.2f;
+                player.AddForce(otherPlayer.moveVec * speed * hit_prop * 100);//未达到的鸡会大幅击飞并叠加击飞值
+            }
+        }
+
+        // if(is_hit)
+        // {
+        //     player.AddForce(-moveVec * current_speed);//达到攻击速度的鸡会小幅击飞
+
+        // }
+        // else
+        // {
+        //     hit_prop += 1.2f;
+        //     player.AddForce(-moveVec * speed * hit_prop);//未达到的鸡会大幅击飞并叠加击飞值
+        // }
+    }
+
+    // /// <summary>
+    // /// 主动碰撞
+    // /// </summary>
+    // private void ActiveCollisions(Collision Collision)
+    // {
+    //     player.AddForce(-moveVec * speed * hit_prop *10);
+    // }
+
+    // /// <summary>
+    // /// 被动碰撞
+    // /// </summary>
+    // private void PasstiveCollisions(Collision Collision)
+    // {
+    //     player.AddForce(-moveVec * speed * hit_prop *10);
+    // }
 }
