@@ -31,8 +31,9 @@ public class PlayerController : MonoBehaviour
     [Header("撞击相关")]
     public bool is_hit = false;//是否为有效攻击
     public float hit_prop = 0.0f;   // 击飞值，击飞值越高，被击飞概率越大
-    public float max_hit_prop = 20.0f;  // 最大击飞值（？
-    public int hit_count = 0;       // 被击飞的次数
+    public float max_hit_prop = 100.0f;  // 最大击飞值
+    public float smash_odds = 0.0f; //击破概率
+    public int smash_count = 0;       // 被击破的次数
     public float dash_cd = 10.0f;   // 冲刺CD，10s
     public float dash_speed_k = 25.0f;  // 冲刺速度系数
     public bool is_dash = false;        // 是否冲刺
@@ -294,7 +295,7 @@ public class PlayerController : MonoBehaviour
         if (hitCollider.CompareTag("Player"))   // 碰撞玩家
         {
             var otherPlayer = hitCollider.gameObject.GetComponent<PlayerController>();
-            player.AddForce(-moveVec * current_speed * 100);//碰撞的基础弹飞，增加打击感同时避免重复判定
+            player.AddForce(-moveVec * current_speed * 90);//碰撞的基础弹飞，增加打击感同时避免重复判定
             if (is_hit && otherPlayer.is_hit) //双方可以进行攻击
             {
                 hit_prop += 0.5f;
@@ -304,6 +305,18 @@ public class PlayerController : MonoBehaviour
             {
                 hit_prop += 2f;
                 player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
+            }
+
+             // 击飞和击破
+            if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
+            {
+                smash_odds += hit_prop;
+                hit_prop = max_hit_prop;
+                if (smash_odds > UnityEngine.Random.Range(0,100))
+                {
+                    print("一击必杀了！");
+                    player.AddForce(otherPlayer.moveVec * 9999);
+                }
             }
         }
 
@@ -317,6 +330,7 @@ public class PlayerController : MonoBehaviour
         {
 
         }
+
 
     }
 }
