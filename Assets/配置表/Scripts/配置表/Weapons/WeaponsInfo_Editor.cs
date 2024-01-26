@@ -18,6 +18,16 @@ public class WeaponsInfo_Editor : Editor
         }
     }
 
+    /// <summary>
+    /// 从id获取行
+    /// </summary>
+    /// <param name="weaponsInfo"></param>
+    public void InitFromID(WeaponsInfo weaponsInfo)
+    {
+        weaponsInfo.InitFromID = weaponsInfo.Settings.id;
+        Init(weaponsInfo);
+    }
+
     public void Init(WeaponsInfo instance)
     {
         Action init;

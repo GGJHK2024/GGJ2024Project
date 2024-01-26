@@ -6,7 +6,6 @@ using UnityEngine;
 // 扔出去会旋转，扔出去一次耐久数-1，飞行途中可以被嘴巴叼住，**不造成伤害**
 public class Knife : WeaponsInfo
 {
-    private bool firstRotate = false;
     private Vector3 m_EulerAngleVelocity = new Vector3(0, 0, 100);
     public float rotate_timer = 30.0f;
 
@@ -35,7 +34,7 @@ public class Knife : WeaponsInfo
             (Mathf.Abs(rigidbody.velocity.y) > 0.0f && Mathf.Abs(rigidbody.velocity.y) < 0.3f))
         {
             isFlying = false;
-            timer = 0.0f;
+            flying_timer = 0.0f;
             rotate_timer = 30.0f;
         }
     }

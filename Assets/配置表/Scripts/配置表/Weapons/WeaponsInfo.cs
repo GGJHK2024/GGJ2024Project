@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Threading.Tasks;
 using UnityEngine.Serialization;
 using XlsWork;
 using XlsWork.WeaponsXls;
+
 
 // todo: 非一次性使用物体耐久归零时涉及对象池的填装
 // todo: 武器击飞
@@ -34,14 +36,16 @@ public class WeaponsInfo : MonoBehaviour
     
     public Rigidbody rigidbody;
     
-    public float timer = 0.0f;
+    public float flying_timer = 0.0f;           // 飞行时间
+    private int durable_remember = 0;
 
     private void Awake()
     {
         rigidbody = this.gameObject.GetComponent<Rigidbody>();
+        durable_remember = Settings.durable;
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         FlyTimer();
         FallDown();
@@ -76,7 +80,7 @@ public class WeaponsInfo : MonoBehaviour
     {
         if (isFlying)
         {
-            timer += Time.fixedDeltaTime;
+            flying_timer += Time.fixedDeltaTime;
         }
     }
 
@@ -89,7 +93,7 @@ public class WeaponsInfo : MonoBehaviour
             (Mathf.Abs(rigidbody.velocity.y) > 0.0f && Mathf.Abs(rigidbody.velocity.y) < 0.3f))
         {
             isFlying = false;
-            timer = 0.0f;
+            flying_timer = 0.0f;
         }
         
     }
@@ -99,12 +103,23 @@ public class WeaponsInfo : MonoBehaviour
     /// </summary>
     public virtual void HitPlayerWhileFlying(PlayerController player)
     {
-        print("hit" + player.gameObject.name);
+        print( player.gameObject.name + "受到" + Settings.name + "的撞击伤害");
         
         player.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 10);
     }
 
+    /// <summary>
+    /// 重置状态，在入池时使用
+    /// 重置耐久度（似乎只有这个会变
+    /// 重置所有布尔值和计时器
+    /// </summary>
+    public virtual void ResetState()
+    {
+        isFlying = false;
+        flying_timer = 0.0f;
+        Settings.durable = durable_remember;
+    }
+
     [Header("配表内ID")]
     public int InitFromID;
-
 }
