@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
         if (!weapon.GetComponent<WeaponsInfo>().isOnce) // 非一次性武器在释放时耐久-1
         {
             weapon.GetComponent<WeaponsInfo>().Break();
+            weapon.GetComponent<WeaponsInfo>().Buff();
         }
             
         // 武器弹射
@@ -306,8 +307,13 @@ public class PlayerController : MonoBehaviour
                 hit_prop += 1.2f;
                 player.AddForce(otherPlayer.moveVec * speed * hit_prop * 100); //未达到的鸡会大幅击飞并叠加击飞值
             }
-        } 
+        }
 
+        if (hitCollider.CompareTag("food")) // 吃到食物
+        {
+            var food = hitCollider.GetComponent<FoodsInfo>();
+            
+        }
 
     }
 

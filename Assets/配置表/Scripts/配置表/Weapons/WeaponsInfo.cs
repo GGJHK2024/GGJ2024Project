@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 using XlsWork;
 using XlsWork.WeaponsXls;
+
+// todo: 非一次性使用物体耐久归零时涉及对象池的填装
 
 [Serializable]
 public class WeaponSettings
@@ -27,6 +30,13 @@ public class WeaponsInfo : MonoBehaviour
     public bool isFlying = false;               // 武器是否处于掷出的状态
     public bool canBePickWhileFlying = false;   // 能够在飞行过程中被拾起（如弯刀
     public bool isOnce = false;                 // 是一次性物品（如炸弹
+    
+    public Rigidbody rigidbody;
+
+    private void Awake()
+    {
+        rigidbody = this.gameObject.GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
@@ -57,10 +67,10 @@ public class WeaponsInfo : MonoBehaviour
 
     public virtual void FallDown()
     {
-        if (this.GetComponent<Rigidbody>().IsSleeping())
-        {
-            isFlying = false;
-        }
+        if (!(Mathf.Abs(rigidbody.velocity.x) > 0.0f) || !(Mathf.Abs(rigidbody.velocity.x) < 0.3f) ||
+            !(Mathf.Abs(rigidbody.velocity.y) > 0.0f) || !(Mathf.Abs(rigidbody.velocity.y) < 0.3f)) return;
+        
+        isFlying = false;
     }
 
     [Header("配表内ID")]

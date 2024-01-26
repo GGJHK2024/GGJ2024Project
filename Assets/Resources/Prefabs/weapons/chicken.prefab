@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7461401017136568372}
   - component: {fileID: 7461401017136568371}
-  - component: {fileID: 7461401017136568370}
   - component: {fileID: 7461401017136568373}
   - component: {fileID: -2958449359087464647}
+  - component: {fileID: 6191046139964462927}
   m_Layer: 0
   m_Name: chicken
   m_TagString: weapon
@@ -87,29 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7461401017136568370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7461401017136568369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9207f1bca68cde34f8b7a2c52d54484b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings:
-    id: 4
-    name: "\u5C16\u53EB\u9E21"
-    durable: 10
-    speed_range: 1
-    basic_damage: 1
-    external_damage: 0
-  isFlying: 0
-  canBePickWhileFlying: 0
-  isOnce: 0
-  InitFromID: 4
 --- !u!65 &7461401017136568373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -137,5 +114,28 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6191046139964462927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461401017136568369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b7a415cdfdfa441acd3339f2dc0677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings:
+    id: 4
+    name: "\u5C16\u53EB\u9E21"
+    durable: 10
+    speed_range: 1
+    basic_damage: 1
+    external_damage: 0
+  isFlying: 0
+  canBePickWhileFlying: 0
+  isOnce: 0
+  InitFromID: 4
