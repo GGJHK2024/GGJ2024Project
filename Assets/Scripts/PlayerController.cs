@@ -122,8 +122,7 @@ public class PlayerController : MonoBehaviour
     private void GrabSth(InputAction.CallbackContext context)
     {
         // todo: change sprite摁住的时候嘴巴闭上
-
-        // todo: 拾取道具，道具可以打上item标签方便筛选
+        
         List<Collider> weaponCanBeGrab = new List<Collider>();
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pick_area);
         Collider[] orderedByProximity = hitColliders.OrderBy(c => (this.transform.position - c.transform.position).sqrMagnitude).ToArray();
@@ -131,12 +130,26 @@ public class PlayerController : MonoBehaviour
         // 从近到远排序可拾取范围内的道具
         foreach (var hitCollider in orderedByProximity)
         {
-            if (!hitCollider.CompareTag("weapon"))
+            if (!hitCollider.CompareTag("weapon"))  // 只抓取武器
                 continue;
             
-            weaponCanBeGrab.Add(hitCollider);
-            print(hitCollider.name);
+            if (!hitCollider.transform.GetComponent<WeaponsInfo>().isFlying) // 武器在飞行过程中无法抓取
+            {
+                weaponCanBeGrab.Add(hitCollider);
+                break;
+            }
+            else
+            {
+                if (!hitCollider.transform.GetComponent<WeaponsInfo>().canBePickWhileFlying) continue; // （特殊除外，例如弯刀
+                weaponCanBeGrab.Add(hitCollider);
+                break;
+            }
         }
+
+        if (weaponCanBeGrab.Count == 0) // 周围没有可拾取的武器
+            return;
+        
+        weaponCanBeGrab[0].transform.GetComponent<WeaponsInfo>().isFlying = false;
         weaponCanBeGrab[0].transform.SetParent(this.transform.GetChild(0));
         weaponCanBeGrab[0].transform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         weaponCanBeGrab[0].transform.localPosition = new Vector3(0, 0, -0.05f);
@@ -149,22 +162,33 @@ public class PlayerController : MonoBehaviour
     private void PutDown(InputAction.CallbackContext context)
     {
         // todo: change sprite 松开的时候，嘴巴松开
-        if (this.transform.GetChild(0).GetChild(0) != null) // 有拾取的武器
+        if (this.transform.GetChild(0).GetChild(0) == null) return;
+        
+        // 有拾取的武器时
+        GameObject weapon = this.transform.GetChild(0).GetChild(0).gameObject;
+        weapon.GetComponent<Rigidbody>().isKinematic = false;
+        weapon.transform.SetParent(null); // 释放武器
+
+        if (moveVec is { x: 0, y: 0 })      // 玩家在静止时放下武器，武器不会飞出或消耗耐久
         {
-            GameObject weapon = this.transform.GetChild(0).GetChild(0).gameObject;
-            weapon.GetComponent<Rigidbody>().isKinematic = false;
+            return;
+        }
             
-            // 武器弹射
-            if (is_dash)
-            {
-                weapon.GetComponent<Rigidbody>().AddForce(moveVec * dash_speed_k * 10);   // 冲刺时弹射更快
-            }
-            else
-            {
-                weapon.GetComponent<Rigidbody>().AddForce(moveVec * dash_speed_k * 5);
-            }
+        if (!weapon.GetComponent<WeaponsInfo>().isOnce) // 非一次性武器在释放时耐久-1
+        {
+            weapon.GetComponent<WeaponsInfo>().Break();
+        }
             
-            this.transform.GetChild(0).GetChild(0).SetParent(null); // 释放武器
+        // 武器弹射
+        if (is_dash)
+        {
+            weapon.GetComponent<Rigidbody>().AddForce(moveVec * dash_speed_k * 20);   // 冲刺时弹射更快
+            weapon.GetComponent<WeaponsInfo>().isFlying = true; // 武器处于飞行过程
+        }
+        else
+        {
+            weapon.GetComponent<Rigidbody>().AddForce(moveVec * dash_speed_k * 10);
+            weapon.GetComponent<WeaponsInfo>().isFlying = true;
         }
     }
 

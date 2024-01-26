@@ -106,6 +106,9 @@ MonoBehaviour:
     speed_range: 1
     basic_damage: 1
     external_damage: 0
+  isFlying: 0
+  canBePickWhileFlying: 0
+  isOnce: 0
   InitFromID: 4
 --- !u!65 &7461401017136568373
 BoxCollider:
@@ -114,7 +117,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7461401017136568369}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fb1c058340ab241439b23155e26ffad0, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
