@@ -5,15 +5,14 @@ using OfficeOpenXml;
 using UnityEditor;
 using System.IO;
 
-public class ReadUnits : MonoBehaviour
+public class ReadUnits : BaseMgr<ReadUnits>
 {
-    /*[Header("路径")]
+    [Header("路径")]
     public string excel_path = "/配置表/Excels/Unity.xlsx";
-    [MenuItem("Excel/Read Excel")]
-    void LoadExcel()
-    {
-        string path = Application.dataPath + excel_path;//指定待读取表格的文件路径。在编辑器模式下，Application.dataPath就是Assets文件夹
 
+    [MenuItem("Excel/Read Excel")]
+    void LoadExcel(string path)
+    {
         print("加载路径为" + path);
 
         FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);//建立文件流fs
@@ -39,5 +38,6 @@ public class ReadUnits : MonoBehaviour
 
         Debug.Log("complete");
         return;
-    }*/
+    }
+
 }

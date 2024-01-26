@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
         weaponCanBeGrab[0].transform.SetParent(this.transform.GetChild(0));
         weaponCanBeGrab[0].transform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         weaponCanBeGrab[0].transform.localPosition = new Vector3(0, 0, -0.05f);
+        EventCenter.GetInstance().EventTrigger("OnPickUp");
     }
 
     /// <summary>
@@ -177,8 +178,8 @@ public class PlayerController : MonoBehaviour
         GameObject weapon = this.transform.GetChild(0).GetChild(0).gameObject;
         weapon.GetComponent<Rigidbody>().isKinematic = false;
         weapon.transform.SetParent(null); // 释放武器
-
-        if (moveVec is { x: 0, y: 0 })      // 玩家在静止时放下武器，武器不会飞出或消耗耐久
+        
+        if (moveVec is { x: 0, y: 0 } && !weapon.GetComponent<WeaponsInfo>().isOnce)      // 玩家在静止时放下武器，武器不会飞出或消耗耐久
         {
             return;
         }
@@ -186,9 +187,10 @@ public class PlayerController : MonoBehaviour
         if (!weapon.GetComponent<WeaponsInfo>().isOnce) // 非一次性武器在释放时耐久-1
         {
             weapon.GetComponent<WeaponsInfo>().Break();
-            weapon.GetComponent<WeaponsInfo>().Buff();
         }
-            
+        
+        weapon.GetComponent<WeaponsInfo>().Buff();  // 释放时各自的特殊事件
+
         // 武器弹射
         if (is_dash)
         {
@@ -329,7 +331,7 @@ public class PlayerController : MonoBehaviour
         if (hitCollider.CompareTag("weapon")) //碰撞武器
         {
             var weapon = hitCollider.GetComponent<WeaponsInfo>();
-            if (weapon.isFlying && weapon.timer >= 0.08f)    // 当玩家撞到飞行中的武器时（可以在飞的过程中叼住但没叼到也算），会受到基础伤害并被轻微撞击
+            if (weapon.isFlying && weapon.flying_timer >= 0.08f)    // 当玩家撞到飞行中的武器时（可以在飞的过程中叼住但没叼到也算），会受到基础伤害并被轻微撞击
             {
                 weapon.Damage(this.gameObject);
                 weapon.HitPlayerWhileFlying(this);

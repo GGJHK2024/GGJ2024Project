@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3209718779573062572}
   - component: {fileID: 3209718779573062575}
-  - component: {fileID: 3209718779573062574}
   - component: {fileID: 3209718779573062573}
   - component: {fileID: 3463596768471150251}
+  - component: {fileID: 4198017418226401377}
   m_Layer: 0
   m_Name: bomb
   m_TagString: weapon
@@ -87,29 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3209718779573062574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3209718779573062569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9207f1bca68cde34f8b7a2c52d54484b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings:
-    id: 2
-    name: "\u70B8\u5F39"
-    durable: 1
-    speed_range: 1
-    basic_damage: 50
-    external_damage: 0
-  isFlying: 0
-  canBePickWhileFlying: 0
-  isOnce: 0
-  InitFromID: 2
 --- !u!65 &3209718779573062573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139,3 +116,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4198017418226401377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209718779573062569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65443e4aef174d94790387cf545308fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings:
+    id: 2
+    name: "\u70B8\u5F39"
+    durable: 1
+    speed_range: 1
+    basic_damage: 1
+    external_damage: 50
+  isFlying: 0
+  canBePickWhileFlying: 0
+  isOnce: 1
+  rigidbody: {fileID: 0}
+  flying_timer: 0
+  InitFromID: 2
+  afterDash_timer: 0
+  afterPick_timer: 0
+  boom_area: 5
