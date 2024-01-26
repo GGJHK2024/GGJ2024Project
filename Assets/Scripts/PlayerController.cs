@@ -297,7 +297,8 @@ public class PlayerController : MonoBehaviour
             player.AddForce(-moveVec * current_speed * 100);//碰撞的基础弹飞，增加打击感同时避免重复判定
             if (is_hit && otherPlayer.is_hit) //双方可以进行攻击
             {
-                player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞
+                hit_prop += 0.5f;
+                player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
             }
             else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
             {
@@ -310,6 +311,11 @@ public class PlayerController : MonoBehaviour
         {
             var food = hitCollider.GetComponent<FoodsInfo>();
             
+        }
+
+        if (hitCollider.CompareTag("Weapon")) //碰撞武器
+        {
+
         }
 
     }
