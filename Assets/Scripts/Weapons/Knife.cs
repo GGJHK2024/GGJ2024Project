@@ -9,12 +9,9 @@ public class Knife : WeaponsInfo
     private bool firstRotate = false;
     private Vector3 m_EulerAngleVelocity = new Vector3(0, 0, 100);
     public float rotate_timer = 30.0f;
-    private Rigidbody _rigidbody;
-    private Rigidbody _rigidbody1;
 
     private void Start()
     {
-        _rigidbody = this.GetComponent<Rigidbody>();
         canBePickWhileFlying = true;
         isOnce = false;
     }
@@ -25,7 +22,7 @@ public class Knife : WeaponsInfo
         Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime * rotate_timer);
         if (isFlying && rotate_timer > 0.0f)
         {
-            _rigidbody.MoveRotation(this.transform.rotation * deltaRotation);
+            rigidbody.MoveRotation(this.transform.rotation * deltaRotation);
             rotate_timer -= Time.fixedDeltaTime * 10;
         }
         FallDown();
@@ -33,10 +30,9 @@ public class Knife : WeaponsInfo
 
     public override void FallDown()
     {
-        if (!(Mathf.Abs(_rigidbody.velocity.x) > 0.0f) || !(Mathf.Abs(_rigidbody.velocity.x) < 0.3f) ||
-            !(Mathf.Abs(_rigidbody.velocity.y) > 0.0f) || !(Mathf.Abs(_rigidbody.velocity.y) < 0.3f)) return;
+        if (!(Mathf.Abs(rigidbody.velocity.x) > 0.0f) || !(Mathf.Abs(rigidbody.velocity.x) < 0.3f) ||
+            !(Mathf.Abs(rigidbody.velocity.y) > 0.0f) || !(Mathf.Abs(rigidbody.velocity.y) < 0.3f)) return;
         
-        // print("slow velocity, stop flying.");
         isFlying = false;
         rotate_timer = 30.0f;
     }
