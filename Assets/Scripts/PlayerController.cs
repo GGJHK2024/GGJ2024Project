@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
     private void PutDown(InputAction.CallbackContext context)
     {
         // todo: change sprite 松开的时候，嘴巴松开
-        if (this.transform.GetChild(0).GetChild(0) == null) return;
+        if (this.transform.GetChild(0).childCount == 0) return;
         
         // 有拾取的武器时
         GameObject weapon = this.transform.GetChild(0).GetChild(0).gameObject;

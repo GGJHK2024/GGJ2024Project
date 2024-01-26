@@ -1,7 +1,9 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+// todo:后续记得删除游戏主场景的audioMgr（不用挂好几个
 public class AudioMgr : BaseMgr<AudioMgr>
 {
     /// <summary>
@@ -9,10 +11,7 @@ public class AudioMgr : BaseMgr<AudioMgr>
     /// </summary>
     public AudioSource bkMusic = null;
 
-    /// <summary>
-    /// 音效组件套组(至多同时播放十个音效)
-    /// </summary>
-    public AudioSource[] soundMusic = new AudioSource[10];
+    public GameObject bkplayer;
 
     //音乐大小
     private float _bkValue = 0;
@@ -26,7 +25,7 @@ public class AudioMgr : BaseMgr<AudioMgr>
     {
         if (!GameObject.FindWithTag("BKPlayer"))
         {
-            GameObject bkplayer = new GameObject("bkPlayer");
+            bkplayer = new GameObject("bkPlayer");
             bkplayer.tag = "BKPlayer";
             DontDestroyOnLoad(bkplayer.gameObject);
             bkMusic = bkplayer.AddComponent<AudioSource>();
@@ -34,21 +33,15 @@ public class AudioMgr : BaseMgr<AudioMgr>
             for (int i = 1; i < 11; i++)
             {
                 bkplayer.AddComponent<AudioSource>();
-                soundMusic[i-1] = bkplayer.GetComponents<AudioSource>()[i];
             }
             bkMusic.loop = true;
-            ChangeBKMusic("Music/bgm");
+            ChangeBKMusic("Audios/bgm");
             PlayBkMusic();
         }
         else
         {
-            GameObject bkplayer = GameObject.FindWithTag("BKPlayer");
+            bkplayer = GameObject.FindWithTag("BKPlayer");
             bkMusic = bkplayer.GetComponents<AudioSource>()[0];
-            for (int i = 1; i < 10; i++)
-            {
-                soundMusic[i] = bkplayer.GetComponents<AudioSource>()[i];
-            }
-            
         }
     }
 
@@ -65,7 +58,7 @@ public class AudioMgr : BaseMgr<AudioMgr>
         bkMusic.volume = _bkValue;
         for (int i = 0; i < 10; i++)
         {
-            soundMusic[i].volume = _soundValue;
+            bkMusic.GetComponents<AudioSource>()[i+1].volume = _soundValue;
         }
     }
 
@@ -129,11 +122,12 @@ public class AudioMgr : BaseMgr<AudioMgr>
     public void ChangeSoundValue(Slider s)
     {
         _soundValue = s.value;
-        if (soundMusic == null)
+        if (bkplayer == null)
             return;
+        
         for (int i = 0; i < 10; i++)
         {
-            soundMusic[i].volume = _soundValue;
+            bkplayer.GetComponents<AudioSource>()[i+1].volume = _soundValue;
         }
     }
 
@@ -142,13 +136,13 @@ public class AudioMgr : BaseMgr<AudioMgr>
     /// </summary>
     public void PlaySound(string fileName)
     {
-        foreach (var s in soundMusic)
+        for (int i = 1; i < 11; i++)
         {
-            if (!s.isPlaying)
+            if (!bkMusic.GetComponents<AudioSource>()[i].isPlaying)
             {
                 _sound = Resources.Load(fileName) as AudioClip;
-                s.clip = _sound;
-                s.Play();
+                bkMusic.GetComponents<AudioSource>()[i].clip = _sound;
+                bkMusic.GetComponents<AudioSource>()[i].Play();
                 break;
             }
         }
@@ -159,11 +153,11 @@ public class AudioMgr : BaseMgr<AudioMgr>
     /// </summary>
     public void StopAllSound()
     {
-        if (soundMusic == null)
+        if (bkMusic == null)
             return;
         for (int i = 0; i < 10; i++)
         {
-            soundMusic[i].Stop();
+            bkMusic.GetComponents<AudioSource>()[i+1].Stop();
         }
     }
 }
