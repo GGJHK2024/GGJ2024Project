@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1宣战":"Audios/P2宣战");
         kbdinput.Enable();
         if (this.name.Contains("1"))    // kbd ctrl
         {
@@ -162,7 +163,7 @@ public class PlayerController : MonoBehaviour
         weaponCanBeGrab[0].transform.SetParent(this.transform.GetChild(0));
         weaponCanBeGrab[0].transform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         weaponCanBeGrab[0].transform.localPosition = new Vector3(0, 0, -0.05f);
-        EventCenter.GetInstance().EventTrigger("OnPickUp");
+        EventCenter.GetInstance().EventTrigger("On"+ weaponCanBeGrab[0].name + "PickUp");
     }
 
     /// <summary>
@@ -213,6 +214,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!is_dash || (is_doubledash && dash_count <= 1))
         {
+            AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/p1冲刺":"Audios/p2冲刺");
             player.AddForce(moveVec * speed * dash_speed_k);
             is_dash = true;
             dash_count++;
