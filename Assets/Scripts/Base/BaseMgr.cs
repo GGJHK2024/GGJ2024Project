@@ -8,10 +8,16 @@ public class BaseMgr<T> : MonoBehaviour where T : MonoBehaviour
     {
         if( instance == null )
         {
-            GameObject obj = new GameObject();
+            GameObject father = GameObject.FindWithTag("manager");
+            
+            if (father == null)
+            {
+                father = new GameObject();
+                father.name = "Managers";
+            }
+            father.transform.SetParent(father.transform);
             //设置对象的名字为脚本名
-            obj.name = typeof(T).ToString();
-            instance = obj.AddComponent<T>();
+            instance = father.AddComponent<T>();
         }
         return instance;
     }

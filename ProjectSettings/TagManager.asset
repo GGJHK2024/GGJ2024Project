@@ -7,6 +7,9 @@ TagManager:
   - BKPlayer
   - weapon
   - food
+  - bkSlider
+  - soundSlider
+  - manager
   layers:
   - Default
   - TransparentFX
