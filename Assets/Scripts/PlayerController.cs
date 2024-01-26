@@ -306,8 +306,13 @@ public class PlayerController : MonoBehaviour
                 hit_prop += 1.2f;
                 player.AddForce(otherPlayer.moveVec * speed * hit_prop * 100); //未达到的鸡会大幅击飞并叠加击飞值
             }
-        } 
+        }
 
+        if (hitCollider.CompareTag("food")) // 吃到食物
+        {
+            var food = hitCollider.GetComponent<FoodsInfo>();
+            
+        }
 
     }
 

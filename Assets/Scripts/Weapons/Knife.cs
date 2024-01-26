@@ -33,11 +33,12 @@ public class Knife : WeaponsInfo
 
     public override void FallDown()
     {
-        if (_rigidbody.IsSleeping())
-        {
-            isFlying = false;
-            rotate_timer = 30.0f;
-        }
+        if (!(Mathf.Abs(_rigidbody.velocity.x) > 0.0f) || !(Mathf.Abs(_rigidbody.velocity.x) < 0.3f) ||
+            !(Mathf.Abs(_rigidbody.velocity.y) > 0.0f) || !(Mathf.Abs(_rigidbody.velocity.y) < 0.3f)) return;
+        
+        // print("slow velocity, stop flying.");
+        isFlying = false;
+        rotate_timer = 30.0f;
     }
 
     public override void Buff()
