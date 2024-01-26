@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        if (hitCollider.CompareTag("Weapon")) //碰撞武器
+        if (hitCollider.CompareTag("weapon")) //碰撞武器
         {
 
         }
