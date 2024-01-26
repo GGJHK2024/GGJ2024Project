@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 
 
 // todo: change sprite
-// todo: pick up items
 
 
 
@@ -27,8 +26,8 @@ public class PlayerController : MonoBehaviour
     public float max_speed = 0.0f; // 角色属性的速度上限
     public float volum_scale = 1.0f;    // 体积
     public float pick_area = 5.0f;  // 拾取范围
-    List<Transform> item_transforms = new List<Transform>();    // 可拾取范围内的所有物品的列表
-    
+    public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
+
     [Header("撞击相关")]
     public bool is_hit = false;//是否为有效攻击
     public float hit_prop = 0.0f;   // 击飞值，击飞值越高，被击飞概率越大
@@ -40,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public bool is_doubledash = false;  // 是否二段冲刺
     public float doubledash_time = 10.0f;   // 二段冲刺buff时间
     public float hit_dmg = 0.0f;    // 裸体撞击伤害
-    // public ?? hit_out;   // 受到撞击吐多少东西,类还没写
+    // public FoodsInfo hit_out;    // 受到撞击吐多少东西
 
     public int dash_count = 0; // 冲刺次数
     
@@ -126,6 +125,11 @@ public class PlayerController : MonoBehaviour
         {
             is_hit = false;
         }
+    }
+
+    private void LateUpdate()
+    {
+        BoundaryCheck();
     }
 
     /// <summary>
@@ -247,6 +251,29 @@ public class PlayerController : MonoBehaviour
         print("cd冷却结束");
         dash_count = 0;
         is_dash = false;
+    }
+
+    /// <summary>
+    /// 边界检测
+    /// </summary>
+    private void BoundaryCheck()
+    {
+        if (this.transform.position.y > boundary.x)
+        {
+            transform.position = new Vector3(transform.position.x,boundary.x,0);
+        }
+        if (this.transform.position.y < boundary.y)
+        {
+            transform.position = new Vector3(transform.position.x,boundary.y,0);
+        }
+        if (this.transform.position.x > boundary.w)
+        {
+            transform.position = new Vector3(boundary.w,transform.position.y,0);
+        }
+        if (this.transform.position.x < boundary.z)
+        {
+            transform.position = new Vector3(boundary.z,transform.position.y,0);
+        }
     }
     
     /// <summary>
