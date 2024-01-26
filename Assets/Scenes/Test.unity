@@ -249,6 +249,7 @@ MonoBehaviour:
   canBePickWhileFlying: 0
   isOnce: 0
   rigidbody: {fileID: 0}
+  timer: 0
   InitFromID: 1
   rotate_timer: 30
 --- !u!1 &601826711
@@ -609,6 +610,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 3209718779573062569, guid: 20374a06fca83464c8053e936b644b23, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3209718779573062572, guid: 20374a06fca83464c8053e936b644b23, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -851,6 +856,18 @@ PrefabInstance:
       value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 7461401017136568373, guid: 402f80dbe0d55e046b8458adc906a453, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5010148
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461401017136568373, guid: 402f80dbe0d55e046b8458adc906a453, type: 3}
+      propertyPath: m_Center.x
+      value: 0.034068022
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461401017136568373, guid: 402f80dbe0d55e046b8458adc906a453, type: 3}
+      propertyPath: m_Center.y
+      value: -1.1877099e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461401017136568373, guid: 402f80dbe0d55e046b8458adc906a453, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
@@ -1088,6 +1105,10 @@ PrefabInstance:
     - target: {fileID: 4458265125218630300, guid: 48144098316b57944a365e58af76d5b3, type: 3}
       propertyPath: m_Name
       value: w_knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458265125218630300, guid: 48144098316b57944a365e58af76d5b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4458265125218630299, guid: 48144098316b57944a365e58af76d5b3, type: 3}
@@ -1428,8 +1449,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7709398, y: 3.312299, z: 2.870531}
-  m_Center: {x: 0.014278412, y: 0.0023409128, z: 0.06806713}
+  m_Size: {x: 0.8610134, y: 1.6992533, z: 2.870531}
+  m_Center: {x: -0.020357609, y: 0.046873003, z: 0.068067074}
 --- !u!212 &1885622622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1658,8 +1679,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7981656, y: 3.3395271, z: 2.8567102}
-  m_Center: {x: 0.027892232, y: -0.011273384, z: 0.0040045977}
+  m_Size: {x: 0.9488528, y: 1.7487204, z: 2.8567102}
+  m_Center: {x: 0.02789247, y: -0.021215796, z: 0.0040045977}
 --- !u!212 &1951067255
 SpriteRenderer:
   m_ObjectHideFlags: 0
