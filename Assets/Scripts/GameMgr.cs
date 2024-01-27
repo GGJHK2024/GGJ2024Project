@@ -29,7 +29,11 @@ public class GameMgr : BaseMgr<GameMgr>
 
     private void Awake()
     {
+        weaponPool = GameObject.Find("PoolWeapons");
+        foodPool = GameObject.Find("PoolFoods");
+        
         AudioMgr.GetInstance().PlaySound("Audios/人群欢呼");
+        FoodSpawner();
         
         TopTimerText = GameObject.Find("TopTimerText").GetComponent<TMP_Text>();
         MidTimerText = GameObject.Find("MidTimerText").GetComponent<TMP_Text>();
@@ -42,8 +46,6 @@ public class GameMgr : BaseMgr<GameMgr>
 
     private void Start()
     {
-        weaponPool = GameObject.Find("PoolWeapons");
-        foodPool = GameObject.Find("PoolFoods");
         StartCoroutine(WeaponWaveSpawner());
     }
 
