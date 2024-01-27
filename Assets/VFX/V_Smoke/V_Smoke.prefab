@@ -14031,7 +14031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8487402871801164198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.56, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14114,7 +14114,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
   randomSeed: 0
@@ -18664,7 +18664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 0
   cameraShake:
     enabled: 0
     useMainCamera: 1

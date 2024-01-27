@@ -773,10 +773,6 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2073871345444748666, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
-      propertyPath: clearBehavior
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3221565902363735721, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
       propertyPath: m_Intensity
       value: 0
@@ -885,10 +881,6 @@ PrefabInstance:
     - target: {fileID: 2003539020519721219, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
       propertyPath: playOnAwake
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073871345444748666, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
-      propertyPath: clearBehavior
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3221565902363735721, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
       propertyPath: m_Intensity
@@ -1117,10 +1109,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1951067256}
     m_Modifications:
-    - target: {fileID: 1757136078456868757, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
-      propertyPath: clearBehavior
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4036418579442813153, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1634,10 +1622,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1885622623}
     m_Modifications:
-    - target: {fileID: 1757136078456868757, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
-      propertyPath: clearBehavior
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4036418579442813153, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: m_RootOrder
       value: 2

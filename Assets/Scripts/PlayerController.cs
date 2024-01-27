@@ -155,7 +155,9 @@ public class PlayerController : MonoBehaviour
                     anim.Play(gameObject.name.Contains("1")?"Brown_Run":"White_Run");
                 }
             }
+            this.transform.GetChild(2).GetComponent<ParticleSystem>().Play();
         }else {
+            this.transform.GetChild(2).GetComponent<ParticleSystem>().Stop();
             anim.Play("New State");
         }
         
