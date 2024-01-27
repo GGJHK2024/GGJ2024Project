@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &3395551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3395552}
-  m_Layer: 0
-  m_Name: LDanchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3395552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3395551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17, y: -9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &53002432
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4185711697729513691, guid: cc5b5ba327f74c04b98147e3cca703c6, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4185711697729513691, guid: cc5b5ba327f74c04b98147e3cca703c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -598,8 +567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1: {fileID: 1951067252}
   Player2: {fileID: 1885622617}
-  LDanchor: {fileID: 3395552}
-  RTanchor: {fileID: 2071652795}
   distance: 0
   transSpeed: 0.6
   maxRange: 15
@@ -666,7 +633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8307647737798693386, guid: b0029d6840b40cd4286285441302703a, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8307647737798693386, guid: b0029d6840b40cd4286285441302703a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1484,7 +1451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4296075427937625330, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4296075427937625330, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1910,7 +1877,7 @@ MonoBehaviour:
   boundary: {x: 50, y: -50, z: -50, w: 50}
   is_hit: 0
   hit_prop: 0
-  max_hit_prop: 5
+  max_hit_prop: 20
   smash_odds: 0
   smash_count: 0
   dash_cd: 5
@@ -2482,37 +2449,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &2071652794
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2071652795}
-  m_Layer: 0
-  m_Name: RTanchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2071652795
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071652794}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 8, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2087984546
 GameObject:
   m_ObjectHideFlags: 0
