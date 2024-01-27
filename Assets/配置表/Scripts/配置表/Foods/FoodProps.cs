@@ -40,7 +40,6 @@ namespace XlsWork
                     for (int col = 1; col <= colCount-1; col++)//从第一列遍历到最后一列
                     {
                         //读取每个单元格中的数据
-                        print(workSheet.Cells[row, col].Text);
                         item.Values[col - 1] = workSheet.Cells[row, col].Text;//将单元格中的数据写入操作单元
                     }
 

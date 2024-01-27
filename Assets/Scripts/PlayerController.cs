@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +23,6 @@ public class PlayerController : MonoBehaviour
     public float current_speed = 0.0f;//实际速度
     public float attack_speed = 15f;//允许攻击的速度
     public float max_speed = 0.0f; // 角色属性的速度上限
-    public float volum_scale = 1.0f;    // 体积
     public float pick_area = 5.0f;  // 拾取范围
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
 
@@ -38,16 +36,13 @@ public class PlayerController : MonoBehaviour
     public float dash_speed_k = 25.0f;  // 冲刺速度系数
     public bool is_dash = false;        // 是否冲刺
     public bool is_doubledash = false;  // 是否二段冲刺
-    public float doubledash_time = 10.0f;   // 二段冲刺buff时间
     public float hit_dmg = 0.0f;    // 裸体撞击伤害
     // public FoodsInfo hit_out;    // 受到撞击吐多少东西
 
     public int dash_count = 0; // 冲刺次数
     
     [Header("护盾相关")]
-    public bool is_tem_shield = false;  // 是否带有一次性护盾
-    public bool is_shield = false;  // 是否带有持续护盾
-    public float shield_cd = 0.0f;  // 持续护盾时间
+    public bool is_shield = false;  // 是否带有一次性护盾
 
     /*控制属性*/
     private Player1 kbdinput = null;    // player input
@@ -304,13 +299,31 @@ public class PlayerController : MonoBehaviour
             player.AddForce(-moveVec * current_speed * 90);//碰撞的基础弹飞，增加打击感同时避免重复判定
             if (is_hit && otherPlayer.is_hit) //双方可以进行攻击
             {
-                hit_prop += 0.5f;
-                player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
+                if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                {
+                    is_shield = false;
+                    EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                }
+                else
+                {
+                    hit_prop += 0.5f;
+                    AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+                    player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
+                }
             }
             else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
             {
-                hit_prop += 2f;
-                player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
+                if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                {
+                    is_shield = false;
+                    EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                }
+                else
+                {
+                    hit_prop += 2f;
+                    AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+                    player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
+                }
             }
 
              // 击飞和击破
@@ -320,21 +333,31 @@ public class PlayerController : MonoBehaviour
                 hit_prop = max_hit_prop;
                 if (smash_odds > UnityEngine.Random.Range(0,100))
                 {
-                    print("一击必杀了！");
-                    AudioMgr.GetInstance().PlaySound((otherPlayer.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
-                    player.AddForce(otherPlayer.moveVec * 9999);
+                    if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                    {
+                        is_shield = false;
+                        EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                    }
+                    else
+                    {
+                        print(this.gameObject.name + "一击必杀了！");
+                        AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
+                        player.AddForce(otherPlayer.moveVec * 9999);
+                    }
                 }
             }
         }
 
         if (hitCollider.CompareTag("food")) // 吃到食物
         {
+            print("get food: " + hitCollider.name);
             var food = hitCollider.GetComponent<FoodsInfo>();
             food.GeneralEffect(this);
             // 食物有buff效果
             if (food.Settings.is_buff == 1)
             {
-                food.OnBuffBegin();
+                food.Buff();
+                StartCoroutine(DeBuffFromFood(food));
             }
         }
 
@@ -344,12 +367,27 @@ public class PlayerController : MonoBehaviour
             var weapon = hitCollider.GetComponent<WeaponsInfo>();
             if (weapon.isFlying && weapon.flying_timer >= 0.08f)    // 当玩家撞到飞行中的武器时（可以在飞的过程中叼住但没叼到也算），会受到基础伤害并被轻微撞击
             {
-                weapon.Damage(this.gameObject);
-                weapon.HitPlayerWhileFlying(this);
+                if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                {
+                    is_shield = false;
+                    EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                }
+                else
+                {
+                    weapon.Damage(this.gameObject);
+                    weapon.HitPlayerWhileFlying(this);
+                }
             }
 
         }
 
+    }
 
+    IEnumerator DeBuffFromFood(FoodsInfo f)
+    {
+        yield return new WaitForSeconds(f.Settings.buff_time);
+        f.Debuff();
+
+        yield return null;
     }
 }

@@ -132,7 +132,7 @@ public class AudioMgr : BaseMgr<AudioMgr>
     }
 
     /// <summary>
-    /// 播放音效
+    /// 通过路径播放音效
     /// </summary>
     public void PlaySound(string fileName)
     {
@@ -142,6 +142,22 @@ public class AudioMgr : BaseMgr<AudioMgr>
             {
                 _sound = Resources.Load(fileName) as AudioClip;
                 bkMusic.GetComponents<AudioSource>()[i].clip = _sound;
+                bkMusic.GetComponents<AudioSource>()[i].Play();
+                break;
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 通过文件直接播放音效
+    /// </summary>
+    public void PlaySound(AudioClip file)
+    {
+        for (int i = 1; i < 11; i++)
+        {
+            if (!bkMusic.GetComponents<AudioSource>()[i].isPlaying)
+            {
+                bkMusic.GetComponents<AudioSource>()[i].clip = file;
                 bkMusic.GetComponents<AudioSource>()[i].Play();
                 break;
             }

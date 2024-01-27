@@ -18,6 +18,7 @@ public class Chicken : WeaponsInfo
 
     private void OnDisable()
     {
+        onChickenPicked -= OnPickUp;
         EventCenter.GetInstance().RemoveEventListener("OnchickenPickUp",onChickenPicked);
     }
     

@@ -11,7 +11,7 @@ public class FoodSettings
     public int id;
     public string name;
     public int is_buff;
-    public int volume;
+    public float volume;
     public int speed;
     public int buff_time;
 }
@@ -23,25 +23,8 @@ public class FoodsInfo : MonoBehaviour
     [Header("配表内ID")]
     public int InitFromID;
 
-    public float buff_timer = 0.0f;
-    private bool begin_buffer = false;
-
-    private PlayerController player;    // buff作用对象
-
-    private void FixedUpdate()
-    {
-        if (begin_buffer)
-        {
-            BuffTimer();    // counting
-        }
-
-        if (Settings.is_buff == 1 && (buff_timer >= Settings.buff_time))   // buff作用结束
-        {
-            Debuff();
-            begin_buffer = false;
-            buff_timer = 0.0f;
-        }
-    }
+    public PlayerController player;    // buff作用对象
+    public AudioClip sound;
 
     /// <summary>
     /// 食物类通用效果
@@ -52,16 +35,8 @@ public class FoodsInfo : MonoBehaviour
     {
         player = p;
         p.speed += Settings.speed;
-        p.volum_scale += Settings.volume;
-    }
-
-    /// <summary>
-    /// buff效果开始
-    /// </summary>
-    public void OnBuffBegin()
-    {
-        Buff();
-        begin_buffer = true;
+        p.gameObject.GetComponent<Transform>().localScale += new Vector3(Settings.volume,Settings.volume,1.0f);
+        PlayPickUpSound();
     }
 
     /// <summary>
@@ -82,12 +57,9 @@ public class FoodsInfo : MonoBehaviour
         print("buff作用结束于 " + player.gameObject.name);
     }
 
-    /// <summary>
-    /// buff计时器
-    /// </summary>
-    private void BuffTimer()
+    public virtual void PlayPickUpSound()
     {
-        buff_timer += Time.fixedDeltaTime;
+        AudioMgr.GetInstance().PlaySound(sound);
     }
 
 }

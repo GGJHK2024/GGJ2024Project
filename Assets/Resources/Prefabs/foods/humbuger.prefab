@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1316406938313910273}
   - component: {fileID: 5754421050831087473}
   - component: {fileID: 1757856625947876150}
+  - component: {fileID: -842866912299030175}
   m_Layer: 0
   m_Name: humbuger
   m_TagString: food
@@ -103,10 +104,12 @@ MonoBehaviour:
     id: 2
     name: "\u7F8E\u5F0F\u6C49\u5821"
     is_buff: 0
-    volume: 10
+    volume: 0.1
     speed: 0
     buff_time: 0
   InitFromID: 2
+  player: {fileID: 0}
+  sound: {fileID: 8300000, guid: f88b730b822fdc54196e63e017bbee79, type: 3}
 --- !u!65 &5754421050831087473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136,3 +139,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 48
   m_CollisionDetection: 0
+--- !u!114 &-842866912299030175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507031941576695612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef41e846e1f84726b366114374dfd65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings:
+    id: 2
+    name: "\u7F8E\u5F0F\u6C49\u5821"
+    is_buff: 0
+    volume: 0.1
+    speed: 0
+    buff_time: 0
+  InitFromID: 2
+  player: {fileID: 0}
+  sound: {fileID: 8300000, guid: f88b730b822fdc54196e63e017bbee79, type: 3}

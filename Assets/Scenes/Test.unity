@@ -813,7 +813,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &915681472
@@ -1393,6 +1393,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 87b78ca2eef44534fb27a9826bfb0615, type: 3}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: InitFromID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.id
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.name
+      value: "\u91D1\u62F1\u95E8"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.is_buff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.buff_time
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3145842457104448244, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
       propertyPath: m_Name
       value: mcDonald
@@ -1821,7 +1849,6 @@ MonoBehaviour:
   current_speed: 0
   attack_speed: 15
   max_speed: 20
-  volum_scale: 1
   pick_area: 5
   boundary: {x: 50, y: -50, z: -50, w: 50}
   is_hit: 0
@@ -1833,12 +1860,9 @@ MonoBehaviour:
   dash_speed_k: 40
   is_dash: 0
   is_doubledash: 0
-  doubledash_time: 10
   hit_dmg: 0
   dash_count: 0
-  is_tem_shield: 0
   is_shield: 0
-  shield_cd: 0
 --- !u!54 &1885622620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2197,7 +2221,6 @@ MonoBehaviour:
   current_speed: 0
   attack_speed: 15
   max_speed: 20
-  volum_scale: 1
   pick_area: 5
   boundary: {x: 50, y: -50, z: -50, w: 50}
   is_hit: 0
@@ -2208,13 +2231,10 @@ MonoBehaviour:
   dash_cd: 5
   dash_speed_k: 40
   is_dash: 0
-  is_doubledash: 1
-  doubledash_time: 10
+  is_doubledash: 0
   hit_dmg: 0
   dash_count: 0
-  is_tem_shield: 0
   is_shield: 0
-  shield_cd: 0
 --- !u!114 &1951067258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2604,6 +2624,10 @@ PrefabInstance:
     - target: {fileID: 1894640488311488026, guid: 66f64b71fac1ec4438f84becd6e7ac3d, type: 3}
       propertyPath: m_Name
       value: feeds
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894640488311488026, guid: 66f64b71fac1ec4438f84becd6e7ac3d, type: 3}
+      propertyPath: m_TagString
+      value: food
       objectReference: {fileID: 0}
     - target: {fileID: 8105493932751382769, guid: 66f64b71fac1ec4438f84becd6e7ac3d, type: 3}
       propertyPath: m_UseGravity
