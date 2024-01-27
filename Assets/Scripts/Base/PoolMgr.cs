@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using System;
 
 /// <summary>
-/// 用于敌人生成的缓存池(与卡牌的不一样，涉及到位置和旋转的问题，所以直接开了个新的类避免混淆
+/// 用于Ape生成的缓存池
 /// </summary>
 public class PoolMgr : BaseMgr<PoolMgr>
 {
@@ -13,28 +13,6 @@ public class PoolMgr : BaseMgr<PoolMgr>
     public Dictionary<string, PoolData> PoolDic = new Dictionary<string, PoolData>();
 
     private GameObject poolObj;
-
-    /// <summary>
-    /// 往外拿东西，含初始坐标
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    public void GetObj(string name, Vector3 position, UnityAction<GameObject> callBack)
-    {
-        print("hi");
-        //有抽屉 并且抽屉里有东西
-        if (PoolDic.ContainsKey(name) && PoolDic[name].poolList.Count > 0)
-        {
-            print("有抽屉 并且抽屉里有东西");
-            if(callBack!=null) callBack(PoolDic[name].GetObj(position));
-            else PoolDic[name].GetObj(position);
-        }
-        else//通过异步加载资源 创建对象给外部用
-        {
-            print("通过异步加载资源 创建对象给外部用");
-            callBack(Resources.Load<GameObject>(name));
-        }
-    }
 
     /// <summary>
     /// 往外拿东西，不含初始坐标
@@ -51,14 +29,9 @@ public class PoolMgr : BaseMgr<PoolMgr>
         }
         else//通过加载资源 创建对象给外部用
         {
-            callBack(Resources.Load<GameObject>(name));
+            callBack(ResMgr.GetInstance().Load<GameObject>(name));
         }
 
-    }
-
-    public void PushObj(GameObject obj)
-    {
-        PushObj(obj.name,obj);
     }
 
     /// <summary>
