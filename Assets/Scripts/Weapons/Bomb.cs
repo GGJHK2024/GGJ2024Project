@@ -112,12 +112,18 @@ public class Bomb : WeaponsInfo
             hitCollider.GetComponent<Rigidbody>().AddForce( direction * 500);
             hitCollider.gameObject.GetComponent<PlayerController>().anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
             AudioMgr.GetInstance().PlaySound((hitCollider.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+            hitCollider.gameObject.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
         }
         
         // todo: 重置后加入对象池
         AudioMgr.GetInstance().PlaySound("Audios/炸弹爆炸");
-        ResetState();
-        PoolMgr.GetInstance().PushObj("Prefabs/weapons/bomb", gameObject);
+        
+        if (!transform.GetChild(0).GetComponent<ParticleSystem>().isPlaying)
+        {
+            transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+        }
+        
+        Invoke("ResetState",0.45f);
     }
 
     public override void ResetState()
@@ -128,5 +134,6 @@ public class Bomb : WeaponsInfo
         afterDash_timer = 0.0f;    // 被扔出去之后经过的总时间（扔出后三秒爆炸）
         beginPick = false;
         afterPick_timer = 0.0f;    // 被捡起来后经过的时间（10秒未扔出在嘴里爆炸）
+        PoolMgr.GetInstance().PushObj("Prefabs/weapons/bomb", gameObject);
     }
 }
