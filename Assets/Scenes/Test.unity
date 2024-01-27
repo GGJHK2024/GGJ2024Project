@@ -1922,9 +1922,10 @@ MonoBehaviour:
   attack_speed: 15
   max_speed: 20
   pick_area: 5
+  one_life_smash: 0
   boundary: {x: 23, y: -28, z: -50, w: 50}
-  img: {fileID: 1981530027}
   anim: {fileID: 1981530028}
+  img: {fileID: 1981530027}
   is_hit: 0
   is_hitting: 0
   is_smashing: 0
@@ -2195,9 +2196,10 @@ MonoBehaviour:
   attack_speed: 15
   max_speed: 20
   pick_area: 5
+  one_life_smash: 0
   boundary: {x: 23, y: -28, z: -50, w: 50}
-  img: {fileID: 108401628}
   anim: {fileID: 108401629}
+  img: {fileID: 108401628}
   is_hit: 0
   is_hitting: 0
   is_smashing: 0

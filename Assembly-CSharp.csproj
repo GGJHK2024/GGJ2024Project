@@ -73,6 +73,7 @@
     <Compile Include="Assets\配置表\Scripts\配置表\ReadUnits.cs" />
     <Compile Include="Assets\Scripts\CameraTrans.cs" />
     <Compile Include="Assets\Scripts\Base\PoolMgr.cs" />
+    <Compile Include="Assets\Scripts\Base\ResMgr.cs" />
     <Compile Include="Assets\Scripts\LogMgr.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Foods\FoodsInfo_Editor.cs" />
     <Compile Include="Assets\Scripts\Weapons\Chicken.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_ShurikenThreadFix.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
-    <Compile Include="Assets\Scripts\Base\ResMgr.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Shaders\CFX2 Particle Alpha Blend Add.shader" />
@@ -97,6 +97,7 @@
     <None Include="Assets\VFX\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Resources\Save\DB.json" />
+    <None Include="Assets\Shader\Flash.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

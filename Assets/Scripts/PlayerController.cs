@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
 
     public Animator anim; // 动画机
+    public SpriteRenderer img;  // 贴图sp
 
     [Header("撞击相关")]
     public bool is_hit = false;//是否为可以造成有效攻击
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
         kbdinput = new Player2();
         gpdinput = new Player2();
         player = GetComponent<Rigidbody>();
-        fl = gameObject.GetComponent<SpriteRenderer>().material;
+        fl = img.material;
         var allGamepads = Gamepad.all;
         if (this.gameObject.name.Contains("1"))
         {
