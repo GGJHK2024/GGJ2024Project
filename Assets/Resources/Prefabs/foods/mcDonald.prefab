@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4296075427937625330}
   - component: {fileID: 8896880344244297416}
   - component: {fileID: 4740125350551475227}
-  - component: {fileID: 7295393813707690036}
   - component: {fileID: 6746456207770308496}
+  - component: {fileID: 2434750450803629656}
   m_Layer: 0
   m_Name: mcDonald
   m_TagString: food
@@ -100,26 +100,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1637025, y: 2.6977568, z: 0.2}
   m_Center: {x: 0.08185172, y: -0.06824535, z: 0}
---- !u!114 &7295393813707690036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3145842457104448244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef41e846e1f84726b366114374dfd65b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings:
-    id: 4
-    name: "\u91D1\u62F1\u95E8"
-    is_buff: 1
-    volume: 10
-    speed: -5
-    buff_time: 100
-  InitFromID: 4
 --- !u!54 &6746456207770308496
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,3 +116,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 48
   m_CollisionDetection: 0
+--- !u!114 &2434750450803629656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3145842457104448244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77fe32f79423e247bb6f6504d71acae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings:
+    id: 4
+    name: "\u91D1\u62F1\u95E8"
+    is_buff: 1
+    volume: 0.1
+    speed: -5
+    buff_time: 100
+  InitFromID: 4
+  player: {fileID: 0}
+  sound: {fileID: 8300000, guid: 87b78ca2eef44534fb27a9826bfb0615, type: 3}

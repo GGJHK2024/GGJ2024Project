@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8307647737798693386}
   - component: {fileID: 405745995202824470}
-  - component: {fileID: 2304340864156920313}
   - component: {fileID: 1706005355476491150}
   - component: {fileID: 6576950308224091559}
+  - component: {fileID: -5277028161723287499}
   m_Layer: 0
   m_Name: tea
   m_TagString: food
@@ -87,26 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2304340864156920313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189612836468543766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef41e846e1f84726b366114374dfd65b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings:
-    id: 3
-    name: "\u529F\u592B\u8336"
-    is_buff: 1
-    volume: 0
-    speed: 0
-    buff_time: 10
-  InitFromID: 3
 --- !u!65 &1706005355476491150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136,3 +116,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 48
   m_CollisionDetection: 0
+--- !u!114 &-5277028161723287499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189612836468543766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de922a9132fe19444b432410af2522ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings:
+    id: 3
+    name: "\u529F\u592B\u8336"
+    is_buff: 1
+    volume: 0
+    speed: 0
+    buff_time: 10
+  InitFromID: 3
+  player: {fileID: 0}
+  sound: {fileID: 8300000, guid: ee435418f258aec4bbe1ab64d2ce0982, type: 3}

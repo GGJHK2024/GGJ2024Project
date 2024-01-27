@@ -36,7 +36,7 @@ public class FoodsInfo_Editor : Editor
             instance.Settings.id = Convert.ToInt32(item.Values[0]);
             instance.Settings.name = Convert.ToString(item.Values[1]);
             instance.Settings.is_buff = Convert.ToInt32(item.Values[2]);
-            instance.Settings.volume = Convert.ToInt32(item.Values[3]);
+            instance.Settings.volume = Convert.ToSingle(item.Values[3]);
             instance.Settings.speed = Convert.ToInt32(item.Values[4]);
             instance.Settings.buff_time = Convert.ToInt32(item.Values[5]);
         });
