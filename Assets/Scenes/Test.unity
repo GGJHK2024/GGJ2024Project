@@ -1402,8 +1402,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282203453
-  m_fontColor: {r: 0.2392157, g: 0.2392157, b: 0.2392157, a: 1}
+    rgba: 3040689469
+  m_fontColor: {r: 0.2392157, g: 0.2392157, b: 0.2392157, a: 0.70980394}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1420,8 +1420,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 93.55
+  m_fontSizeBase: 93.55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1673,6 +1673,7 @@ MonoBehaviour:
   pick_area: 5
   boundary: {x: 50, y: -50, z: -50, w: 50}
   is_hit: 0
+  is_hitting: 0
   hit_prop: 0
   max_hit_prop: 20
   smash_odds: 0
@@ -1956,8 +1957,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9488528, y: 1.7487204, z: 2.8567102}
-  m_Center: {x: 0.02789247, y: -0.021215796, z: 0.0040045977}
+  m_Size: {x: 0.9488528, y: 2.8467805, z: 2.9778097}
+  m_Center: {x: 0.02789247, y: 0.050348442, z: -0.032116733}
 --- !u!212 &1951067255
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2045,6 +2046,7 @@ MonoBehaviour:
   pick_area: 5
   boundary: {x: 50, y: -50, z: -50, w: 50}
   is_hit: 0
+  is_hitting: 0
   hit_prop: 0
   max_hit_prop: 20
   smash_odds: 0

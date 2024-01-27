@@ -96,14 +96,15 @@ public class GameMgr : BaseMgr<GameMgr>
 
         if (remainingTime <= 0)
         {
-             GameOver();
+            MidTimerText.text = "";
+            GameOver();
         }
 
     }
     
     IEnumerator Show30s()
     {   
-        TopTimerText.text = "30s Left!";
+        MidTimerText.text = "30s Left!";
         yield return new WaitForSeconds(3f);
         MidTimerText.text = "";
     }
@@ -142,10 +143,42 @@ public class GameMgr : BaseMgr<GameMgr>
     /// </summary>
      void GameOver()
     {
-
+        CheckWinner();
     }
 
-
-    
+    /// <summary>
+    /// 判断胜负
+    /// </summary>
+     void CheckWinner()
+    {
+        int P1 = GameObject.Find("player1").GetComponent<PlayerController>().smash_count;//判断胜负
+        int P2 = GameObject.Find("player2").GetComponent<PlayerController>().smash_count;
+        if(P1 > P2)
+        {
+            //P2赢
+            print("P2 win!");
+            
+        }
+        else if (P1 < P2)
+        {
+            //P1赢
+            print("P1 win!");
+        }
+        else
+        {
+            float P1hit = GameObject.Find("player1").GetComponent<PlayerController>().hit_prop;//如果击破次数相同，则根据当前击飞值判断
+            float P2hit = GameObject.Find("player2").GetComponent<PlayerController>().hit_prop;
+            if(P1hit > P2hit)
+             {
+                //P2赢
+                print("P2 win!");
+             }
+            else
+            {
+                //P1赢
+                print("P1 win!");
+            }
+        }
+    }
 
 }

@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
 
     [Header("撞击相关")]
-    public bool is_hit = false;//是否为有效攻击
+    public bool is_hit = false;//是否为可以造成有效攻击
+    public bool is_hitting = false;//是否在被击飞状态
     public float hit_prop = 0.0f;   // 击飞值，击飞值越高，被击飞概率越大
     public float max_hit_prop = 100.0f;  // 最大击飞值
     public float smash_odds = 0.0f; //击破概率
@@ -304,10 +305,12 @@ public class PlayerController : MonoBehaviour
                     EventCenter.GetInstance().EventTrigger("McdonaldBreak");
                 }
                 else
-                {
+                {   
+                    is_hitting = true;
                     hit_prop += 0.5f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
+                    if(current_speed <= 5){ is_hitting = false;} 
                 }
             }
             else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
@@ -319,9 +322,11 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    is_hitting = true;
                     hit_prop += 2f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
-                    player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
+                    player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10);//我方会额外大幅击飞并叠加击飞值
+                    if(current_speed <= 5){ is_hitting = false;} 
                 }
             }
 
@@ -344,6 +349,7 @@ public class PlayerController : MonoBehaviour
                         player.AddForce(otherPlayer.moveVec * 9999);
                         smash_count ++;
                         //这里需要随机重生位置
+
                     }
                 }
             }
