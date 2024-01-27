@@ -16,9 +16,9 @@ public class Knife : WeaponsInfo
         canBePickWhileFlying = true;
         isOnce = false;
         onKnifePicked += OnPickUp;
-        EventCenter.GetInstance().AddEventListener("OnknifePickUp",onKnifePicked);
-        EventCenter.GetInstance().AddEventListener("OnaxePickUp",onKnifePicked);
-        EventCenter.GetInstance().AddEventListener("OnboomerangPickUp",onKnifePicked);
+        EventCenter.GetInstance().AddEventListener("Onknife(Clone)PickUp",onKnifePicked);
+        EventCenter.GetInstance().AddEventListener("Onaxe(Clone)PickUp",onKnifePicked);
+        EventCenter.GetInstance().AddEventListener("Onboomerang(Clone)PickUp",onKnifePicked);
     }
 
     private void FixedUpdate()
@@ -27,7 +27,7 @@ public class Knife : WeaponsInfo
         if (Settings.durable <= 0)
         {
             ResetState();
-            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name.Substring(0,gameObject.name.Length-7), gameObject);
+            PoolMgr.GetInstance().PushObj("Prefabs/weapons/knife", gameObject);
         }
         
         // 扔出去会旋转
@@ -42,9 +42,9 @@ public class Knife : WeaponsInfo
     private void OnDisable()
     {
         onKnifePicked -= OnPickUp;
-        EventCenter.GetInstance().RemoveEventListener("OnknifePickUp",onKnifePicked);
-        EventCenter.GetInstance().RemoveEventListener("OnaxePickUp",onKnifePicked);
-        EventCenter.GetInstance().RemoveEventListener("OnboomerangPickUp",onKnifePicked);
+        EventCenter.GetInstance().RemoveEventListener("Onknife(Clone)PickUp",onKnifePicked);
+        EventCenter.GetInstance().RemoveEventListener("Onaxe(Clone)PickUp",onKnifePicked);
+        EventCenter.GetInstance().RemoveEventListener("Onboomerang(Clone)PickUp",onKnifePicked);
     }
     
     public override void FallDown()
