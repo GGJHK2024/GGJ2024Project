@@ -35,7 +35,7 @@ public class FoodsInfo : MonoBehaviour
             BuffTimer();    // counting
         }
 
-        if (buff_timer >= Settings.buff_time)   // buff作用结束
+        if (Settings.is_buff == 1 && (buff_timer >= Settings.buff_time))   // buff作用结束
         {
             Debuff();
             begin_buffer = false;
