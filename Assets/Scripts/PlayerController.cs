@@ -524,7 +524,7 @@ public class PlayerController : MonoBehaviour
             this.transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = ready;
             smash_count ++;
             if(one_life){one_life_smash = true; GameMgr.GameOverAdd(); return;}
-            if(smash_count == 2){GameMgr.GameOver();return;}
+            if(smash_count >= 2){GameMgr.GameOver();return;}
             speed = 20.0f;
             hit_prop = 0.0f;
             smash_odds = 0.0f;

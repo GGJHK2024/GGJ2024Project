@@ -1423,19 +1423,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4223188315814551729, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4292828191062302239, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6300717128283190289, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6312015239537743950, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8487402871801164198, guid: efabfce1d1f849846afc9c3cb3a506aa, type: 3}
       propertyPath: m_Name
