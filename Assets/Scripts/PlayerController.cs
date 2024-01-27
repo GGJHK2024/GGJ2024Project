@@ -498,6 +498,9 @@ public class PlayerController : MonoBehaviour
     private void SmashAndBack()
     {
             player.Sleep();
+            Color ready = new Color(1f, 1f, 1f, 0.5f);
+            Debug.Log(transform.Find("truePlayer").GetComponent<SpriteRenderer>().color);
+            transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = ready;
             smash_count ++;
             if(one_life){one_life_smash = true; GameMgr.GameOverAdd(); return;}
             if(smash_count == 2){GameMgr.GameOver();return;}
