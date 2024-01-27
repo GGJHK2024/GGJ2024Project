@@ -394,9 +394,9 @@ public class PlayerController : MonoBehaviour
 
         if (hitCollider.CompareTag("wall")) //碰撞墙壁弹反
         {
-            if(current_speed >= 8)
+            if(current_speed >= 9)
             {
-                player.AddForce(-player.velocity * current_speed * 6); 
+                player.AddForce(-player.velocity.normalized * current_speed * 100); 
             }
         }
 
@@ -416,11 +416,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void SmashAndBack()
     {
-            player.transform.position = new Vector3(0,0,0);
             smash_count ++;
-            speed = 0.0f;     
+            speed = 0.0f;
             hit_prop = 0.0f; 
             smash_odds = 0.0f;
+            this.gameObject.transform.position = new Vector3(0,0,0);
+            print(this.gameObject.transform.position);
 
     }
 }
