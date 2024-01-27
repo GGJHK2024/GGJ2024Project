@@ -109,6 +109,7 @@ public class WeaponsInfo : MonoBehaviour
         AudioMgr.GetInstance().PlaySound((player.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
         
         player.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 20);
+        this.rigidbody.AddForce(-rigidbody.velocity * 10);
     }
 
     /// <summary>

@@ -95,8 +95,8 @@ public class GameMgr : BaseMgr<GameMgr>
 
         if (remainingTime <= 0)
         {
-            MidTimerText.text = "";
-            GameOver();
+            MidTimerText.text = "Finish It!";
+            GameAddCount();
         }
 
     }
@@ -178,15 +178,43 @@ public class GameMgr : BaseMgr<GameMgr>
     /// <summary>
     /// 游戏结束
     /// </summary>
-     void GameOver()
+    public static void GameOver()
     {
         CheckWinner();
+        GameReload();
     }
+
+    /// <summary>
+    /// 游戏结束
+    /// </summary>
+    public static void GameOverAdd()
+    {
+        CheckWinnerAdd();
+        GameReload();
+    }
+
+    /// <summary>
+    /// 游戏重启
+    /// </summary>
+    public static void GameReload()
+    {
+
+    }
+
+    /// <summary>
+    /// 加时赛
+    /// </summary>
+    public static void GameAddCount()
+    {
+        
+        CheckWinner();
+    }
+
 
     /// <summary>
     /// 判断胜负
     /// </summary>
-     void CheckWinner()
+    public static void CheckWinner()
     {
         int P1 = GameObject.Find("player1").GetComponent<PlayerController>().smash_count;//判断胜负
         int P2 = GameObject.Find("player2").GetComponent<PlayerController>().smash_count;
@@ -194,27 +222,33 @@ public class GameMgr : BaseMgr<GameMgr>
         {
             //P2赢
             print("P2 win!");
-            
-        }
-        else if (P1 < P2)
-        {
-            //P1赢
-            print("P1 win!");
+            return;
         }
         else
         {
-            float P1hit = GameObject.Find("player1").GetComponent<PlayerController>().hit_prop;//如果击破次数相同，则根据当前击飞值判断
-            float P2hit = GameObject.Find("player2").GetComponent<PlayerController>().hit_prop;
-            if(P1hit > P2hit)
-             {
-                //P2赢
-                print("P2 win!");
-             }
-            else
-            {
-                //P1赢
-                print("P1 win!");
-            }
+            //P1赢
+            print("P1 win!");
+            return;
+        }
+    }
+
+    /// <summary>
+    /// 判断加时赛胜负
+    /// </summary>
+    public static void CheckWinnerAdd()
+    {
+        bool P1 = GameObject.Find("player1").GetComponent<PlayerController>().one_life_smash;//判断胜负
+        bool P2 = GameObject.Find("player2").GetComponent<PlayerController>().one_life_smash;
+        if(P1)
+        {
+            //P2赢
+            print("P2 win!");
+            
+        }
+        else
+        {
+            //P1赢
+            print("P1 win!");
         }
     }
 

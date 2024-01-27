@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public float attack_speed = 15f;//允许攻击的速度
     public float max_speed = 0.0f; // 角色属性的速度上限
     public float pick_area = 5.0f;  // 拾取范围
+    private bool one_life = false; // 一命模式
+    public bool one_life_smash = false; // 被一命击杀了
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
 
     public Animator anim; // 动画机
@@ -55,11 +57,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveVec = Vector2.zero; // direction
     private Rigidbody player = null;
 
+    /*材质*/
+    Material fl;
+
     private void Awake()
     {
         kbdinput = new Player2();
         gpdinput = new Player2();
         player = GetComponent<Rigidbody>();
+        fl = gameObject.GetComponent<SpriteRenderer>().material;
         var allGamepads = Gamepad.all;
         if (this.gameObject.name.Contains("1"))
         {
@@ -329,9 +335,10 @@ public class PlayerController : MonoBehaviour
             is_hit = false;
         }
 
-        if(current_speed <= 5)
+        if(current_speed <= 8)
         { 
             is_hitting = false;
+            fl.SetInt("_BeAttack",0);
         } 
     }
 
@@ -354,6 +361,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {   
                     is_hitting = true;
+                    fl.SetInt("_BeAttack",1);
                     hit_prop += 0.5f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     anim.Play(this.gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
@@ -371,6 +379,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     is_hitting = true;
+                    fl.SetInt("_BeAttack",1);
                     hit_prop += 2f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     anim.Play(this.gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
@@ -429,6 +438,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     weapon.Damage(this.gameObject);
+                    fl.SetInt("_BeAttack",1);
                     weapon.HitPlayerWhileFlying(this);
                     // 击飞和击破
                     if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
@@ -466,8 +476,6 @@ public class PlayerController : MonoBehaviour
             }
             if(is_smashing)
             {
-                //这里需要随机重生位置
-                Debug.Log("击破至墙！");
                 SmashAndBack();
             }
         }
@@ -488,11 +496,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void SmashAndBack()
     {
-            Debug.Log("开始重置");
             player.Sleep();
             smash_count ++;
+            if(one_life){one_life_smash = true; GameMgr.GameOverAdd(); return;}
+            if(smash_count == 2){GameMgr.GameOver();return;}
             speed = 20.0f;
-            hit_prop = 0.0f; 
+            hit_prop = 0.0f;
             smash_odds = 0.0f;
             this.transform.position = new Vector3(0,0,0);
             is_smashing = false;
