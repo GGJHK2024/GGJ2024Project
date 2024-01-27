@@ -147,10 +147,6 @@ public class UIMgr : BaseMgr<UIMgr>
     //
     // 倒计时功能
     //
-    public float GetTotalTime()
-    {
-        return totalTime;
-    }
     public Text GetTopTimerText()
     {
         return topTimerText;
@@ -158,11 +154,5 @@ public class UIMgr : BaseMgr<UIMgr>
     public Text GetMidTimerText()
     {
         return midTimerText;
-    }
-    IEnumerator  Show30s()
-    {   
-        midTimerText.text = "30s Left!";
-        yield return new WaitForSeconds(3f);
-        midTimerText.text = "";
     }
 }
