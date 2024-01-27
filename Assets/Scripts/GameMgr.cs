@@ -77,9 +77,34 @@ public class GameMgr : BaseMgr<GameMgr>
     /// </summary>
      void GameOver()
     {
-
+        CheckWinner();
     }
 
+    /// <summary>
+    /// 判断胜负
+    /// </summary>
+     void CheckWinner()
+    {
+        int P1 = GameObject.Find("Player1").GetComponent<PlayerController>().smash_count;//判断胜负
+        int P2 = GameObject.Find("Player2").GetComponent<PlayerController>().smash_count;
+        if(P1 > P2)
+        {
+            //P2赢
+            return;
+        }
+        else if (P1 < P2)
+        {
+            //P1赢
+            return;
+        }
+        else
+        {
+            float P1hit = GameObject.Find("Player1").GetComponent<PlayerController>().hit_prop;//如果击破次数相同，则根据当前击飞值判断
+            float P2hit = GameObject.Find("Player2").GetComponent<PlayerController>().hit_prop;
+        }
 
+
+
+    }
 
 }
