@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,9 +42,7 @@ public class PlayerController : MonoBehaviour
     public int dash_count = 0; // 冲刺次数
     
     [Header("护盾相关")]
-    public bool is_tem_shield = false;  // 是否带有一次性护盾
-    public bool is_shield = false;  // 是否带有持续护盾
-    public float shield_cd = 0.0f;  // 持续护盾时间
+    public bool is_shield = false;  // 是否带有一次性护盾
 
     /*控制属性*/
     private Player1 kbdinput = null;    // player input
@@ -302,13 +299,31 @@ public class PlayerController : MonoBehaviour
             player.AddForce(-moveVec * current_speed * 90);//碰撞的基础弹飞，增加打击感同时避免重复判定
             if (is_hit && otherPlayer.is_hit) //双方可以进行攻击
             {
-                hit_prop += 0.5f;
-                player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
+                if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                {
+                    is_shield = false;
+                    EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                }
+                else
+                {
+                    hit_prop += 0.5f;
+                    AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+                    player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
+                }
             }
             else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
             {
-                hit_prop += 2f;
-                player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
+                if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                {
+                    is_shield = false;
+                    EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                }
+                else
+                {
+                    hit_prop += 2f;
+                    AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+                    player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10); //我方会额外大幅击飞并叠加击飞值
+                }
             }
 
              // 击飞和击破
@@ -318,9 +333,17 @@ public class PlayerController : MonoBehaviour
                 hit_prop = max_hit_prop;
                 if (smash_odds > UnityEngine.Random.Range(0,100))
                 {
-                    print("一击必杀了！");
-                    AudioMgr.GetInstance().PlaySound((otherPlayer.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
-                    player.AddForce(otherPlayer.moveVec * 9999);
+                    if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                    {
+                        is_shield = false;
+                        EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                    }
+                    else
+                    {
+                        print(this.gameObject.name + "一击必杀了！");
+                        AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
+                        player.AddForce(otherPlayer.moveVec * 9999);
+                    }
                 }
             }
         }
@@ -344,8 +367,16 @@ public class PlayerController : MonoBehaviour
             var weapon = hitCollider.GetComponent<WeaponsInfo>();
             if (weapon.isFlying && weapon.flying_timer >= 0.08f)    // 当玩家撞到飞行中的武器时（可以在飞的过程中叼住但没叼到也算），会受到基础伤害并被轻微撞击
             {
-                weapon.Damage(this.gameObject);
-                weapon.HitPlayerWhileFlying(this);
+                if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                {
+                    is_shield = false;
+                    EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                }
+                else
+                {
+                    weapon.Damage(this.gameObject);
+                    weapon.HitPlayerWhileFlying(this);
+                }
             }
 
         }

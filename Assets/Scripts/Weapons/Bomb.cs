@@ -46,6 +46,7 @@ public class Bomb : WeaponsInfo
 
     private void OnDisable()
     {
+        onBombPicked -= OnPickUp;
         EventCenter.GetInstance().RemoveEventListener("OnbombPickUp",onBombPicked);
         firstPickUp = true;
     }

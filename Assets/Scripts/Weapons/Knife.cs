@@ -34,6 +34,7 @@ public class Knife : WeaponsInfo
 
     private void OnDisable()
     {
+        onKnifePicked -= OnPickUp;
         EventCenter.GetInstance().RemoveEventListener("OnknifePickUp",onKnifePicked);
     }
     

@@ -252,33 +252,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.908756, y: 1.0000001, z: 19.541233}
   m_Center: {x: 5.454378, y: 0, z: 0.30053854}
---- !u!1 &294232360 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189612836468543766, guid: b0029d6840b40cd4286285441302703a, type: 3}
-  m_PrefabInstance: {fileID: 761328263}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &294232366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294232360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de922a9132fe19444b432410af2522ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings:
-    id: 3
-    name: "\u529F\u592B\u8336"
-    is_buff: 1
-    volume: 0
-    speed: 0
-    buff_time: 10
-  InitFromID: 3
-  player: {fileID: 0}
-  sound: {fileID: 8300000, guid: ee435418f258aec4bbe1ab64d2ce0982, type: 3}
 --- !u!1001 &405998849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1420,6 +1393,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 87b78ca2eef44534fb27a9826bfb0615, type: 3}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: InitFromID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.id
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.name
+      value: "\u91D1\u62F1\u95E8"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.is_buff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434750450803629656, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
+      propertyPath: Settings.buff_time
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3145842457104448244, guid: 2cb3ee1f132ff114da21c97c531f953e, type: 3}
       propertyPath: m_Name
       value: mcDonald
@@ -1861,9 +1862,7 @@ MonoBehaviour:
   is_doubledash: 0
   hit_dmg: 0
   dash_count: 0
-  is_tem_shield: 0
   is_shield: 0
-  shield_cd: 0
 --- !u!54 &1885622620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2235,9 +2234,7 @@ MonoBehaviour:
   is_doubledash: 0
   hit_dmg: 0
   dash_count: 0
-  is_tem_shield: 0
   is_shield: 0
-  shield_cd: 0
 --- !u!114 &1951067258
 MonoBehaviour:
   m_ObjectHideFlags: 0
