@@ -144,6 +144,8 @@ public class PlayerController : MonoBehaviour
     {
         // todo: change sprite摁住的时候嘴巴闭上
         
+        
+        
         List<Collider> weaponCanBeGrab = new List<Collider>();
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pick_area);
         Collider[] orderedByProximity = hitColliders.OrderBy(c => (this.transform.position - c.transform.position).sqrMagnitude).ToArray();
@@ -379,7 +381,7 @@ public class PlayerController : MonoBehaviour
 
         if (hitCollider.CompareTag("food")) // 吃到食物
         {
-            print("get food: " + hitCollider.name);
+            // print("get food: " + hitCollider.name);
             var food = hitCollider.GetComponent<FoodsInfo>();
             food.GeneralEffect(this);
             // 食物有buff效果
