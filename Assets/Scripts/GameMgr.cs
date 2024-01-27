@@ -27,6 +27,7 @@ public class GameMgr : BaseMgr<GameMgr>
     public static int  P2;
     public static bool  P1a;
     public static bool  P2a;
+    public static bool  is_onelife;
 
     public static string P1W;
 
@@ -45,6 +46,7 @@ public class GameMgr : BaseMgr<GameMgr>
         P1a = false;
         P2a = false;
         P1W = "0";
+        is_onelife = false;
         AudioMgr.GetInstance().PlaySound("Audios/人群欢呼");
         FoodSpawner();
         
@@ -221,8 +223,7 @@ public class GameMgr : BaseMgr<GameMgr>
     /// </summary>
     public static void GameAddCount()
     {
-        
-        CheckWinner();
+        is_onelife = true;
     }
 
 
@@ -259,12 +260,14 @@ public class GameMgr : BaseMgr<GameMgr>
         {
             //P2赢
             print("P2 win!");
+            return;
         }
         else
         {
             //P1赢
             print("P1 win!");
             P1W = "1";
+            return;
         }
     }
 
