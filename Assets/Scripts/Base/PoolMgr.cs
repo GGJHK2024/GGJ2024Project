@@ -21,15 +21,18 @@ public class PoolMgr : BaseMgr<PoolMgr>
     /// <returns></returns>
     public void GetObj(string name, Vector3 position, UnityAction<GameObject> callBack)
     {
+        print("hi");
         //有抽屉 并且抽屉里有东西
         if (PoolDic.ContainsKey(name) && PoolDic[name].poolList.Count > 0)
         {
+            print("有抽屉 并且抽屉里有东西");
             if(callBack!=null) callBack(PoolDic[name].GetObj(position));
             else PoolDic[name].GetObj(position);
         }
         else//通过异步加载资源 创建对象给外部用
         {
-            Resources.Load<GameObject>(name);
+            print("通过异步加载资源 创建对象给外部用");
+            callBack(Resources.Load<GameObject>(name));
         }
     }
 

@@ -58,13 +58,6 @@ public class PoolData:MonoBehaviour
         return obj;
     }
 
-    // 这是一个根本不会执行的协程，但是他可以让子弹变得正常，但也会报错（不用管
-    IEnumerator Wait(){
-        yield return new WaitForSeconds(0.5f);
-        print("等待完成");
-        yield break;
-    }
-
     /// <summary>
     /// 从抽屉里面取东西, 含初始坐标
     /// </summary>
@@ -78,7 +71,6 @@ public class PoolData:MonoBehaviour
 
         // 设置初始位置
         obj.transform.position = position;
-        StartCoroutine(Wait());
 
         //激活 让其显示
         obj.SetActive(true);

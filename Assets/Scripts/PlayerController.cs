@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
         // 有拾取的武器时
         GameObject weapon = this.transform.GetChild(0).GetChild(0).gameObject;
         weapon.GetComponent<Rigidbody>().isKinematic = false;
-        weapon.transform.SetParent(null); // 释放武器
+        weapon.transform.SetParent(GameObject.Find("PoolWeapons").transform); // 释放武器
         
         if (moveVec is { x: 0, y: 0 } && !weapon.GetComponent<WeaponsInfo>().isOnce)      // 玩家在静止时放下武器，武器不会飞出或消耗耐久
         {
