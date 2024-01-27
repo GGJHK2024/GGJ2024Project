@@ -297,6 +297,11 @@ public class PlayerController : MonoBehaviour
         {
             is_hit = false;
         }
+
+        if(current_speed <= 5)
+        { 
+            is_hitting = false;
+        } 
     }
 
     /// <summary>
@@ -321,7 +326,7 @@ public class PlayerController : MonoBehaviour
                     hit_prop += 0.5f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
-                    if(current_speed <= 5){ is_hitting = false;} 
+
                 }
             }
             else if(!is_hit && otherPlayer.is_hit)//我方不能攻击
@@ -337,33 +342,32 @@ public class PlayerController : MonoBehaviour
                     hit_prop += 2f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10);//我方会额外大幅击飞并叠加击飞值
-                    if(current_speed <= 5){ is_hitting = false;} 
-                }
-            }
-
-             // 击飞和击破
-            if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
-            {
-                smash_odds += hit_prop;
-                hit_prop = max_hit_prop;
-                if (smash_odds > UnityEngine.Random.Range(0,100))
-                {
-                    if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                    // 击飞和击破
+                    if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
                     {
-                        is_shield = false;
-                        EventCenter.GetInstance().EventTrigger("McdonaldBreak");
-                    }
-                    else
-                    {
-                        print(this.gameObject.name + "一击必杀了！");
-                        AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
-                        player.AddForce(otherPlayer.moveVec * 9999);
-                        smash_count ++;
-                        //这里需要随机重生位置
-
+                        smash_odds += hit_prop;
+                        hit_prop = max_hit_prop;
+                        if (smash_odds > UnityEngine.Random.Range(0,100))
+                        {
+                            if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                            {
+                                is_shield = false;
+                                EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                            }
+                            else
+                            {
+                                print(this.gameObject.name + "被一击必杀了！");
+                                AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
+                                player.AddForce(otherPlayer.moveVec * 9999);
+                                //这里需要随机重生位置
+                                SmashAndBack();
+                            }
+                        }
                     }
                 }
             }
+
+
         }
 
         if (hitCollider.CompareTag("food")) // 吃到食物
@@ -399,6 +403,15 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (hitCollider.CompareTag("wall")) //碰撞墙壁弹反
+        {
+            if(current_speed >= 8)
+            {
+                player.AddForce(-player.velocity * current_speed * 6); 
+            }
+        }
+
+
     }
 
     IEnumerator DeBuffFromFood(FoodsInfo f)
@@ -407,5 +420,18 @@ public class PlayerController : MonoBehaviour
         f.Debuff();
 
         yield return null;
+    }
+
+    /// <summary>
+    /// 被击破和重生
+    /// </summary>
+    private void SmashAndBack()
+    {
+            player.transform.position = new Vector3(0,0,0);
+            smash_count ++;
+            speed = 0.0f;     
+            hit_prop = 0.0f; 
+            smash_odds = 0.0f;
+
     }
 }
