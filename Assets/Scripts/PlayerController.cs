@@ -342,6 +342,8 @@ public class PlayerController : MonoBehaviour
                         print(this.gameObject.name + "一击必杀了！");
                         AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                         player.AddForce(otherPlayer.moveVec * 9999);
+                        smash_count ++;
+                        //这里需要随机重生位置
                     }
                 }
             }

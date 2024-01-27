@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,24 +10,13 @@ public class UIMgr : BaseMgr<UIMgr>
 {
     private Stack<GameObject> _openingWindows = new Stack<GameObject>();
 
-    public float totalTime = 33f; // 总游戏时间
-
-
-    void Awake()
-    {
-        
-    }
-
-    private void OnEnable()
-    {
-
-    }
-
     private void Start()
     {
+        // EventCenter.GetInstance().AddEventListener("LastLog", CloseWindow);
+
         Data db = SaveMgr.GetInstance().LoadDB();
         // find all inactive slider
-        Slider[] sliders = FindObjectsOfType<Slider>(true).Where(sr => !sr.gameObject.activeInHierarchy).ToArray();
+        Slider[] sliders = GameObject.FindObjectsOfType<Slider>(true).Where(sr => !sr.gameObject.activeInHierarchy).ToArray();
         foreach (var s in sliders)
         {
             if (s.CompareTag("bkSlider"))
