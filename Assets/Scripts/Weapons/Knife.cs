@@ -26,8 +26,11 @@ public class Knife : WeaponsInfo
         base.FixedUpdate();
         if (Settings.durable <= 0)
         {
-            ResetState();
-            PoolMgr.GetInstance().PushObj("Prefabs/weapons/knife", gameObject);
+            if (!transform.GetChild(0).GetComponent<ParticleSystem>().isPlaying)
+            {
+                transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            }
+            Invoke("ResetState",0.45f);
         }
         
         // 扔出去会旋转
@@ -69,6 +72,7 @@ public class Knife : WeaponsInfo
         isFlying = false;
         flying_timer = 0.0f;
         rotate_timer = 30.0f;
+        PoolMgr.GetInstance().PushObj("Prefabs/weapons/knife", gameObject);
     }
 
     public void OnPickUp()

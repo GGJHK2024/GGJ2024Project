@@ -21,8 +21,12 @@ public class Chicken : WeaponsInfo
         base.FixedUpdate();
         if (!isOnce && (Settings.durable <= 0))
         {
-            ResetState();
-            PoolMgr.GetInstance().PushObj("Prefabs/weapons/chicken", gameObject);
+            if (!transform.GetChild(0).GetComponent<ParticleSystem>().isPlaying)
+            {
+                transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            }
+
+            Invoke("ResetState",0.45f);
         }
     }
 
@@ -40,5 +44,11 @@ public class Chicken : WeaponsInfo
     public void OnPickUp()
     {
         AudioMgr.GetInstance().PlaySound("Audios/尖叫鸡拾取");
+    }
+
+    public override void ResetState()
+    {
+        base.ResetState();
+        PoolMgr.GetInstance().PushObj("Prefabs/weapons/chicken", gameObject);
     }
 }
