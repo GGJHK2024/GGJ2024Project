@@ -138,4 +138,6 @@ MonoBehaviour:
   isFlying: 0
   canBePickWhileFlying: 0
   isOnce: 0
+  rigidbody: {fileID: -2958449359087464647}
+  flying_timer: 0
   InitFromID: 4

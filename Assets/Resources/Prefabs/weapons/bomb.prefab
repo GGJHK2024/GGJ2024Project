@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3209718779573062575}
   - component: {fileID: 3209718779573062573}
   - component: {fileID: 3463596768471150251}
-  - component: {fileID: 4198017418226401377}
+  - component: {fileID: 8374975093087517424}
   m_Layer: 0
   m_Name: bomb
   m_TagString: weapon
@@ -116,7 +116,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4198017418226401377
+--- !u!114 &8374975093087517424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,8 +137,8 @@ MonoBehaviour:
     external_damage: 50
   isFlying: 0
   canBePickWhileFlying: 0
-  isOnce: 1
-  rigidbody: {fileID: 0}
+  isOnce: 0
+  rigidbody: {fileID: 3463596768471150251}
   flying_timer: 0
   InitFromID: 2
   afterDash_timer: 0
