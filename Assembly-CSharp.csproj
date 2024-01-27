@@ -74,7 +74,6 @@
     <Compile Include="Assets\Scripts\Weapons\Chicken.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Weapons\WeaponProps.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
-    <Compile Include="Assets\Scripts\CountDown.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_ShurikenThreadFix.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />

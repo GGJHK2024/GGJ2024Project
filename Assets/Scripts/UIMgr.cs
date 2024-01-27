@@ -10,13 +10,9 @@ public class UIMgr : BaseMgr<UIMgr>
 {
     private Stack<GameObject> _openingWindows = new Stack<GameObject>();
 
-    [SerializeField]public Text topTimerText; // 顶部倒计时UI
-    [SerializeField]public Text midTimerText;//中部倒计时UI
-
-
     private void Start()
     {
-        EventCenter.GetInstance().AddEventListener("LastLog", CloseWindow);
+        // EventCenter.GetInstance().AddEventListener("LastLog", CloseWindow);
 
         Data db = SaveMgr.GetInstance().LoadDB();
         // find all inactive slider
@@ -142,16 +138,5 @@ public class UIMgr : BaseMgr<UIMgr>
         CloseAllWindows();
         SceneManager.LoadScene(scene_id);
     }
-
-    //
-    // 倒计时功能
-    //
-    public Text GetTopTimerText()
-    {
-        return topTimerText;
-    }
-    public Text GetMidTimerText()
-    {
-        return midTimerText;
-    }
+    
 }
