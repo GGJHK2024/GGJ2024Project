@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2340220878157750666}
   - component: {fileID: 6909968207321125463}
   m_Layer: 0
-  m_Name: knife
+  m_Name: boomerang
   m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 161f69c652e16154dab2c64f637e6199, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08a07328e68b58449a3a9edb8162f2fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,8 +98,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6724644, y: 3.2888892, z: 0.20000002}
-  m_Center: {x: -0.23536257, y: -0.0056038797, z: 0}
+  m_Size: {x: 3.8203025, y: 2.1860704, z: 0.20000002}
+  m_Center: {x: 0.012209192, y: 0.3207407, z: 0}
 --- !u!54 &2340220878157750666
 Rigidbody:
   m_ObjectHideFlags: 0
