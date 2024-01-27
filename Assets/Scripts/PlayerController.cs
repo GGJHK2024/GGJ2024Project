@@ -133,6 +133,10 @@ public class PlayerController : MonoBehaviour
     {
         player.AddForce(moveVec * speed);
         Attackspeed();
+        if(GameMgr.is_onelife)
+        {
+            one_life = true;
+        }
     }
 
     private void Update()

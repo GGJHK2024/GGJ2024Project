@@ -138,14 +138,5 @@ public class UIMgr : BaseMgr<UIMgr>
         CloseAllWindows();
         SceneManager.LoadScene(scene_id);
     }
-    
-
-    //
-    // 显示胜者
-    //
-    public void ShowP1W()
-    {
-        
-    }
 
 }
