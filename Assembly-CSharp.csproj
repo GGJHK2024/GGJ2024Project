@@ -48,9 +48,7 @@
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutodestructWhenNoChildren.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Weapons\WeaponsInfo.cs" />
-    <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\Foods\Tea.cs" />
-    <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\InputActions\player1.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Weapons\WeaponsInfo_Editor.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Foods\FoodsInfo.cs" />
@@ -62,9 +60,7 @@
     <Compile Include="Assets\Scripts\AudioMgr.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\BaseExcel.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_InspectorHelp.cs" />
-    <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\Scripts\Base\BaseMgr.cs" />
-    <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX2_Demo.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Foods\FoodProps.cs" />
     <Compile Include="Assets\InputActions\player2.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb.cs" />
@@ -78,10 +74,8 @@
     <Compile Include="Assets\配置表\Scripts\配置表\Foods\FoodsInfo_Editor.cs" />
     <Compile Include="Assets\Scripts\Weapons\Chicken.cs" />
     <Compile Include="Assets\配置表\Scripts\配置表\Weapons\WeaponProps.cs" />
-    <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
     <Compile Include="Assets\Scripts\Base\PoolData.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_ShurikenThreadFix.cs" />
-    <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -107,7 +101,6 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\VFX\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
     <None Include="Assets\VFX\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
     <None Include="Assets\Resources\Arts\Billboard.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
@@ -119,7 +112,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\VFX\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
@@ -923,10 +915,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ToonyColorsPro.Demo.Editor.csproj">
-      <Project>{63d2e113-fc41-c857-d093-ab90b3560ac0}</Project>
-      <Name>ToonyColorsPro.Demo.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="CFXREditor.csproj">
       <Project>{2d5f5447-4f6f-867f-c2fe-9ec55a1fd689}</Project>
       <Name>CFXREditor</Name>
@@ -934,14 +922,6 @@
     <ProjectReference Include="CFXRRuntime.csproj">
       <Project>{da126c7a-581b-8dd9-122e-c544cdf25034}</Project>
       <Name>CFXRRuntime</Name>
-    </ProjectReference>
-    <ProjectReference Include="KinoBloom.Runtime.csproj">
-      <Project>{cedcf704-0440-582c-55b6-8d4d7b41fd60}</Project>
-      <Name>KinoBloom.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="CFXRDemo.csproj">
-      <Project>{34cde4c3-0a33-a713-81f2-b9e8a86336ad}</Project>
-      <Name>CFXRDemo</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

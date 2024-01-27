@@ -7,10 +7,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 
 
-// todo: change sprite
-// todo: 体积上限5
-
-
 /// <summary>
 /// 移动控制 WASD / left joystick
 /// 张嘴（自动拾取） space / right trigger
@@ -53,10 +49,12 @@ public class PlayerController : MonoBehaviour
     public bool is_shield = false;  // 是否带有一次性护盾
 
     /*控制属性*/
+    public GameObject otherP;
     private Player2 kbdinput = null;    // player input
     private Player2 gpdinput = null;
     private Vector2 moveVec = Vector2.zero; // direction
     private Rigidbody player = null;
+    
 
     /*材质*/
     Material fl;
@@ -143,6 +141,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        transform.GetChild(5).gameObject.SetActive(is_shield ? true : false);
         if (is_hitting)
         {
             this.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
@@ -151,6 +150,7 @@ public class PlayerController : MonoBehaviour
 
         if (moveVec.x != 0 && moveVec.y != 0)
         {
+            transform.GetChild(2).GetComponent<ParticleSystem>().Play();
             if (!is_dash)
             {
                 if (current_speed < 15.0f)   // 在动,且不在跑
@@ -168,9 +168,8 @@ public class PlayerController : MonoBehaviour
                     anim.Play(gameObject.name.Contains("1")?"Brown_Run":"White_Run");
                 }
             }
-            this.transform.GetChild(2).GetComponent<ParticleSystem>().Play();
         }else {
-            this.transform.GetChild(2).GetComponent<ParticleSystem>().Stop();
+            transform.GetChild(2).GetComponent<ParticleSystem>().Stop();
             anim.Play("New State");
         }
     }
@@ -416,6 +415,7 @@ public class PlayerController : MonoBehaviour
                             else
                             {
                                 print(this.gameObject.name + "被一击必杀了！");
+
                                 AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                                 player.AddForce(otherPlayer.moveVec * 5000);
                                 is_smashing = true;
@@ -472,6 +472,7 @@ public class PlayerController : MonoBehaviour
                             else
                             {
                                 print(gameObject.name + "被一击必杀了！");
+
                                 AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                                 player.AddForce(weapon.rigidbody.velocity * 5000);
                                 is_smashing = true;
@@ -491,6 +492,17 @@ public class PlayerController : MonoBehaviour
             }
             if(is_smashing)
             {
+                // todo: otherPlayer无法行动，有光照在他身上，直到另一个玩家回来
+                print(otherP.name + " 沐浴在圣光中");
+                otherP.transform.GetChild(4).gameObject.SetActive(true);
+                if (otherP.gameObject.name.Contains("1"))
+                {
+                    otherP.GetComponent<PlayerController>().kbdinput.Disable();
+                }
+                else
+                {
+                    otherP.GetComponent<PlayerController>().gpdinput.Disable();
+                }
                 SmashAndBack();
             }
         }
@@ -522,6 +534,7 @@ public class PlayerController : MonoBehaviour
             smash_odds = 0.0f;
             this.transform.localScale = new Vector3(1.5f , 1.5f , 1.5f);
             this.transform.position = new Vector3(0,0,0);
+
             is_smashing = false;
             Invoke("Ready", 3f);
             
@@ -533,6 +546,17 @@ public class PlayerController : MonoBehaviour
     private void Ready()
     {
             transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = new Color(255,255,255,255);
+            // 另一个玩家重新控制
+            print(otherP.name + " 重新控制");
+            if (otherP.gameObject.name.Contains("1"))
+            {
+                otherP.GetComponent<PlayerController>().kbdinput.Enable();
+            }
+            else
+            {
+                otherP.GetComponent<PlayerController>().gpdinput.Enable();
+            }
+            otherP.transform.GetChild(4).gameObject.SetActive(false);
             player.WakeUp(); 
     }
 }
