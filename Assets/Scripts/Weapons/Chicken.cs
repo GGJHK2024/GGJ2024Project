@@ -13,7 +13,7 @@ public class Chicken : WeaponsInfo
         canBePickWhileFlying = false;
         isOnce = false;
         onChickenPicked += OnPickUp;
-        EventCenter.GetInstance().AddEventListener("OnchickenPickUp",onChickenPicked);
+        EventCenter.GetInstance().AddEventListener("Onchicken(Clone)PickUp",onChickenPicked);
     }
 
     void FixedUpdate()
@@ -22,14 +22,14 @@ public class Chicken : WeaponsInfo
         if (!isOnce && (Settings.durable <= 0))
         {
             ResetState();
-            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name.Substring(0,gameObject.name.Length-7), gameObject);
+            PoolMgr.GetInstance().PushObj("Prefabs/weapons/chicken", gameObject);
         }
     }
 
     private void OnDisable()
     {
         onChickenPicked -= OnPickUp;
-        EventCenter.GetInstance().RemoveEventListener("OnchickenPickUp",onChickenPicked);
+        EventCenter.GetInstance().RemoveEventListener("Onchicken(Clone)PickUp",onChickenPicked);
     }
     
     public override void Buff()

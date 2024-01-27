@@ -22,7 +22,7 @@ public class Bomb : WeaponsInfo
         canBePickWhileFlying = true;    // 可以再次捡起，但不重置引信
         
         onBombPicked += OnPickUp;
-        EventCenter.GetInstance().AddEventListener("OnbombPickUp",onBombPicked);
+        EventCenter.GetInstance().AddEventListener("Onbomb(Clone)PickUp",onBombPicked);
     }
 
     private void FixedUpdate()
@@ -47,7 +47,7 @@ public class Bomb : WeaponsInfo
     private void OnDisable()
     {
         onBombPicked -= OnPickUp;
-        EventCenter.GetInstance().RemoveEventListener("OnbombPickUp",onBombPicked);
+        EventCenter.GetInstance().RemoveEventListener("Onbomb(Clone)PickUp",onBombPicked);
         firstPickUp = true;
     }
 
@@ -116,7 +116,7 @@ public class Bomb : WeaponsInfo
         // todo: 重置后加入对象池
         AudioMgr.GetInstance().PlaySound("Audios/炸弹爆炸");
         ResetState();
-        PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name.Substring(0,gameObject.name.Length-7), gameObject);
+        PoolMgr.GetInstance().PushObj("Prefabs/weapons/bomb", gameObject);
     }
 
     public override void ResetState()
