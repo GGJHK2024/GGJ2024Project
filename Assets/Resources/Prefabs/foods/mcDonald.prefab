@@ -120,6 +120,7 @@ MonoBehaviour:
     speed: -5
     buff_time: 100
   InitFromID: 4
+  sound: {fileID: 8300000, guid: 87b78ca2eef44534fb27a9826bfb0615, type: 3}
 --- !u!54 &6746456207770308496
 Rigidbody:
   m_ObjectHideFlags: 0

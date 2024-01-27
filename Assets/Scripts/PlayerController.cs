@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     public float current_speed = 0.0f;//实际速度
     public float attack_speed = 15f;//允许攻击的速度
     public float max_speed = 0.0f; // 角色属性的速度上限
-    public float volum_scale = 1.0f;    // 体积
     public float pick_area = 5.0f;  // 拾取范围
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
 
@@ -329,12 +328,14 @@ public class PlayerController : MonoBehaviour
 
         if (hitCollider.CompareTag("food")) // 吃到食物
         {
+            print("get food: " + hitCollider.name);
             var food = hitCollider.GetComponent<FoodsInfo>();
             food.GeneralEffect(this);
             // 食物有buff效果
             if (food.Settings.is_buff == 1)
             {
-                food.OnBuffBegin();
+                food.Buff();
+                StartCoroutine(DeBuffFromFood(food));
             }
         }
 
@@ -350,6 +351,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
 
+    IEnumerator DeBuffFromFood(FoodsInfo f)
+    {
+        yield return new WaitForSeconds(f.Settings.buff_time);
+        f.Debuff();
+
+        yield return null;
     }
 }

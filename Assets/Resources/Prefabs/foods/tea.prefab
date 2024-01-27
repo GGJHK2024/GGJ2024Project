@@ -107,6 +107,7 @@ MonoBehaviour:
     speed: 0
     buff_time: 10
   InitFromID: 3
+  sound: {fileID: 8300000, guid: ee435418f258aec4bbe1ab64d2ce0982, type: 3}
 --- !u!65 &1706005355476491150
 BoxCollider:
   m_ObjectHideFlags: 0

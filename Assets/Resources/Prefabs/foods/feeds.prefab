@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8105493932751382769}
   m_Layer: 0
   m_Name: feeds
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
     speed: 1
     buff_time: 0
   InitFromID: 1
+  sound: {fileID: 8300000, guid: 03be92ba0d547464e9c9f3f581c3cd88, type: 3}
 --- !u!65 &6768971687361884100
 BoxCollider:
   m_ObjectHideFlags: 0
