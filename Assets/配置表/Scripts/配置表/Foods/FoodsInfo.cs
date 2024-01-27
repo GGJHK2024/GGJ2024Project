@@ -35,7 +35,10 @@ public class FoodsInfo : MonoBehaviour
     {
         player = p;
         p.speed += Settings.speed;
-        p.gameObject.GetComponent<Transform>().localScale += new Vector3(Settings.volume,Settings.volume,1.0f);
+        if (p.gameObject.GetComponent<Transform>().localScale.x < 5)
+        {
+            p.gameObject.GetComponent<Transform>().localScale += new Vector3(Settings.volume,Settings.volume,1.0f);
+        }
         PlayPickUpSound();
         switch (gameObject.name)
         {
