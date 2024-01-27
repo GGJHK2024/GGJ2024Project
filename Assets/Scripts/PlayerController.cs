@@ -465,10 +465,10 @@ public class PlayerController : MonoBehaviour
     {
             player.Sleep();
             smash_count ++;
-            if(one_life){one_life_smash = true; GameMgr.GameOverAdd();}
-            if(smash_count == 2){GameMgr.GameOver();}
+            if(one_life){one_life_smash = true; GameMgr.GameOverAdd(); return;}
+            if(smash_count == 2){GameMgr.GameOver();return;}
             speed = 20.0f;
-            hit_prop = 0.0f; 
+            hit_prop = 0.0f;
             smash_odds = 0.0f;
             this.transform.position = new Vector3(0,0,0);
             is_smashing = false;

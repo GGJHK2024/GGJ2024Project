@@ -198,8 +198,7 @@ public class GameMgr : BaseMgr<GameMgr>
     /// </summary>
     public static void GameReload()
     {
-        CheckWinner();
-        GameReload();
+
     }
 
     /// <summary>
@@ -223,17 +222,18 @@ public class GameMgr : BaseMgr<GameMgr>
         {
             //P2赢
             print("P2 win!");
-            
+            return;
         }
         else
         {
             //P1赢
             print("P1 win!");
+            return;
         }
     }
 
     /// <summary>
-    /// 判断胜负
+    /// 判断加时赛胜负
     /// </summary>
     public static void CheckWinnerAdd()
     {
