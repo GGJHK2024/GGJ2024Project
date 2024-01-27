@@ -10,6 +10,8 @@ TagManager:
   - bkSlider
   - soundSlider
   - manager
+  - FxTemporaire
+  - wall
   layers:
   - Default
   - TransparentFX
