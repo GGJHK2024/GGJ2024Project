@@ -52,11 +52,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveVec = Vector2.zero; // direction
     private Rigidbody player = null;
 
+    /*材质*/
+    Material fl;
+
     private void Awake()
     {
         kbdinput = new Player2();
         gpdinput = new Player2();
         player = GetComponent<Rigidbody>();
+        fl = gameObject.GetComponent<SpriteRenderer>().material;
         var allGamepads = Gamepad.all;
         if (this.gameObject.name.Contains("1"))
         {
@@ -299,9 +303,10 @@ public class PlayerController : MonoBehaviour
             is_hit = false;
         }
 
-        if(current_speed <= 5)
+        if(current_speed <= 8)
         { 
             is_hitting = false;
+            fl.SetInt("_BeAttack",0);
         } 
     }
 
@@ -324,6 +329,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {   
                     is_hitting = true;
+                    fl.SetInt("_BeAttack",1);
                     hit_prop += 0.5f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
@@ -340,6 +346,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     is_hitting = true;
+                    fl.SetInt("_BeAttack",1);
                     hit_prop += 2f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10);//我方会额外大幅击飞并叠加击飞值
@@ -397,6 +404,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     weapon.Damage(this.gameObject);
+                    fl.SetInt("_BeAttack",1);
                     weapon.HitPlayerWhileFlying(this);
                     // 击飞和击破
                     if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
