@@ -252,6 +252,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.908756, y: 1.0000001, z: 19.541233}
   m_Center: {x: 5.454378, y: 0, z: 0.30053854}
+--- !u!1 &294232360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 189612836468543766, guid: b0029d6840b40cd4286285441302703a, type: 3}
+  m_PrefabInstance: {fileID: 761328263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &294232366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294232360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de922a9132fe19444b432410af2522ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings:
+    id: 3
+    name: "\u529F\u592B\u8336"
+    is_buff: 1
+    volume: 0
+    speed: 0
+    buff_time: 10
+  InitFromID: 3
+  player: {fileID: 0}
+  sound: {fileID: 8300000, guid: ee435418f258aec4bbe1ab64d2ce0982, type: 3}
 --- !u!1001 &405998849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1832,7 +1859,6 @@ MonoBehaviour:
   dash_speed_k: 40
   is_dash: 0
   is_doubledash: 0
-  doubledash_time: 10
   hit_dmg: 0
   dash_count: 0
   is_tem_shield: 0
@@ -2206,8 +2232,7 @@ MonoBehaviour:
   dash_cd: 5
   dash_speed_k: 40
   is_dash: 0
-  is_doubledash: 1
-  doubledash_time: 10
+  is_doubledash: 0
   hit_dmg: 0
   dash_count: 0
   is_tem_shield: 0

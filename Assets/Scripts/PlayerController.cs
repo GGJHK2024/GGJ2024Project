@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     public float dash_speed_k = 25.0f;  // 冲刺速度系数
     public bool is_dash = false;        // 是否冲刺
     public bool is_doubledash = false;  // 是否二段冲刺
-    public float doubledash_time = 10.0f;   // 二段冲刺buff时间
     public float hit_dmg = 0.0f;    // 裸体撞击伤害
     // public FoodsInfo hit_out;    // 受到撞击吐多少东西
 

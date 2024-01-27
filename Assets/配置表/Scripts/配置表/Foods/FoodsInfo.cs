@@ -23,7 +23,7 @@ public class FoodsInfo : MonoBehaviour
     [Header("配表内ID")]
     public int InitFromID;
 
-    private PlayerController player;    // buff作用对象
+    public PlayerController player;    // buff作用对象
     public AudioClip sound;
 
     /// <summary>
