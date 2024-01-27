@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameMgr : BaseMgr<GameMgr>
@@ -11,10 +13,16 @@ public class GameMgr : BaseMgr<GameMgr>
     private float time_duration; // 喝彩间隔
     private bool is_show30s;//播放一次声音
     private float timer;
+    private TMP_Text TopTimerText;
+    private TMP_Text MidTimerText;
 
     private void Awake()
     {
         AudioMgr.GetInstance().PlaySound("Audios/人群欢呼");
+        
+        TopTimerText = GameObject.Find("TopTimerText").GetComponent<TMP_Text>();
+        MidTimerText = GameObject.Find("MidTimerText").GetComponent<TMP_Text>();
+        
         remainingTime = totalTime;
         is_show30s = false;
         time_duration = Random.Range(5.0f, 10.0f);
@@ -43,7 +51,7 @@ public class GameMgr : BaseMgr<GameMgr>
     public void CountDown() 
     {
         remainingTime -= Time.deltaTime;
-        UIMgr.GetInstance().GetTopTimerText().text = remainingTime.ToString("F0");
+        TopTimerText.text = remainingTime.ToString("F0");
         if (remainingTime <= 30 && remainingTime >= 27){//在还剩30s时用中间文字提示玩家
             StartCoroutine(Show30s());
             if(!is_show30s)
@@ -55,8 +63,8 @@ public class GameMgr : BaseMgr<GameMgr>
         }
 
         if (remainingTime < 10){//剩余10s内持续提示玩家
-            UIMgr.GetInstance().GetTopTimerText().text = "";
-            UIMgr.GetInstance().GetMidTimerText().text = remainingTime.ToString("F0");
+            TopTimerText.text = "";
+            MidTimerText.text = remainingTime.ToString("F0");
         }
 
         if (remainingTime <= 0)
@@ -65,11 +73,11 @@ public class GameMgr : BaseMgr<GameMgr>
         }
 
     }
-    IEnumerator  Show30s()
+    IEnumerator Show30s()
     {   
-        UIMgr.GetInstance().GetMidTimerText().text = "30s Left!";       
+        TopTimerText.text = "30s Left!";
         yield return new WaitForSeconds(3f);
-        UIMgr.GetInstance().GetMidTimerText().text = "";
+        MidTimerText.text = "";
     }
 
     /// <summary>

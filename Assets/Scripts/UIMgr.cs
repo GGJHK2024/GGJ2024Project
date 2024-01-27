@@ -12,8 +12,6 @@ public class UIMgr : BaseMgr<UIMgr>
     private Stack<GameObject> _openingWindows = new Stack<GameObject>();
 
     public float totalTime = 33f; // 总游戏时间
-    [SerializeField]public Text topTimerText; // 顶部倒计时UI
-    [SerializeField]public Text midTimerText;//中部倒计时UI
 
 
     void Awake()
@@ -44,11 +42,6 @@ public class UIMgr : BaseMgr<UIMgr>
             }
         }
 
-    }
-
-    private void Test(InputAction.CallbackContext context)
-    {
-        print("?");
     }
 
     /// <summary>
@@ -157,16 +150,5 @@ public class UIMgr : BaseMgr<UIMgr>
         CloseAllWindows();
         SceneManager.LoadScene(scene_id);
     }
-
-    //
-    // 倒计时功能
-    //
-    public Text GetTopTimerText()
-    {
-        return topTimerText;
-    }
-    public Text GetMidTimerText()
-    {
-        return midTimerText;
-    }
+    
 }
