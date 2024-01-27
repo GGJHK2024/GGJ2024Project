@@ -1990,7 +1990,7 @@ MonoBehaviour:
   - waveRate: 1000
     weaponAndPos:
     - {fileID: 7461401017136568369, guid: 402f80dbe0d55e046b8458adc906a453, type: 3}
-  totalTime: 120
+  totalTime: 10
 --- !u!1 &1664355554
 GameObject:
   m_ObjectHideFlags: 0

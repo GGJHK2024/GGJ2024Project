@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -204,8 +203,7 @@ public class GameMgr : BaseMgr<GameMgr>
     public static void GameOverAdd()
     {
         CheckWinnerAdd();
-        // GameReload();
-        UIMgr.GetInstance().Restart(2);
+        GameReload();
     }
 
     /// <summary>
@@ -213,7 +211,8 @@ public class GameMgr : BaseMgr<GameMgr>
     /// </summary>
     public static void GameReload()
     {
-         PlayerPrefs.GetString(P1W);
+         PlayerPrefs.GetString("P1W",P1W);
+         P1W = "0";
          UIMgr.GetInstance().Restart(3);
     }
 
