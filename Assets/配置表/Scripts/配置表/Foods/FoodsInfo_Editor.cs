@@ -4,7 +4,7 @@ using System;
 using XlsWork;
 using XlsWork.FoodsXls;
 
-[CustomEditor(typeof(FoodsInfo))]//将本模块指定为UnitInfo组件的编辑器自定义模块
+[CustomEditor(typeof(FoodsInfo),true)]//将本模块指定为FoodsInfo组件的编辑器自定义模块
 public class FoodsInfo_Editor : Editor
 {
     public override void OnInspectorGUI()//对UnitInfo在Inspector中的绘制方式进行接管

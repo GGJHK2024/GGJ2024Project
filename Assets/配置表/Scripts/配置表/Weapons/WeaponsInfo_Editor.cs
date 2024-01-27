@@ -4,7 +4,7 @@ using System;
 using XlsWork;
 using XlsWork.WeaponsXls;
 
-[CustomEditor(typeof(WeaponsInfo))]//将本模块指定为WeaponsInfo组件的编辑器自定义模块
+[CustomEditor(typeof(WeaponsInfo),true)]//将本模块指定为WeaponsInfo组件的编辑器自定义模块
 public class WeaponsInfo_Editor : Editor
 {
     public override void OnInspectorGUI()//对UnitInfo在Inspector中的绘制方式进行接管

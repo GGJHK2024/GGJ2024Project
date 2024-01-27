@@ -31,8 +31,6 @@ public class WeaponsInfo : MonoBehaviour
     // 基础信息
     public WeaponSettings Settings;
 
-    public UnityAction onPickedUpEvents;
-    
     public bool isFlying = false;               // 武器是否处于掷出的状态
     public bool canBePickWhileFlying = false;   // 能够在飞行过程中被拾起（如弯刀
     public bool isOnce = false;                 // 是一次性物品（如炸弹
@@ -44,7 +42,6 @@ public class WeaponsInfo : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody = this.gameObject.GetComponent<Rigidbody>();
         durable_remember = Settings.durable;
     }
 
