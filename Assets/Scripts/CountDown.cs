@@ -35,6 +35,7 @@ public class Timer : MonoBehaviour
     IEnumerator  Show30s()
     {   
         UIMgr.GetInstance().GetMidTimerText().text = "30s Left!";
+        AudioMgr.GetInstance().PlaySound("Audios/30S倒计时");
         yield return new WaitForSeconds(3f);
         UIMgr.GetInstance().GetMidTimerText().text = "";
     }
