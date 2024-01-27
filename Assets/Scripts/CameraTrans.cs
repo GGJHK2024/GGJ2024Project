@@ -12,7 +12,7 @@ public class CameraTrans : MonoBehaviour {
 	private Transform playerTransform;  //玩家1组件
     private Transform playerTransform2;  //玩家2组件
 	private Transform cameraTransform;  //相机组件
-	public Transform LDanchor;//左下锚点
+	public Transform LBanchor;//左下锚点
 	public Transform RTanchor;//右上锚点
 
 	public float distance = 0;
@@ -37,9 +37,8 @@ public class CameraTrans : MonoBehaviour {
 		Camera.main.orthographicSize = (-this.transform.position.z) + 5;
 
 		this.transform.position = 
-		new Vector3(Mathf.Clamp(this.transform.position.x, LDanchor.position.x, RTanchor.position.x), //相机限制
-		Mathf.Clamp(this.transform.position.y, LDanchor.position.y, RTanchor.position.y),-8);
-
+		new Vector3(Mathf.Clamp(this.transform.position.x, 2 * distance - 46, 2 *  -distance + 46), //相机限制
+		Mathf.Clamp(this.transform.position.y, distance - 24, -distance + 23),-8);
 
 		CameraView();
 	}
@@ -53,5 +52,8 @@ public class CameraTrans : MonoBehaviour {
 			distance = minRange;
 		}
 		offset = offset.normalized * distance;
+
+
+
 	}
 }
