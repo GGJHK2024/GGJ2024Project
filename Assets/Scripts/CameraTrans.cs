@@ -29,20 +29,12 @@ public class CameraTrans : MonoBehaviour {
         playerTransform2 = Player2.GetComponent<Transform> (); //得到玩家2的Transform组件
 		cameraTransform = this.GetComponent<Transform> ();   //得到相机的Transform组件
 		offset = cameraTransform.position - (playerTransform.position+playerTransform2.position)/2;  //得到相机和玩家中间位置的差值
-		// Vector2 ld = theCamera.ViewprotToWorld (new Vector(0,0));
-		// Vector2 rt = theCamera.ViewprotToWorld (new Vector(1,1));
-
-		// Vector2 tmp = ld - rt;
-		// tmp/=2;
-	
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		this.transform.position = (playerTransform.position+playerTransform2.position)/2 + offset;//玩家中间位置加上差值赋值给相机的位置
 		Camera.main.orthographicSize = (-this.transform.position.z) + 5;
-
-		Debug.Log (LDanchor.position.x);
 
 		this.transform.position = 
 		new Vector3(Mathf.Clamp(this.transform.position.x, LDanchor.position.x, RTanchor.position.x), //相机限制
