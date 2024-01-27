@@ -145,7 +145,7 @@ public class UIMgr : BaseMgr<UIMgr>
     //
     public void ShowP1W()
     {
-
+        
     }
 
 }
