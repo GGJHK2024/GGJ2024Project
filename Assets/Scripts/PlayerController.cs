@@ -135,7 +135,6 @@ public class PlayerController : MonoBehaviour
     {
         player.AddForce(moveVec * speed);
         Attackspeed();
-        Debug.Log(moveVec);
         if (moveVec.x != 0 && moveVec.y != 0)
         {
             if (!is_dash)
@@ -499,13 +498,14 @@ public class PlayerController : MonoBehaviour
     {
             player.Sleep();
             Color ready = new Color(1f, 1f, 1f, 0.5f);
-            transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = ready;
+            this.transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = ready;
             smash_count ++;
             if(one_life){one_life_smash = true; GameMgr.GameOverAdd(); return;}
             if(smash_count == 2){GameMgr.GameOver();return;}
             speed = 20.0f;
             hit_prop = 0.0f;
             smash_odds = 0.0f;
+            this.transform.localScale = new Vector3(1.5f , 1.5f , 1.5f);
             this.transform.position = new Vector3(0,0,0);
             is_smashing = false;
             Invoke("Ready", 3f);
