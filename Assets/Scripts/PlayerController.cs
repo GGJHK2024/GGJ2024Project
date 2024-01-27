@@ -508,14 +508,27 @@ public class PlayerController : MonoBehaviour
     private void SmashAndBack()
     {
             player.Sleep();
+            Color ready = new Color(1f, 1f, 1f, 0.5f);
+            this.transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = ready;
             smash_count ++;
             if(one_life){one_life_smash = true; GameMgr.GameOverAdd(); return;}
             if(smash_count == 2){GameMgr.GameOver();return;}
             speed = 20.0f;
             hit_prop = 0.0f;
             smash_odds = 0.0f;
+            this.transform.localScale = new Vector3(1.5f , 1.5f , 1.5f);
             this.transform.position = new Vector3(0,0,0);
             is_smashing = false;
+            Invoke("Ready", 3f);
+            
+    }
+
+    /// <summary>
+    /// 重生
+    /// </summary>
+    private void Ready()
+    {
+            transform.Find("truePlayer").GetComponent<SpriteRenderer>().color = new Color(255,255,255,255);
             player.WakeUp(); 
     }
 }
