@@ -29,7 +29,6 @@ public class Mcdonald : FoodsInfo
     public override void Buff()
     {
         base.Buff();
-        print("啊？");
         player.is_shield = true;
     }
 

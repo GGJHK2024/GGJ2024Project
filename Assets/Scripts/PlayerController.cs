@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.InputSystem.Users;
 
 
 // todo: change sprite
@@ -46,16 +46,27 @@ public class PlayerController : MonoBehaviour
     public bool is_shield = false;  // 是否带有一次性护盾
 
     /*控制属性*/
-    private Player1 kbdinput = null;    // player input
+    private Player2 kbdinput = null;    // player input
     private Player2 gpdinput = null;
     private Vector2 moveVec = Vector2.zero; // direction
     private Rigidbody player = null;
 
     private void Awake()
     {
-        kbdinput = new Player1();
+        kbdinput = new Player2();
         gpdinput = new Player2();
         player = GetComponent<Rigidbody>();
+        var allGamepads = Gamepad.all;
+        if (this.gameObject.name.Contains("1"))
+        {
+            var user1 = InputUser.PerformPairingWithDevice(allGamepads[0]);
+            user1.AssociateActionsWithUser(kbdinput);
+        }
+        else
+        {
+            var user2 = InputUser.PerformPairingWithDevice(allGamepads[1]);
+            user2.AssociateActionsWithUser(gpdinput);
+        }
     }
 
     private void OnEnable()

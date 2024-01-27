@@ -21,7 +21,13 @@ public class Knife : WeaponsInfo
 
     private void FixedUpdate()
     {
-        FlyTimer();
+        base.FixedUpdate();
+        if (Settings.durable <= 0)
+        {
+            ResetState();
+            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name, gameObject);
+        }
+        
         // 扔出去会旋转
         Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime * rotate_timer);
         if (isFlying && rotate_timer > 0.0f)
@@ -29,7 +35,6 @@ public class Knife : WeaponsInfo
             rigidbody.MoveRotation(this.transform.rotation * deltaRotation);
             rotate_timer -= Time.fixedDeltaTime * 10;
         }
-        FallDown();
     }
 
     private void OnDisable()
@@ -52,6 +57,14 @@ public class Knife : WeaponsInfo
     public override void Buff()
     {
         AudioMgr.GetInstance().PlaySound("Audios/弯刀飞来飞去");
+    }
+
+    public override void ResetState()
+    {
+        base.ResetState();
+        isFlying = false;
+        flying_timer = 0.0f;
+        rotate_timer = 30.0f;
     }
 
     public void OnPickUp()
