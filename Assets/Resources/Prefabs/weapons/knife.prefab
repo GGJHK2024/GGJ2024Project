@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 4458265125218630296}
   - component: {fileID: 4458265125218630297}
   - component: {fileID: 4458265125218630298}
-  - component: {fileID: 4458265125218630299}
   - component: {fileID: 2340220878157750666}
   - component: {fileID: 6909968207321125463}
   m_Layer: 0
-  m_Name: w_knife
+  m_Name: knife
   m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,31 +100,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4458265125218630299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4458265125218630300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9207f1bca68cde34f8b7a2c52d54484b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings:
-    id: 1
-    name: "\u5F2F\u5200"
-    durable: 5
-    speed_range: 2
-    basic_damage: 10
-    external_damage: 0
-  isFlying: 0
-  canBePickWhileFlying: 0
-  isOnce: 0
-  rigidbody: {fileID: 0}
-  flying_timer: 0
-  InitFromID: 1
 --- !u!54 &2340220878157750666
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -164,7 +138,7 @@ MonoBehaviour:
   isFlying: 0
   canBePickWhileFlying: 0
   isOnce: 0
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 2340220878157750666}
   flying_timer: 0
   InitFromID: 1
   rotate_timer: 30

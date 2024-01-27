@@ -330,7 +330,12 @@ public class PlayerController : MonoBehaviour
         if (hitCollider.CompareTag("food")) // 吃到食物
         {
             var food = hitCollider.GetComponent<FoodsInfo>();
-            
+            food.GeneralEffect(this);
+            // 食物有buff效果
+            if (food.Settings.is_buff == 1)
+            {
+                food.OnBuffBegin();
+            }
         }
 
         if (hitCollider.CompareTag("weapon")) //碰撞武器
