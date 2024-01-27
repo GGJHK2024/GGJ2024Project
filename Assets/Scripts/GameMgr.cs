@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -190,7 +191,8 @@ public class GameMgr : BaseMgr<GameMgr>
     public static void GameOverAdd()
     {
         CheckWinnerAdd();
-        GameReload();
+        // GameReload();
+        UIMgr.GetInstance().Restart(2);
     }
 
     /// <summary>
