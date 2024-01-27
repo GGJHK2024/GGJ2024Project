@@ -112,6 +112,7 @@ public class Bomb : WeaponsInfo
             hitCollider.GetComponent<Rigidbody>().AddForce( direction * 500);
             hitCollider.gameObject.GetComponent<PlayerController>().anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
             AudioMgr.GetInstance().PlaySound((hitCollider.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+            hitCollider.gameObject.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
         }
         
         // todo: 重置后加入对象池

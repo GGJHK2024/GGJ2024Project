@@ -135,7 +135,16 @@ public class PlayerController : MonoBehaviour
     {
         player.AddForce(moveVec * speed);
         Attackspeed();
-       
+    }
+
+    private void Update()
+    {
+        if (is_hitting)
+        {
+            this.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
+            anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
+        }
+
         if (moveVec.x != 0 && moveVec.y != 0)
         {
             if (!is_dash)
@@ -160,7 +169,6 @@ public class PlayerController : MonoBehaviour
             this.transform.GetChild(2).GetComponent<ParticleSystem>().Stop();
             anim.Play("New State");
         }
-        
     }
 
     private void LateUpdate()
@@ -368,6 +376,7 @@ public class PlayerController : MonoBehaviour
                     hit_prop += 0.5f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     anim.Play(this.gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
+                    this.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
                     player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
 
                 }
@@ -386,6 +395,7 @@ public class PlayerController : MonoBehaviour
                     hit_prop += 2f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
                     anim.Play(this.gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
+                    this.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
                     player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10);//我方会额外大幅击飞并叠加击飞值
                     // 击飞和击破
                     if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
@@ -458,8 +468,6 @@ public class PlayerController : MonoBehaviour
                             else
                             {
                                 print(gameObject.name + "被一击必杀了！");
-                                // todo: hitten animation
-                                anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
                                 AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                                 player.AddForce(weapon.rigidbody.velocity * 5000);
                                 is_smashing = true;

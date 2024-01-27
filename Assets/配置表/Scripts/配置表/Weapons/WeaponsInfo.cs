@@ -107,7 +107,7 @@ public class WeaponsInfo : MonoBehaviour
 
         player.GetComponent<PlayerController>().anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
         AudioMgr.GetInstance().PlaySound((player.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
-        
+        player.gameObject.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
         player.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 20);
         this.rigidbody.AddForce(-rigidbody.velocity * 10);
     }
