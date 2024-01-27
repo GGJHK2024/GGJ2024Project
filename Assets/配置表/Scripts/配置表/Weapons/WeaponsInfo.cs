@@ -107,6 +107,7 @@ public class WeaponsInfo : MonoBehaviour
     public virtual void HitPlayerWhileFlying(PlayerController player)
     {
         print( player.gameObject.name + "受到" + Settings.name + "的撞击伤害");
+        AudioMgr.GetInstance().PlaySound((player.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
         
         player.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 10);
     }

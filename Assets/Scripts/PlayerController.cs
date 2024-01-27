@@ -228,6 +228,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     private void Move(InputAction.CallbackContext context)
     {
+        this.GetComponent<AudioSource>().Play();
         moveVec = context.ReadValue<Vector2>();
         player.transform.rotation = Quaternion.Euler(0, moveVec.x >= 0 ? 180 : 0, 0);
     }
@@ -238,6 +239,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     private void OnMovementCanceled(InputAction.CallbackContext context)
     {
+        this.GetComponent<AudioSource>().Stop();
         moveVec = Vector2.zero;
     }
 
@@ -319,6 +321,7 @@ public class PlayerController : MonoBehaviour
                 if (smash_odds > UnityEngine.Random.Range(0,100))
                 {
                     print("一击必杀了！");
+                    AudioMgr.GetInstance().PlaySound((otherPlayer.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                     player.AddForce(otherPlayer.moveVec * 9999);
                 }
             }
