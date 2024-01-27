@@ -535,7 +535,7 @@ public class PlayerController : MonoBehaviour
             this.transform.localScale = new Vector3(1.5f , 1.5f , 1.5f);
             this.transform.position = new Vector3(0,0,0);
             is_smashing = false;
-            Invoke("Ready", 5f);
+            Invoke("Ready", 3f);
             
     }
 
