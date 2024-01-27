@@ -37,8 +37,9 @@ namespace XlsWork
                 {
                     IndividualData item = new IndividualData(CountOfAttributes);//新建一个操作单元，开始接收本行数据
 
-                    for (int col = 1; col <= colCount; col++)//从第一列遍历到最后一列
+                    for (int col = 1; col <= colCount-1; col++)//从第一列遍历到最后一列
                     {
+                        print(workSheet.Cells[row, col].Text);
                         //读取每个单元格中的数据
                         item.Values[col - 1] = workSheet.Cells[row, col].Text;//将单元格中的数据写入操作单元
                     }
