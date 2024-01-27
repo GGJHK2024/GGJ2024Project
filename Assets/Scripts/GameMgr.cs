@@ -9,17 +9,10 @@ using Random = UnityEngine.Random;
 public class GameMgr : BaseMgr<GameMgr>
 {
     [System.Serializable]
-    public struct weaponAndPos
-    {
-        public GameObject weapon;
-        public Vector3 position;
-    }
-    
-    [System.Serializable]
     public class WeaponGenerateWave
     {
         public float waveRate;  // 与下一波武器刷新之间的间隔
-        public weaponAndPos[] weaponAndPos;     // 波内会出现的武器（vec3是生成位置）
+        public GameObject[] weaponAndPos;     // 波内会出现的武器（vec3是生成位置）
     }
 
     public List<WeaponGenerateWave> weapon_waves;
@@ -123,11 +116,12 @@ public class GameMgr : BaseMgr<GameMgr>
                 // 波内生成的武器
                 for (int j = 0; j < weapon_waves[i].weaponAndPos.Length; j++)
                 {
-                    PoolMgr.GetInstance().GetObj("Prefabs/weapons/" + weapon_waves[i].weaponAndPos[j].weapon.name, o=>
+                    PoolMgr.GetInstance().GetObj("Prefabs/weapons/" + weapon_waves[i].weaponAndPos[j].name, o=>
                     {
+                        Vector3 randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
                         var obj = Instantiate(o, weaponPool.transform);
-                        obj.name = weapon_waves[i].weaponAndPos[j].weapon.name;
-                        obj.transform.position = weapon_waves[i].weaponAndPos[j].position;
+                        obj.name = weapon_waves[i].weaponAndPos[j].name;
+                        obj.transform.position = randomPos;
                         obj.gameObject.SetActive(true);
                     });
                     
