@@ -31,6 +31,7 @@ public class GameMgr : BaseMgr<GameMgr>
     private float timer;
     private TMP_Text TopTimerText;
     private TMP_Text MidTimerText;
+    private GameObject weaponPool;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class GameMgr : BaseMgr<GameMgr>
 
     private void Start()
     {
+        weaponPool = GameObject.Find("PoolWeapons");
         StartCoroutine(WeaponWaveSpawner());
     }
 
@@ -122,9 +124,8 @@ public class GameMgr : BaseMgr<GameMgr>
                 {
                     PoolMgr.GetInstance().GetObj("Prefabs/weapons/" + weapon_waves[i].weaponAndPos[j].weapon.name, o=>
                     {
-                        var obj = Instantiate(o);
+                        var obj = Instantiate(o, weaponPool.transform);
                         obj.name = weapon_waves[i].weaponAndPos[j].weapon.name;
-                        obj.transform.parent = GameObject.Find("PoolWeapons").transform;
                         obj.transform.position = weapon_waves[i].weaponAndPos[j].position;
                         obj.gameObject.SetActive(true);
                     });
