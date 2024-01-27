@@ -113,6 +113,7 @@ public class WeaponsInfo : MonoBehaviour
     /// 重置状态，在入池时使用
     /// 重置耐久度（似乎只有这个会变
     /// 重置所有布尔值和计时器
+    /// 入池
     /// </summary>
     public virtual void ResetState()
     {

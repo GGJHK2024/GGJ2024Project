@@ -16,6 +16,16 @@ public class Chicken : WeaponsInfo
         EventCenter.GetInstance().AddEventListener("OnchickenPickUp",onChickenPicked);
     }
 
+    void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (!isOnce && (Settings.durable <= 0))
+        {
+            ResetState();
+            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name, gameObject);
+        }
+    }
+
     private void OnDisable()
     {
         onChickenPicked -= OnPickUp;
