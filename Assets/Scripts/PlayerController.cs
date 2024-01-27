@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public float attack_speed = 15f;//允许攻击的速度
     public float max_speed = 0.0f; // 角色属性的速度上限
     public float pick_area = 5.0f;  // 拾取范围
+    private bool one_life = false; // 一命模式
+    public bool one_life_smash = false; // 被一命击杀了
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
 
     [Header("撞击相关")]
@@ -129,7 +131,6 @@ public class PlayerController : MonoBehaviour
     {
         player.AddForce(moveVec * speed);
         Attackspeed();
-
     }
 
     private void LateUpdate()
@@ -442,8 +443,6 @@ public class PlayerController : MonoBehaviour
             }
             if(is_smashing)
             {
-                //这里需要随机重生位置
-                Debug.Log("击破至墙！");
                 SmashAndBack();
             }
         }
@@ -464,9 +463,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void SmashAndBack()
     {
-            Debug.Log("开始重置");
             player.Sleep();
             smash_count ++;
+            if(one_life){one_life_smash = true; GameMgr.GameOverAdd();}
+            if(smash_count == 2){GameMgr.GameOver();}
             speed = 20.0f;
             hit_prop = 0.0f; 
             smash_odds = 0.0f;
