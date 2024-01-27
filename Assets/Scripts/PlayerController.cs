@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("撞击相关")]
     public bool is_hit = false;//是否为可以造成有效攻击
     public bool is_hitting = false;//是否在被击飞状态
+    public bool is_smashing = false;//在击破撞到墙前
     public float hit_prop = 0.0f;   // 击飞值，击飞值越高，被击飞概率越大
     public float max_hit_prop = 100.0f;  // 最大击飞值
     public float smash_odds = 0.0f; //击破概率
@@ -348,8 +349,7 @@ public class PlayerController : MonoBehaviour
                                 print(this.gameObject.name + "被一击必杀了！");
                                 AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                                 player.AddForce(otherPlayer.moveVec * 9999);
-                                //这里需要随机重生位置
-                                SmashAndBack();
+                                is_smashing = true;
                             }
                         }
                     }
@@ -398,6 +398,12 @@ public class PlayerController : MonoBehaviour
             {
                 player.AddForce(-player.velocity.normalized * current_speed * 100); 
             }
+            if(is_smashing)
+            {
+                //这里需要随机重生位置
+                Debug.Log("击破至墙！");
+                SmashAndBack();
+            }
         }
 
 
@@ -416,12 +422,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void SmashAndBack()
     {
+            Debug.Log("开始重置");
+            player.Sleep();
             smash_count ++;
             speed = 0.0f;
             hit_prop = 0.0f; 
             smash_odds = 0.0f;
-            this.gameObject.transform.position = new Vector3(0,0,0);
-            print(this.gameObject.transform.position);
-
+            this.transform.position = new Vector3(0,0,0);
+            is_smashing = false;
+            player.WakeUp(); 
     }
 }
