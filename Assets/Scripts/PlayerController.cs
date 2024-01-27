@@ -15,6 +15,7 @@ using UnityEngine.InputSystem.Users;
 /// 移动控制 WASD / left joystick
 /// 张嘴（自动拾取） space / right trigger
 /// 冲刺 shift / B
+/// p1棕色 p2白色（暂定
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private bool one_life = false; // 一命模式
     public bool one_life_smash = false; // 被一命击杀了
     public Vector4 boundary = new Vector4(25, -25, -33, 33);  // 可移动边界；上下左右
+
+    public Animator anim; // 动画机
 
     [Header("撞击相关")]
     public bool is_hit = false;//是否为可以造成有效攻击
@@ -75,7 +78,7 @@ public class PlayerController : MonoBehaviour
             user2.AssociateActionsWithUser(gpdinput);
         }
     }
-
+    
     private void OnEnable()
     {
         AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1宣战":"Audios/P2宣战");
@@ -131,6 +134,30 @@ public class PlayerController : MonoBehaviour
     {
         player.AddForce(moveVec * speed);
         Attackspeed();
+       
+        if (moveVec.x != 0 && moveVec.y != 0)
+        {
+            if (!is_dash)
+            {
+                if (current_speed < 15.0f)   // 在动,且不在跑
+                {
+                    anim.Play(gameObject.name.Contains("1")?"Brown_Run":"White_Run");
+                } else  // 达到伤害速度
+                {
+                    anim.Play(gameObject.name.Contains("1")?"Brown_FastRun":"White_Fast_Run");
+                }
+            }
+            else
+            {
+                if (current_speed < 6.0f)   // 在动,且不在跑
+                {
+                    anim.Play(gameObject.name.Contains("1")?"Brown_Run":"White_Run");
+                }
+            }
+        }else {
+            anim.Play("New State");
+        }
+        
     }
 
     private void LateUpdate()
@@ -143,9 +170,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GrabSth(InputAction.CallbackContext context)
     {
-        // todo: change sprite摁住的时候嘴巴闭上
-        
-        
+        anim.Play(gameObject.name.Contains("1")?"Brown_Eat":"White_Eat");
         
         List<Collider> weaponCanBeGrab = new List<Collider>();
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pick_area);
@@ -186,7 +211,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     private void PutDown(InputAction.CallbackContext context)
     {
-        // todo: change sprite 松开的时候，嘴巴松开
+        anim.Play(gameObject.name.Contains("1")?"Brown_Eat":"White_Eat");
+        
         if (this.transform.GetChild(0).childCount == 0) return;
         
         // 有拾取的武器时
@@ -229,6 +255,9 @@ public class PlayerController : MonoBehaviour
         if (!is_dash || (is_doubledash && dash_count <= 1))
         {
             AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/p1冲刺":"Audios/p2冲刺");
+            
+            anim.Play(gameObject.name.Contains("1")?"Brown_Dash":"White_Dash");
+            
             player.AddForce(moveVec * speed * dash_speed_k);
             is_dash = true;
             dash_count++;
@@ -335,6 +364,7 @@ public class PlayerController : MonoBehaviour
                     fl.SetInt("_BeAttack",1);
                     hit_prop += 0.5f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+                    anim.Play(this.gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
                     player.AddForce(-moveVec * current_speed * hit_prop * 10); //两者会额外小幅击飞并小幅叠加击飞值
 
                 }
@@ -352,6 +382,7 @@ public class PlayerController : MonoBehaviour
                     fl.SetInt("_BeAttack",1);
                     hit_prop += 2f;
                     AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
+                    anim.Play(this.gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
                     player.AddForce(otherPlayer.moveVec * otherPlayer.current_speed * hit_prop * 10);//我方会额外大幅击飞并叠加击飞值
                     // 击飞和击破
                     if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
@@ -423,7 +454,9 @@ public class PlayerController : MonoBehaviour
                             }
                             else
                             {
-                                print(this.gameObject.name + "被一击必杀了！");
+                                print(gameObject.name + "被一击必杀了！");
+                                // todo: hitten animation
+                                anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
                                 AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
                                 player.AddForce(weapon.rigidbody.velocity * 5000);
                                 is_smashing = true;
