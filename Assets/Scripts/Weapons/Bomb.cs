@@ -116,7 +116,7 @@ public class Bomb : WeaponsInfo
         // todo: 重置后加入对象池
         AudioMgr.GetInstance().PlaySound("Audios/炸弹爆炸");
         ResetState();
-        PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name,gameObject);
+        PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name.Substring(0,gameObject.name.Length-7), gameObject);
     }
 
     public override void ResetState()

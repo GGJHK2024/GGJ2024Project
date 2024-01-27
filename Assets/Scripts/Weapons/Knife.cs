@@ -17,6 +17,8 @@ public class Knife : WeaponsInfo
         isOnce = false;
         onKnifePicked += OnPickUp;
         EventCenter.GetInstance().AddEventListener("OnknifePickUp",onKnifePicked);
+        EventCenter.GetInstance().AddEventListener("OnaxePickUp",onKnifePicked);
+        EventCenter.GetInstance().AddEventListener("OnboomerangPickUp",onKnifePicked);
     }
 
     private void FixedUpdate()
@@ -25,7 +27,7 @@ public class Knife : WeaponsInfo
         if (Settings.durable <= 0)
         {
             ResetState();
-            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name, gameObject);
+            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name.Substring(0,gameObject.name.Length-7), gameObject);
         }
         
         // 扔出去会旋转
@@ -41,6 +43,8 @@ public class Knife : WeaponsInfo
     {
         onKnifePicked -= OnPickUp;
         EventCenter.GetInstance().RemoveEventListener("OnknifePickUp",onKnifePicked);
+        EventCenter.GetInstance().RemoveEventListener("OnaxePickUp",onKnifePicked);
+        EventCenter.GetInstance().RemoveEventListener("OnboomerangPickUp",onKnifePicked);
     }
     
     public override void FallDown()

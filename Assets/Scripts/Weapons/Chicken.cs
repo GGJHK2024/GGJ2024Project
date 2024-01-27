@@ -22,7 +22,7 @@ public class Chicken : WeaponsInfo
         if (!isOnce && (Settings.durable <= 0))
         {
             ResetState();
-            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name, gameObject);
+            PoolMgr.GetInstance().PushObj("Prefabs/weapons/" + gameObject.name.Substring(0,gameObject.name.Length-7), gameObject);
         }
     }
 

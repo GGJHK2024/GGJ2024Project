@@ -112,6 +112,7 @@ public class GameMgr : BaseMgr<GameMgr>
     /// <returns></returns>
     IEnumerator WeaponWaveSpawner()
     {
+        Vector3 randomPos;
         while (true)    // todo: 改成还在游戏里的时候
         {
             // 波之间
@@ -122,11 +123,9 @@ public class GameMgr : BaseMgr<GameMgr>
                 {
                     PoolMgr.GetInstance().GetObj("Prefabs/weapons/" + weapon_waves[i].weaponAndPos[j].name, o=>
                     {
-                        Vector3 randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
-                        var obj = Instantiate(o, weaponPool.transform);
-                        obj.name = weapon_waves[i].weaponAndPos[j].name;
-                        obj.transform.position = randomPos;
-                        obj.gameObject.SetActive(true);
+                        randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
+                        o.transform.position = randomPos;
+                        o.transform.parent = weaponPool.transform;
                     });
                     
                 }
@@ -149,35 +148,27 @@ public class GameMgr : BaseMgr<GameMgr>
             PoolMgr.GetInstance().GetObj("Prefabs/foods/feeds", (o) =>
             {
                 randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
-                var obj = Instantiate(o,foodPool.transform);
-                obj.name = "feeds";
-                obj.transform.position = randomPos;
-                obj.SetActive(true);
+                o.transform.position = randomPos;
+                o.transform.parent = foodPool.transform;
             });
         }
         PoolMgr.GetInstance().GetObj("Prefabs/foods/humbuger", o =>
         {
             randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
-            var obj = Instantiate(o,foodPool.transform);
-            obj.name = "humbuger";
-            obj.transform.position = randomPos;
-            obj.SetActive(true);
+            o.transform.position = randomPos;
+            o.transform.parent = foodPool.transform;
         });
         PoolMgr.GetInstance().GetObj("Prefabs/foods/mcDonald", o =>
         {
             randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
-            var obj = Instantiate(o,foodPool.transform);
-            obj.name = "mcDonald";
-            obj.transform.position = randomPos;
-            obj.SetActive(true);
+            o.transform.position = randomPos;
+            o.transform.parent = foodPool.transform;
         });
         PoolMgr.GetInstance().GetObj("Prefabs/foods/tea", o =>
         {
             randomPos = new Vector3(Random.Range(-45, 45), Random.Range(-19, 19), -0.05f);
-            var obj = Instantiate(o,foodPool.transform);
-            obj.name = "tea";
-            obj.transform.position = randomPos;
-            obj.SetActive(true);
+            o.transform.position = randomPos;
+            o.transform.parent = foodPool.transform;
         });
         
     }

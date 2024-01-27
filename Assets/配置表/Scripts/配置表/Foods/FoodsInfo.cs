@@ -37,6 +37,22 @@ public class FoodsInfo : MonoBehaviour
         p.speed += Settings.speed;
         p.gameObject.GetComponent<Transform>().localScale += new Vector3(Settings.volume,Settings.volume,1.0f);
         PlayPickUpSound();
+        switch (gameObject.name)
+        {
+            case "feeds(Clone)":
+                PoolMgr.GetInstance().PushObj("Prefabs/foods/feeds", gameObject);
+                break;
+            case "humbuger(Clone)":
+                PoolMgr.GetInstance().PushObj("Prefabs/foods/humbuger", gameObject);
+                break;
+            case "mcDonald(Clone)":
+                PoolMgr.GetInstance().PushObj("Prefabs/foods/mcDonald", gameObject);
+                break;
+            case "tea(Clone)":
+                PoolMgr.GetInstance().PushObj("Prefabs/foods/tea", gameObject);
+                break;
+        }
+        
     }
 
     /// <summary>
