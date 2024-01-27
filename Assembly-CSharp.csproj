@@ -80,6 +80,9 @@
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
     <Compile Include="Assets\Scripts\Foods\Tea.cs" />
     <Compile Include="Assets\Scripts\Foods\Mcdonald.cs" />
+    <Compile Include="Assets\Scripts\Base\PoolData.cs" />
+    <Compile Include="Assets\Scripts\Base\PoolMgr.cs" />
+    <Compile Include="Assets\InputActions\menu.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Shaders\CFX2 Particle Alpha Blend Add.shader" />
