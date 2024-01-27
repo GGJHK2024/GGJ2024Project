@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class CountDown : MonoBehaviour
 {
 
     private float remainingTime; //剩余时间
