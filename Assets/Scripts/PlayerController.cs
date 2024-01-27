@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour
                             {
                                 print(this.gameObject.name + "被一击必杀了！");
                                 AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
-                                player.AddForce(otherPlayer.moveVec * 9999);
+                                player.AddForce(otherPlayer.moveVec * 5000);
                                 is_smashing = true;
                             }
                         }
@@ -400,6 +400,27 @@ public class PlayerController : MonoBehaviour
                 {
                     weapon.Damage(this.gameObject);
                     weapon.HitPlayerWhileFlying(this);
+                    // 击飞和击破
+                    if(hit_prop > max_hit_prop)//当达到最大击飞值后开始叠加一击击破率
+                    {
+                        smash_odds += hit_prop;
+                        hit_prop = max_hit_prop;
+                        if (smash_odds > UnityEngine.Random.Range(0,100))
+                        {
+                            if (is_shield)  // 如果有护盾，抵挡一次伤害并且护盾破碎
+                            {
+                                is_shield = false;
+                                EventCenter.GetInstance().EventTrigger("McdonaldBreak");
+                            }
+                            else
+                            {
+                                print(this.gameObject.name + "被一击必杀了！");
+                                AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1被击飞":"Audios/P2被击飞");
+                                player.AddForce(weapon.rigidbody.velocity * 5000);
+                                is_smashing = true;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -438,7 +459,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("开始重置");
             player.Sleep();
             smash_count ++;
-            speed = 0.0f;
+            speed = 20.0f;
             hit_prop = 0.0f; 
             smash_odds = 0.0f;
             this.transform.position = new Vector3(0,0,0);
