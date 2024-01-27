@@ -12,8 +12,6 @@ public class CameraTrans : MonoBehaviour {
 	private Transform playerTransform;  //玩家1组件
     private Transform playerTransform2;  //玩家2组件
 	private Transform cameraTransform;  //相机组件
-	public Transform LBanchor;//左下锚点
-	public Transform RTanchor;//右上锚点
 
 	public float distance = 0;
     [Range(0,1)]public float transSpeed;
