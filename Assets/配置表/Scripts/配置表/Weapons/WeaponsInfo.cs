@@ -104,6 +104,8 @@ public class WeaponsInfo : MonoBehaviour
     public virtual void HitPlayerWhileFlying(PlayerController player)
     {
         print( player.gameObject.name + "受到" + Settings.name + "的撞击伤害");
+
+        player.GetComponent<PlayerController>().anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
         AudioMgr.GetInstance().PlaySound((player.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
         
         player.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 20);

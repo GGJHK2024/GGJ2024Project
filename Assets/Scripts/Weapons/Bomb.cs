@@ -110,6 +110,7 @@ public class Bomb : WeaponsInfo
             var direction = heading / distance;
             hitCollider.GetComponent<PlayerController>().hit_prop += Settings.external_damage;
             hitCollider.GetComponent<Rigidbody>().AddForce( direction * 500);
+            hitCollider.gameObject.GetComponent<PlayerController>().anim.Play(gameObject.name.Contains("1")?"Brown_Hitted":"White_Hitted");
             AudioMgr.GetInstance().PlaySound((hitCollider.gameObject.name.Contains("1"))?"Audios/P1受击":"Audios/P2受击");
         }
         
