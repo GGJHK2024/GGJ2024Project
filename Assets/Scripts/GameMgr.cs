@@ -22,6 +22,7 @@ public class GameMgr : BaseMgr<GameMgr>
     private float time_duration; // 喝彩间隔
     private bool is_show30s;//播放一次声音
     private float timer;
+    private bool begin = false;
 
     public static int  P1;
     public static int  P2;
@@ -66,9 +67,18 @@ public class GameMgr : BaseMgr<GameMgr>
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        RandomCheer();
-        CountDown();
+        if (begin)
+        {
+            timer += Time.deltaTime;
+            RandomCheer();
+            CountDown();
+        }
+    }
+
+    public void BeginGameFromButton(GameObject o)
+    {
+        begin = true;
+        o.SetActive(false);
     }
 
     /// <summary>

@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Base\PoolData.cs" />
     <Compile Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_ShurikenThreadFix.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
+    <Compile Include="Assets\Scripts\ShowWinner.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\VFX\JMO Assets\Cartoon FX (legacy)\Shaders\CFX2 Particle Alpha Blend Add.shader" />
