@@ -167,7 +167,7 @@ MonoBehaviour:
     durable: 1
     speed_range: 1
     basic_damage: 1
-    external_damage: 50
+    external_damage: 5
   isFlying: 0
   canBePickWhileFlying: 0
   isOnce: 0
