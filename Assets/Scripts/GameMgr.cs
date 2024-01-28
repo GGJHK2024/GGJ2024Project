@@ -110,7 +110,7 @@ public class GameMgr : BaseMgr<GameMgr>
 
         if (remainingTime <= 0)
         {
-            MidTimerText.text = "Finish It!";
+            MidTimerText.text = "Terminate it!";
             GameAddCount();
         }
 
