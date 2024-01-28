@@ -633,7 +633,7 @@ Transform:
   m_GameObject: {fileID: 223841631}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1951067256}
@@ -922,7 +922,7 @@ Transform:
   m_GameObject: {fileID: 494817317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1885622623}
@@ -2511,7 +2511,7 @@ MonoBehaviour:
     - {fileID: 3209718779573062569, guid: 20374a06fca83464c8053e936b644b23, type: 3}
     - {fileID: 3209718779573062569, guid: 20374a06fca83464c8053e936b644b23, type: 3}
     - {fileID: 7461401017136568369, guid: 402f80dbe0d55e046b8458adc906a453, type: 3}
-  - waveRate: 160
+  - waveRate: 16000
     weaponAndPos:
     - {fileID: 4458265125218630300, guid: 48144098316b57944a365e58af76d5b3, type: 3}
     - {fileID: 4458265125218630300, guid: af3334a80a919464f958f113646b2eb5, type: 3}

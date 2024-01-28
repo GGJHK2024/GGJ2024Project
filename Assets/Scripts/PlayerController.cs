@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
     
     private void OnEnable()
     {
-        AudioMgr.GetInstance().PlaySound((this.gameObject.name.Contains("1"))?"Audios/P1宣战":"Audios/P2宣战");
         if (this.name.Contains("1"))    // kbd ctrl
         {
             kbdinput.Enable();

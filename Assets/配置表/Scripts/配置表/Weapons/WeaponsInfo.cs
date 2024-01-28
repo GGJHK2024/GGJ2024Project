@@ -47,6 +47,11 @@ public class WeaponsInfo : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (flying_timer>=5.0f)
+        {
+            flying_timer = 0.0f;
+            isFlying = false;
+        }
         FlyTimer();
         FallDown();
     }

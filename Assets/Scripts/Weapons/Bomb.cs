@@ -25,7 +25,7 @@ public class Bomb : WeaponsInfo
         EventCenter.GetInstance().AddEventListener("Onbomb(Clone)PickUp",onBombPicked);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         base.FixedUpdate();
         if (beginDash)

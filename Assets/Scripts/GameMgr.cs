@@ -22,7 +22,8 @@ public class GameMgr : BaseMgr<GameMgr>
     private float time_duration; // 喝彩间隔
     private bool is_show30s;//播放一次声音
     private float timer;
-    private bool begin = false;
+    private bool begin = false; //  关闭教程，开始计时
+    private bool shout = false; // 宣战
 
     public static int  P1;
     public static int  P2;
@@ -62,6 +63,7 @@ public class GameMgr : BaseMgr<GameMgr>
 
     private void Start()
     {
+        shout = false;
         StartCoroutine(WeaponWaveSpawner());
     }
 
@@ -69,6 +71,13 @@ public class GameMgr : BaseMgr<GameMgr>
     {
         if (begin)
         {
+            if (!shout)
+            {
+                AudioMgr.GetInstance().PlaySound("Audios/P1宣战");
+                AudioMgr.GetInstance().PlaySound("Audios/P2宣战");
+                shout = true;
+            }
+            
             timer += Time.deltaTime;
             RandomCheer();
             CountDown();

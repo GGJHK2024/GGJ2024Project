@@ -35,8 +35,8 @@ public class AudioMgr : BaseMgr<AudioMgr>
                 bkplayer.AddComponent<AudioSource>();
             }
             bkMusic.loop = true;
-            ChangeBKMusic("Audios/bgm");
-            PlayBkMusic();
+            /*ChangeBKMusic("Audios/bgm");
+            PlayBkMusic();*/
         }
         else
         {

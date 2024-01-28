@@ -41,6 +41,15 @@ public class Chicken : WeaponsInfo
         AudioMgr.GetInstance().PlaySound("Audios/尖叫鸡丢出");
     }
 
+    public override void FallDown()
+    {
+        if ((Mathf.Abs(rigidbody.velocity.x) > 0.0f && Mathf.Abs(rigidbody.velocity.x) < 0.3f) ||
+            (Mathf.Abs(rigidbody.velocity.y) > 0.0f && Mathf.Abs(rigidbody.velocity.y) < 0.3f))
+        {
+            isFlying = false;
+            flying_timer = 0.0f;
+        }
+    }
     public void OnPickUp(GameObject o)
     {
         if (o == this.gameObject)
@@ -52,6 +61,8 @@ public class Chicken : WeaponsInfo
     public override void ResetState()
     {
         base.ResetState();
+        isFlying = false;
+        flying_timer = 0.0f;
         PoolMgr.GetInstance().PushObj("Prefabs/weapons/chicken", gameObject);
     }
 }
