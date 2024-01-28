@@ -534,7 +534,6 @@ public class PlayerController : MonoBehaviour
             smash_odds = 0.0f;
             this.transform.localScale = new Vector3(1.5f , 1.5f , 1.5f);
             this.transform.position = new Vector3(0,0,0);
-
             is_smashing = false;
             Invoke("Ready", 3f);
             

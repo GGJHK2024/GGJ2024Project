@@ -120,7 +120,7 @@ public class GameMgr : BaseMgr<GameMgr>
 
         if (remainingTime <= 0)
         {
-            MidTimerText.text = "Finish It!";
+            MidTimerText.text = "Terminate it!";
             GameAddCount();
         }
 
@@ -223,8 +223,7 @@ public class GameMgr : BaseMgr<GameMgr>
     /// </summary>
     public static void GameReload()
     {
-         PlayerPrefs.GetString("P1W",P1W);
-         P1W = "0";
+         PlayerPrefs.SetString("P1W",P1W);
          UIMgr.GetInstance().Restart(3);
     }
 
@@ -248,6 +247,7 @@ public class GameMgr : BaseMgr<GameMgr>
         {
             //P2赢
             print("P2 win!");
+            P1W = "0";
             return;
         }
         else
@@ -270,6 +270,7 @@ public class GameMgr : BaseMgr<GameMgr>
         {
             //P2赢
             print("P2 win!");
+            P1W = "0";
             return;
         }
         else

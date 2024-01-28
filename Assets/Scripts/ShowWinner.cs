@@ -20,5 +20,6 @@ public class ShowWinner : MonoBehaviour
             GameObject.Find("chic-white").SetActive(true);
         }
         P1Win = "0";
+         PlayerPrefs.DeleteAll();
     }
 }
