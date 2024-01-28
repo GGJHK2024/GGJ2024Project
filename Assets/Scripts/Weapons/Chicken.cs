@@ -7,7 +7,7 @@ using UnityEngine.Events;
 // 特性：拾取与丢出去发出鸡叫
 public class Chicken : WeaponsInfo
 {
-    private UnityAction onChickenPicked;
+    private UnityAction<GameObject> onChickenPicked;
     private void Start()
     {
         canBePickWhileFlying = false;
@@ -41,9 +41,12 @@ public class Chicken : WeaponsInfo
         AudioMgr.GetInstance().PlaySound("Audios/尖叫鸡丢出");
     }
 
-    public void OnPickUp()
+    public void OnPickUp(GameObject o)
     {
-        AudioMgr.GetInstance().PlaySound("Audios/尖叫鸡拾取");
+        if (o == this.gameObject)
+        {
+            AudioMgr.GetInstance().PlaySound("Audios/尖叫鸡拾取");
+        }
     }
 
     public override void ResetState()

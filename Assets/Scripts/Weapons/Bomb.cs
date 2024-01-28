@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Bomb : WeaponsInfo
 {
-    private UnityAction onBombPicked;
+    private UnityAction<GameObject> onBombPicked;
     private bool firstPickUp = true;        // 是否第一次被捡起
 
     private bool beginDash = false;
@@ -64,14 +64,17 @@ public class Bomb : WeaponsInfo
   /// <summary>
     /// 捡起炸弹的回调函数
     /// </summary>
-    private void OnPickUp()
+    private void OnPickUp(GameObject o)
     {
-        AudioMgr.GetInstance().PlaySound("Audios/捡到炸弹");
-        if (firstPickUp)
+        if (o == this.gameObject)
         {
-            // 炸弹被第一次捡起
-            beginPick = true;
-            firstPickUp = false;
+            AudioMgr.GetInstance().PlaySound("Audios/捡到炸弹");
+            if (firstPickUp)
+            {
+                // 炸弹被第一次捡起
+                beginPick = true;
+                firstPickUp = false;
+            }
         }
     }
 
@@ -117,13 +120,14 @@ public class Bomb : WeaponsInfo
         
         // todo: 重置后加入对象池
         AudioMgr.GetInstance().PlaySound("Audios/炸弹爆炸");
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
         
         if (!transform.GetChild(0).GetComponent<ParticleSystem>().isPlaying)
         {
             transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         }
         
-        Invoke("ResetState",0.45f);
+        Invoke("ResetState",0.4f);
     }
 
     public override void ResetState()
@@ -134,6 +138,8 @@ public class Bomb : WeaponsInfo
         afterDash_timer = 0.0f;    // 被扔出去之后经过的总时间（扔出后三秒爆炸）
         beginPick = false;
         afterPick_timer = 0.0f;    // 被捡起来后经过的时间（10秒未扔出在嘴里爆炸）
+        transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
         PoolMgr.GetInstance().PushObj("Prefabs/weapons/bomb", gameObject);
     }
 }

@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
         weaponCanBeGrab[0].transform.SetParent(this.transform.GetChild(0));
         weaponCanBeGrab[0].transform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         weaponCanBeGrab[0].transform.localPosition = new Vector3(0, 0, -0.05f);
-        EventCenter.GetInstance().EventTrigger("On"+ weaponCanBeGrab[0].name + "PickUp");
+        EventCenter.GetInstance().EventTrigger<GameObject>("On"+ weaponCanBeGrab[0].name + "PickUp",weaponCanBeGrab[0].gameObject);
     }
 
     /// <summary>

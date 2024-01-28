@@ -133,7 +133,7 @@ MonoBehaviour:
     name: "\u91D1\u62F1\u95E8"
     is_buff: 1
     volume: 0.1
-    speed: -5
+    speed: 0
     buff_time: 100
   InitFromID: 4
   player: {fileID: 0}

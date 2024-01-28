@@ -7,7 +7,7 @@ using UnityEngine.Events;
 // 扔出去会旋转，扔出去一次耐久数-1，飞行途中可以被嘴巴叼住，**不造成伤害**
 public class Knife : WeaponsInfo
 {
-    private UnityAction onKnifePicked;
+    private UnityAction<GameObject> onKnifePicked;
     private Vector3 m_EulerAngleVelocity = new Vector3(0, 0, 100);
     public float rotate_timer = 30.0f;
 
@@ -75,8 +75,11 @@ public class Knife : WeaponsInfo
         PoolMgr.GetInstance().PushObj("Prefabs/weapons/knife", gameObject);
     }
 
-    public void OnPickUp()
+    public void OnPickUp(GameObject o)
     {
-        AudioMgr.GetInstance().PlaySound("Audios/捡到弯刀");
+        if (o == this.gameObject)
+        {
+            AudioMgr.GetInstance().PlaySound("Audios/捡到弯刀");
+        }
     }
 }
