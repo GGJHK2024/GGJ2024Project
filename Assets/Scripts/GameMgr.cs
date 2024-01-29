@@ -90,6 +90,16 @@ public class GameMgr : BaseMgr<GameMgr>
         o.SetActive(false);
     }
 
+    public void ToNextTut(GameObject next)
+    {
+        next.SetActive(true);
+    }
+
+    public void CloseItself(GameObject o)
+    {
+        o.SetActive(false);
+    }
+
     /// <summary>
     /// 随机欢呼（人群
     /// </summary>
